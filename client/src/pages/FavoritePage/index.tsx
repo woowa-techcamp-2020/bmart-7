@@ -4,6 +4,7 @@ import { ProductList } from '@/components/common/ProductList'
 import './style.scss'
 import { GET_FAVORITES } from './gql'
 import { StoreContext, SetStoreContext } from '@/store'
+import { useQuery } from 'react-apollo'
 
 const COLUMN_NUM = 2
 
@@ -12,19 +13,21 @@ export const FavoritePage = () => {
   const setStore = useContext(SetStoreContext)
   const productList = store.favorites.map((favorite) => favorite.product)
 
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      const {
-        data: { getUserFavorites },
-      } = await client.query({ query: GET_FAVORITES(5) })
+  const { loading, error, data } = useQuery(GET_FAVORITES, {
+    variables: {
+      userId: 5,
+    },
+    fetchPolicy: 'cache-and-network',
+  })
 
+  useEffect(() => {
+    if (data) {
       const newStore = { ...store }
-      newStore.favorites = getUserFavorites
+      newStore.favorites = data.getUserFavorites
 
       setStore(newStore)
     }
-    fetchFavorites()
-  }, [])
+  }, [loading, error, data])
 
   return (
     <div id="favorite-page">
