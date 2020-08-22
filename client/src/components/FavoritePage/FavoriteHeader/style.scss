@@ -1,0 +1,9 @@
+@import 'src/styles/package';
+
+.favorite-header {
+  @include page-header();
+
+  .title {
+    color: $color-gray-400;
+  }
+}
