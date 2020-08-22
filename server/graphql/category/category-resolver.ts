@@ -1,10 +1,11 @@
 import { Context } from '../context'
-import { FindManyMainCategoryArgs } from '@prisma/client'
+import { FindOneMainCategoryArgs } from '@prisma/client'
 
 export const categoryResolver = {
   Query: {
     getSections,
     getMainCategories,
+    getMainCategory,
   },
 }
 
@@ -20,21 +21,30 @@ async function getSections(parent, args, context: Context) {
   })
 }
 
+async function getMainCategories(parent, args, context: Context) {
+  return await context.prisma.mainCategory.findMany()
+}
+
 type MainCategoryInput = {
   input: {
+    id: number
     categories: boolean
     products: boolean
   }
 }
 
-async function getMainCategories(parent, args: MainCategoryInput, context: Context) {
-  const includeCondition: FindManyMainCategoryArgs = {}
+async function getMainCategory(parent, args: MainCategoryInput, context: Context) {
+  const findCondition: FindOneMainCategoryArgs = {
+    where: {
+      id: args.input.id,
+    },
+  }
 
   if (args.input.categories) {
-    includeCondition.include = { categories: true }
+    findCondition.include = { categories: true }
 
     if (args.input.products) {
-      includeCondition.include.categories = {
+      findCondition.include.categories = {
         include: {
           products: true,
         },
@@ -42,5 +52,5 @@ async function getMainCategories(parent, args: MainCategoryInput, context: Conte
     }
   }
 
-  return await context.prisma.mainCategory.findMany(includeCondition)
+  return await context.prisma.mainCategory.findOne(findCondition)
 }

@@ -20,11 +20,13 @@ type Category {
 }
 
 input MainCategoryInclude {
+  id: Int
   categories: Boolean
   products: Boolean
 }
 
 type Query {
   getSections: [Section!]!
-  getMainCategories(input: MainCategoryInclude): [MainCategory!]!
+  getMainCategories: [MainCategory!]!
+  getMainCategory(input: MainCategoryInclude): MainCategory
 }

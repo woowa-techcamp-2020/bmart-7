@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export const GET_MAIN_CATEGORIES = gql`
-  query($input: MainCategoryInclude) {
-    getMainCategories(input: $input) {
+  query {
+    getMainCategories {
       id
       title
     }
