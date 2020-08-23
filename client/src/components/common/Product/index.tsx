@@ -22,9 +22,14 @@ export const Product: React.FC<ProductProps> = (props) => {
       <div className="image-wrapper">
         <img src={imageBaseUrl + mainImage} alt="no image" />
         <div className="icon-container">
-          <CartIcon id={id} />
           <HeartIcon id={id} />
+          {amount ? <CartIcon id={id} /> : null}
         </div>
+        {amount ? null : (
+          <div className="sold-out">
+            <p className="message">다 팔렸어요</p>
+          </div>
+        )}
       </div>
       <div className="product-wrapper">
         <div className="info-wrapper">

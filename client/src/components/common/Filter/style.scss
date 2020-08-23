@@ -37,7 +37,7 @@
     .filter-container {
       position: absolute;
       bottom: 0;
-      transition: ease 0.2s;
+      transition: ease-in 0.2s;
       background-color: $color-white;
       border-radius: 10px 10px 0 0;
       width: 100%;

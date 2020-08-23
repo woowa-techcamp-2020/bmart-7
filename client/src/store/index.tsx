@@ -22,21 +22,19 @@ export const defaultStore = {
 export const InitStore: React.FC = () => {
   const setStore = useContext(SetStoreContext)
 
-  const { loading, error, data } = useQuery(GET_FAVORITES, {
+  const { data } = useQuery(GET_FAVORITES, {
     variables: {
       userId: 5,
     },
     fetchPolicy: 'cache-and-network',
   })
 
-  useEffect(() => {
-    if (data) {
-      setStore({
-        isLoading: false,
-        favorites: data.getUserFavorites,
-      })
-    }
-  }, [loading, error, data])
+  if (data) {
+    setStore({
+      isLoading: false,
+      favorites: data.getUserFavorites,
+    })
+  }
 
   return <></>
 }

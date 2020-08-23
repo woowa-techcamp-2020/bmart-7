@@ -11,6 +11,7 @@ import { MainPage } from './pages/MainPage'
 import { StoreContext, SetStoreContext, StoreType, defaultStore, InitStore } from '@/store'
 import { TestPage } from './pages/TestPage'
 import { CategoryPage } from './pages/CategoryPage'
+import { MainCategoryPage } from './pages/MainCategoryPage'
 
 function App() {
   const [store, setStore] = useState<StoreType>(defaultStore)
@@ -28,6 +29,7 @@ function App() {
                   <Route path="/" exact component={MainPage} />
                   <Route path="/login" exact component={LoginPage} />
                   <Route path="/category/:id" exact component={CategoryPage} />
+                  <Route path="/main/category/:id" exact component={MainCategoryPage} />
                   <Route path="/favorite" exact component={FavoritePage} />
                   <Route path="/test" exact component={TestPage} />
                 </>

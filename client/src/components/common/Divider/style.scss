@@ -3,11 +3,11 @@
 .divider {
   $shadow-size: 2px;
 
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
 
   .bar {
-    width: calc(100vw + #{$shadow-size} * 2);
+    width: calc(100% + #{$shadow-size} * 2);
     height: 8px;
     background-color: $color-gray-100;
     box-shadow: 0px 1.5px $shadow-size inset $color-gray-150,
