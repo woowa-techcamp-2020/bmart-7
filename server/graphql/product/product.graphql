@@ -17,6 +17,7 @@ type Product {
 }
 
 enum SortBy {
+  Null
   hit
   createdAt
   salePrice

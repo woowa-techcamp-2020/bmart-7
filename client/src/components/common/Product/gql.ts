@@ -1,11 +1,8 @@
 import gql from 'graphql-tag'
 
-export const INSERT_FAVORITES = (userId: number, productId: number) => gql`
-  mutation {
-    insertFavorite(input: {
-      userId: ${userId}
-      productId: ${productId}
-    }) {
+export const INSERT_FAVORITES = gql`
+  mutation($input: FavoriteInput!) {
+    insertFavorite(input: $input) {
       id
       product {
         id
@@ -20,9 +17,9 @@ export const INSERT_FAVORITES = (userId: number, productId: number) => gql`
   }
 `
 
-export const DELETE_FAVORITES = (favoriteId: number) => gql`
-  mutation {
-    deleteFavorite(id: ${favoriteId}) {
+export const DELETE_FAVORITES = gql`
+  mutation($favoriteId: Int!) {
+    deleteFavorite(id: $favoriteId) {
       id
     }
   }

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const GET_FAVORITES = (userId) => gql`
-  query {
-    getUserFavorites(id: ${userId}) {
+export const GET_FAVORITES = gql`
+  query($userId: Int!) {
+    getUserFavorites(id: $userId) {
       id
       product {
         id
