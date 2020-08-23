@@ -3,7 +3,7 @@
 .product-slide {
   $side-padding: 10px;
 
-  width: 100vw;
+  width: 100%;
   padding: 12px 0;
 
   .title-wrapper {
@@ -39,11 +39,12 @@
     overflow-x: scroll;
 
     display: flex;
-    font-size: $resize-buffer / $column-num * $font-base-size;
+    font-size: ($resize-buffer / $column-num) * 1rem;
     padding-left: $side-padding;
 
     .product {
       min-width: calc(100% / #{$column-num});
+      max-width: calc(100% / #{$column-num});
       margin-right: $side-padding;
 
       &:last-of-type {
