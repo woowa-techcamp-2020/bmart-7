@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
-
-const tmpPrweiewList = [
-  'https://media.vlpt.us/images/blair/post/3cdc6b33-1028-477b-97b5-e4c846fdc36b/1.png',
-  'https://media.vlpt.us/images/blair/post/15e86c94-e647-4f1a-800d-eb5ce55d4163/2.png',
-  'https://media.vlpt.us/images/blair/post/261524d8-74ad-4a59-b69b-1b8e9de83d5f/3.png',
-  'https://media.vlpt.us/images/blair/post/9a47f104-6352-44b3-80c6-10b787e93e1e/4.png',
-]
+import { GET_PREVIEW_PRODUCTS } from './gql'
+import { useQuery } from 'react-apollo'
+import { Product as ProductType } from '@/types'
+import { Product } from '@/components/common/Product'
 
 export const PreviewContainer: React.FC = () => {
-  const clickPreviewItem = (e: any) => {
-    // todo:클릭시 해당 페이지 이동
-    console.log(e.target)
+  const [previewIdx, setPreviewIdx] = useState(0)
+  const { loading, error, data } = useQuery(GET_PREVIEW_PRODUCTS, {
+    fetchPolicy: 'cache-and-network',
+  })
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error...</p>
+
+  const productList = data.getPreviewProducts
+  const clickPreviewProduct = (idx: number) => {
+    setPreviewIdx(idx)
   }
 
   return (
@@ -28,14 +33,20 @@ export const PreviewContainer: React.FC = () => {
 
       <div className="preview-body-section">
         <ul className="preview-list-wrap">
-          {tmpPrweiewList.map((url: string, idx: number) => (
-            <li className="product-small-item">
-              <img data-id={idx} src={url} alt="preview" onClick={clickPreviewItem} />
+          {productList.map((product: ProductType, idx: number) => (
+            <li className="product-small-item" onClick={() => clickPreviewProduct(idx)}>
+              <img
+                data-id={idx}
+                src={`${process.env.REACT_APP_S3_URL}${product.mainImage}`}
+                alt="preview"
+              />
             </li>
           ))}
         </ul>
 
-        <div className="product-big-item">product{/* 범수님이 작업하신 product */}</div>
+        <div className="product-big-item">
+          <Product product={productList[previewIdx]} />
+        </div>
       </div>
     </div>
   )
