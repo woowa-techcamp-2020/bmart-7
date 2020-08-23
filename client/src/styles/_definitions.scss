@@ -17,10 +17,12 @@ $color-red: #ff5555;
 $color-blue: #5555ff;
 
 /* sizes */
+$mobile-max-width: 800px;
 $height-nav: 48px; //FIXME
 
 /* fonts */
-$font-base-size: 10px;
+$font-desktop-size: 10px;
+$font-base-size: 12px;
 $font-main: 'Noto Sans KR';
 $font-hanna: 'Hanna';
 $font-hanna-pro: 'BMHANNAPro';

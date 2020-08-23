@@ -74,8 +74,8 @@ const HeartIcon: React.FC<{ id: number }> = ({ id }) => {
 
   return (
     <div className="heart icon-wrapper" onClick={toggleFavorite}>
-      <IoMdHeartEmpty className={'icon ' + (favoriteId ? 'hidden' : '')} />
-      <IoMdHeart className={'icon ' + (!favoriteId ? 'hidden' : '')} />
+      <IoMdHeartEmpty className={'icon ' + (favoriteId ? 'dp-none' : '')} />
+      <IoMdHeart className={'icon ' + (!favoriteId ? 'dp-none' : '')} />
     </div>
   )
 }
