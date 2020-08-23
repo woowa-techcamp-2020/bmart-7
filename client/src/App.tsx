@@ -12,6 +12,7 @@ import { StoreContext, SetStoreContext, StoreType, defaultStore, InitStore } fro
 import { TestPage } from './pages/TestPage'
 import { CategoryPage } from './pages/CategoryPage'
 import { MainCategoryPage } from './pages/MainCategoryPage'
+import { SearchResultPage } from './pages/SearchResultPage'
 
 function App() {
   const [store, setStore] = useState<StoreType>(defaultStore)
@@ -31,6 +32,7 @@ function App() {
                   <Route path="/category/:id" exact component={CategoryPage} />
                   <Route path="/main/category/:id" exact component={MainCategoryPage} />
                   <Route path="/favorite" exact component={FavoritePage} />
+                  <Route path="/search/result/:q" exact component={SearchResultPage} />
                   <Route path="/test" exact component={TestPage} />
                 </>
               )}
