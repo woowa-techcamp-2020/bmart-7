@@ -1,48 +1,53 @@
-import React,{useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './style.scss'
 
 interface IProps {
-  mainCategoryList : []
+  mainCategoryList: []
+  currentCategoryId: number
+  changeCategory: (categoryId: number) => void
+}
+
+interface refObject {
+  [key: string]: HTMLElement
 }
 
 export const CategoryPreviewHeader: React.FC<IProps> = (props) => {
-  const {mainCategoryList} = props
+  const { mainCategoryList, currentCategoryId, changeCategory } = props
+  const aRef: refObject = {}
 
-  const [isSticky, setSticky] = useState(false);
-  const [categoryId, setCategoryId] = useState(16)
+  const headerRef = useRef<HTMLDivElement>()
 
-  const ref = useRef(null)
-
-  let timeout
-
-  const handleScroll = () => {
-    if(timeout){
-      window.cancelAnimationFrame(timeout)
-    }
-    timeout = window.requestAnimationFrame(function () {
-      if (ref.current) {
-        setSticky(ref.current.getBoundingClientRect().top <= 0);
-      }
-    });
-    
-  };
-  
-  
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    scrollHeader()
+  }, [currentCategoryId])
 
-    return () => {
-      window.removeEventListener('scroll', () => handleScroll);
-    };
-  }, []);
+  const onClickHandler = ({ id }) => {
+    if (id !== currentCategoryId) changeCategory(id)
+  }
 
-  
+  const scrollHeader = () => {
+    const $header = headerRef.current
+    const $currentCategory = aRef[currentCategoryId]
+    const diff =
+      $currentCategory.offsetLeft - $header.offsetWidth / 2 + $currentCategory.offsetWidth / 2
+    $header.scrollLeft = diff
+  }
 
   return (
-    <div className={`category-header ${isSticky ? ' sticky' : ''}`} ref={ref}>
-      {mainCategoryList.map((category, idx) => {
-      const {title, id} = category
-      return id===categoryId ? <a className="active" data-category={id} href={`#catgory-${id}`} key={id} onClick={(e) => {setCategoryId(id)}}> {title}</a> : <a href={`#catgory-${id}`} key={id} onClick={(e) => {setCategoryId(id)}}>{title}</a>
+    <div className="category-header sticky" ref={headerRef}>
+      {mainCategoryList.map(({ title, id }, idx) => {
+        return (
+          <a
+            className={id === currentCategoryId ? 'active' : ''}
+            data-category={id}
+            href={`#catgory-${id}`}
+            key={id}
+            onClick={(e) => onClickHandler({ id })}
+            ref={(el) => (aRef[id] = el)}
+          >
+            {title}
+          </a>
+        )
       })}
     </div>
   )
