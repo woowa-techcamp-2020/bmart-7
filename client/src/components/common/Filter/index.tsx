@@ -10,14 +10,12 @@ export type Condition = {
 
 type FilterItem = {
   title: string
-  isActive: boolean
   condition: Condition
 }
 
-const filterListDefault: FilterItem[] = [
+const filterList: FilterItem[] = [
   {
     title: '기본 정렬순',
-    isActive: true,
     condition: {
       sortBy: null,
       isAscending: false,
@@ -25,7 +23,6 @@ const filterListDefault: FilterItem[] = [
   },
   {
     title: '인기 상품순',
-    isActive: false,
     condition: {
       sortBy: 'hit',
       isAscending: false,
@@ -33,7 +30,6 @@ const filterListDefault: FilterItem[] = [
   },
   {
     title: '금액 높은순',
-    isActive: false,
     condition: {
       sortBy: 'salePrice',
       isAscending: false,
@@ -41,7 +37,6 @@ const filterListDefault: FilterItem[] = [
   },
   {
     title: '금액 낮은순',
-    isActive: false,
     condition: {
       sortBy: 'salePrice',
       isAscending: true,
@@ -49,7 +44,6 @@ const filterListDefault: FilterItem[] = [
   },
   {
     title: '신규 상품순',
-    isActive: false,
     condition: {
       sortBy: 'createdAt',
       isAscending: false,
@@ -57,7 +51,6 @@ const filterListDefault: FilterItem[] = [
   },
   {
     title: '할인율 순',
-    isActive: false,
     condition: {
       sortBy: 'salePercent',
       isAscending: false,
@@ -65,35 +58,37 @@ const filterListDefault: FilterItem[] = [
   },
 ]
 
+let filterIndex = 0
+
 export type FilterProps = {
   setCondition: React.Dispatch<React.SetStateAction<Condition>>
 }
 
 export const Filter: React.FC<FilterProps> = (props) => {
   const { setCondition } = props
-  const filterContainerElement = useRef(null)
-  const [filterList, setFilterList] = useState(filterListDefault)
 
-  const changeCondition = (condition: Condition) => {
-    const newFilterList = [...filterList]
-    const prevCondition = newFilterList.find((filterItem) => filterItem.isActive)
-    prevCondition.isActive = false
-    const newCondition = newFilterList.find((filterItem) => filterItem.condition === condition)
-    newCondition.isActive = true
-    setFilterList(newFilterList)
-    setCondition(condition)
+  const filterContainerElement = useRef(null)
+  const [isHidden, setIsHidden] = useState(true)
+
+  console.log('load', filterIndex)
+  const changeCondition = (index: number) => {
+    filterIndex = index
+    toggleFilterContainer()
+    setCondition(filterList[index].condition)
   }
 
   const toggleFilterContainer = () => {
-    if (filterContainerElement.current.classList.contains('hidden')) {
+    console.log(filterIndex, isHidden)
+    if (isHidden) {
       document.body.classList.add('stop-scroll')
-      filterContainerElement.current.classList.remove('hidden')
+      filterContainerElement.current.style.top = `${window.scrollY}px`
+      setIsHidden(false)
       return
     }
     document.body.classList.remove('stop-scroll')
-    filterContainerElement.current.classList.add('hidden')
+    setIsHidden(true)
   }
-  const currentFilter = filterList.find((filterItem) => filterItem.isActive)
+  const currentFilter = filterList[filterIndex]
 
   return (
     <div className="filter">
@@ -101,7 +96,7 @@ export const Filter: React.FC<FilterProps> = (props) => {
         <div className="title">{currentFilter.title}</div>
         <IoIosArrowDown className="down-arrow-icon" />
       </div>
-      <div className="filter-menu hidden" ref={filterContainerElement}>
+      <div className={'filter-menu' + (isHidden ? ' hidden' : '')} ref={filterContainerElement}>
         <div className="filter-container">
           <div className="header">
             <div className="title">정렬</div>
@@ -111,10 +106,10 @@ export const Filter: React.FC<FilterProps> = (props) => {
           </div>
           {filterList.map((filterItem, index) => (
             <div
-              className={'condition-wrapper' + (filterItem.isActive ? ' active' : '')}
+              className={'condition-wrapper' + (index === filterIndex ? ' active' : '')}
               key={index}
             >
-              <div className="title" onClick={() => changeCondition(filterItem.condition)}>
+              <div className="title" onClick={() => changeCondition(index)}>
                 {filterItem.title}
               </div>
               <FaCheck className="check-icon" />
