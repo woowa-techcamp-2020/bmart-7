@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { RouteProps } from 'react-router'
 import { Redirect } from 'react-router-dom'
-import './style.scss'
 import { useQuery } from 'react-apollo'
 import { GET_MAIN_CATEGORY } from './gql'
 import { ProductList } from '@/components/common/ProductList'
@@ -9,6 +8,7 @@ import { CategoryList } from '@/components/MainCategoryPage/CategoryList'
 import { Divider } from '@/components/common/Divider'
 import { ProductSlide } from '@/components/common/ProductSlide'
 import { Filter } from '@/components/common/Filter'
+import { SubHeader } from '@/components/common/SubHeader'
 
 export const MainCategoryPage: React.FC<RouteProps> = (props) => {
   const {
@@ -57,7 +57,7 @@ export const MainCategoryPage: React.FC<RouteProps> = (props) => {
       <Divider />
       <ProductSlide productList={sortedProductList} title="이 상품 어때요?" />
       <Divider />
-      <Filter setCondition={setFilterCondition} />
+      <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
     </div>
   )

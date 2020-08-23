@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { RouteProps } from 'react-router'
-import './style.scss'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { ProductList } from '@/components/common/ProductList'
 import { Redirect } from 'react-router-dom'
 import { Filter } from '@/components/common/Filter'
+import { SubHeader } from '@/components/common/SubHeader'
 
 export const CategoryPage: React.FC<RouteProps> = (props) => {
   const {
@@ -36,7 +36,7 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
 
   return (
     <div id="category-page">
-      <Filter setCondition={setFilterCondition} />
+      <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
     </div>
   )

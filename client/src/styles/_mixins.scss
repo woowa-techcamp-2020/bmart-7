@@ -11,18 +11,3 @@
     font-family: $font, $font-main, sans-serif;
   }
 }
-
-@mixin page-header($justify-content: space-between) {
-  display: flex;
-  align-items: center;
-  justify-content: $justify-content;
-  width: 100%;
-  height: 46px;
-  padding: 0 10px;
-  border-bottom: 1px solid $color-gray-150;
-  margin-bottom: 10px;
-
-  .title {
-    font-size: 1.4rem;
-  }
-}
