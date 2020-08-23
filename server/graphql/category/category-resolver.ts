@@ -29,28 +29,18 @@ type MainCategoryInput = {
   input: {
     id: number
     categories: boolean
-    products: boolean
   }
 }
 
 async function getMainCategory(parent, args: MainCategoryInput, context: Context) {
-  const findCondition: FindOneMainCategoryArgs = {
+  const { id, categories } = args.input
+
+  return await context.prisma.mainCategory.findOne({
     where: {
-      id: args.input.id,
+      id,
     },
-  }
-
-  if (args.input.categories) {
-    findCondition.include = { categories: true }
-
-    if (args.input.products) {
-      findCondition.include.categories = {
-        include: {
-          products: true,
-        },
-      }
-    }
-  }
-
-  return await context.prisma.mainCategory.findOne(findCondition)
+    include: {
+      categories,
+    },
+  })
 }
