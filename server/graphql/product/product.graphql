@@ -38,4 +38,5 @@ type Query {
   getProducts(input: ProductFilterInput): [Product!]!
   getRecommended(offset: Int!, limit: Int!, categoryId: Int!): [Product!]
   getSearchProducts(searchInput: String!): [Product!]
+  getPreviewProducts: [Product!]
 }
