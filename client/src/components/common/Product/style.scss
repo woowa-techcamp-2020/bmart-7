@@ -14,15 +14,19 @@
     img {
       width: 100%;
       height: auto;
+      min-height: 100px;
+      background-color: $color-gray-200;
       border: 1px solid $color-gray-150;
       border-radius: 4px;
     }
 
     .icon-container {
       display: flex;
+      flex-direction: row-reverse;
       justify-content: space-between;
       position: absolute;
       bottom: 1em;
+      z-index: 50;
       width: 100%;
       padding: 0 1em;
 
@@ -50,6 +54,20 @@
             stroke: $color-main;
           }
         }
+      }
+    }
+
+    .sold-out {
+      @include flex-center();
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: unquote($color-black + '80');
+
+      .message {
+        font-size: 1.6em;
+        color: $color-white;
       }
     }
   }
