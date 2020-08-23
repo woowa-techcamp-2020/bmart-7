@@ -30,16 +30,14 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
   })
 
   if (loading) return <></>
-  if (error) return <></>
+  if (error) return <Redirect to="/" />
 
-  if (data.getProducts.length === 0) {
-    return <Redirect to="/" />
-  }
+  const productList = data.getProducts
 
   return (
     <div id="category-page">
       <Filter setCondition={setFilterCondition} />
-      <ProductList productList={data.getProducts} column={2} />
+      <ProductList productList={productList} column={2} />
     </div>
   )
 }
