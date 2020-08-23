@@ -15,6 +15,7 @@ export const PreviewContainer: React.FC = () => {
   if (error) return <p>Error...</p>
 
   const productList = data.getPreviewProducts
+  const S3_URL = process.env.REACT_APP_S3_URL
   const clickPreviewProduct = (idx: number) => {
     setPreviewIdx(idx)
   }
@@ -35,11 +36,7 @@ export const PreviewContainer: React.FC = () => {
         <ul className="preview-list-wrap">
           {productList.map((product: ProductType, idx: number) => (
             <li className="product-small-item" onClick={() => clickPreviewProduct(idx)}>
-              <img
-                data-id={idx}
-                src={`${process.env.REACT_APP_S3_URL}${product.mainImage}`}
-                alt="preview"
-              />
+              <img data-id={idx} src={`${S3_URL}${product.mainImage}`} alt="preview" />
             </li>
           ))}
         </ul>
