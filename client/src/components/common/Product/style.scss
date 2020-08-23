@@ -33,9 +33,13 @@
         border-radius: 100%;
         background-color: unquote($color-black + '80');
 
-        &.heart .icon {
-          font-size: 2.1em;
-          color: $color-pink;
+        &.heart {
+          padding-top: 0.2em;
+
+          .icon {
+            font-size: 2.1em;
+            color: $color-pink;
+          }
         }
 
         &.cart .icon {

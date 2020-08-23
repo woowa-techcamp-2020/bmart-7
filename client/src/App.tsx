@@ -8,12 +8,12 @@ import '@/styles/reset.scss'
 import '@/styles/base.scss'
 import '@/styles/fonts.scss'
 import { MainPage } from './pages/MainPage'
-import { StoreContext, SetStoreContext, StoreType, globalStore } from '@/store'
+import { StoreContext, SetStoreContext, StoreType, defaultStore, InitStore } from '@/store'
 import { TestPage } from './pages/TestPage'
 import { CategoryPage } from './pages/CategoryPage'
 
 function App() {
-  const [store, setStore] = useState<StoreType>(globalStore)
+  const [store, setStore] = useState<StoreType>(defaultStore)
 
   return (
     <ApolloProvider client={client}>
@@ -21,11 +21,17 @@ function App() {
         <SetStoreContext.Provider value={setStore}>
           <Router>
             <div id="app">
-              <Route path="/" exact component={MainPage} />
-              <Route path="/login" exact component={LoginPage} />
-              <Route path="/category/:id" exact component={CategoryPage} />
-              <Route path="/favorite" exact component={FavoritePage} />
-              <Route path="/test" exact component={TestPage} />
+              {store.isLoading ? (
+                <InitStore />
+              ) : (
+                <>
+                  <Route path="/" exact component={MainPage} />
+                  <Route path="/login" exact component={LoginPage} />
+                  <Route path="/category/:id" exact component={CategoryPage} />
+                  <Route path="/favorite" exact component={FavoritePage} />
+                  <Route path="/test" exact component={TestPage} />
+                </>
+              )}
             </div>
           </Router>
         </SetStoreContext.Provider>
