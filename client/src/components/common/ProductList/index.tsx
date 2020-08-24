@@ -10,10 +10,11 @@ const BUFFER: number = 0.5
 export type ProductListType = {
   productList: ProductType[]
   column: number
+  eagerLoading?: boolean
 }
 
 export const ProductList: React.FC<ProductListType> = (props) => {
-  const { productList, column } = props
+  const { productList, column, eagerLoading } = props
   const productListElement = useRef<HTMLUListElement>()
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const ProductList: React.FC<ProductListType> = (props) => {
   return (
     <ul className="product-list" ref={productListElement}>
       {productList.map((product) => (
-        <Product product={product} key={product.id} />
+        <Product product={product} key={product.id} eagerLoading={eagerLoading} />
       ))}
     </ul>
   )

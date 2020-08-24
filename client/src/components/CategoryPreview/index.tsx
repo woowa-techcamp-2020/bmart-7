@@ -47,7 +47,7 @@ export const CategoryPreview: React.FC<IProps> = (props) => {
           <h2>{title}</h2>
           <a href="#">더보기 &gt;</a>
         </div>
-        <ProductList column={2} productList={productList} />
+        <ProductList column={2} productList={productList} eagerLoading={true} />
       </div>
     </div>
   )

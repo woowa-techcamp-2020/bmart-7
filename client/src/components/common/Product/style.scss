@@ -1,7 +1,17 @@
 @import 'src/styles/package';
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .product {
   width: 100%;
+  animation: fadeIn ease 1s;
 
   .icon-wrapper {
     cursor: pointer;

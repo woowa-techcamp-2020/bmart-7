@@ -9,18 +9,25 @@ const imageBaseUrl = process.env.REACT_APP_S3_URL
 
 export type ProductProps = {
   product: ProductType
+  eagerLoading?: boolean
 }
 
 export const Product: React.FC<ProductProps> = (props) => {
   const {
     product: { id, title, originPrice, salePrice, salePercent, amount, mainImage },
+    eagerLoading,
   } = props
   const priceProps = { originPrice, salePrice, salePercent }
 
   return (
     <li className="product">
       <div className="image-wrapper">
-        <img src={imageBaseUrl + mainImage} alt="no image" />
+        {eagerLoading ? (
+          <img src={imageBaseUrl + mainImage} loading="eager" alt="no image" />
+        ) : (
+          <img src={imageBaseUrl + mainImage} loading="lazy" alt="no image" />
+        )}
+
         <div className="icon-container">
           <HeartIcon id={id} />
           {amount ? <CartIcon id={id} /> : null}

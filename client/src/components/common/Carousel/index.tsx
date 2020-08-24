@@ -28,7 +28,7 @@ export const SlickCarousel: React.FC = () => {
     <div className="slick-carousel">
       <Slider className="images" {...settings}>
         {imgUrlArr.map((url: string, idx: number) => (
-          <img key={idx} width="100%" src={url} alt="cat" />
+          <img key={idx} width="100%" src={url} alt="cat" loading="eager" />
         ))}
       </Slider>
     </div>
