@@ -7,6 +7,7 @@ export const productResolver = {
     getProducts,
     getRecommended,
     getSearchProducts,
+    getPreviewProducts,
   },
 }
 
@@ -23,13 +24,26 @@ type ProductFilterInput = {
   categoryId?: number
   mainCategoryId?: number
   sectionId?: number
+  searchQuery?: string
   sortBy?: string
   isAscending?: boolean
   limit?: number
 }
 
 async function getProducts(parent, args: { input: ProductFilterInput }, context: Context) {
-  const { categoryId, mainCategoryId, sectionId, sortBy, isAscending, limit } = args.input
+  const {
+    categoryId,
+    mainCategoryId,
+    sectionId,
+    searchQuery,
+    sortBy,
+    isAscending,
+    limit,
+  } = args.input
+
+  const searchCondition = {
+    contains: searchQuery ? searchQuery : '',
+  }
 
   const sortCondition: ProductOrderByInput = { id: 'asc' }
   if (sortBy) {
@@ -41,6 +55,7 @@ async function getProducts(parent, args: { input: ProductFilterInput }, context:
     return await context.prisma.product.findMany({
       where: {
         categoryId: categoryId,
+        title: searchCondition,
       },
       orderBy: sortCondition,
       take: limit,
@@ -51,6 +66,7 @@ async function getProducts(parent, args: { input: ProductFilterInput }, context:
         category: {
           mainCategoryId,
         },
+        title: searchCondition,
       },
       orderBy: sortCondition,
       take: limit,
@@ -63,12 +79,16 @@ async function getProducts(parent, args: { input: ProductFilterInput }, context:
             sectionId,
           },
         },
+        title: searchCondition,
       },
       orderBy: sortCondition,
       take: limit,
     })
   } else {
     return await context.prisma.product.findMany({
+      where: {
+        title: searchCondition,
+      },
       orderBy: sortCondition,
       take: limit,
     })
@@ -96,5 +116,11 @@ async function getSearchProducts(parent, args: { searchInput: string }, context:
         contains: searchInput,
       },
     },
+  })
+}
+
+async function getPreviewProducts(parent, args, context: Context) {
+  return await context.prisma.product.findMany({
+    take: 4,
   })
 }

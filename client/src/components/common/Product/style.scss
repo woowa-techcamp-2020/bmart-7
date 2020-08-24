@@ -1,7 +1,17 @@
 @import 'src/styles/package';
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .product {
   width: 100%;
+  animation: fadeIn ease 1s;
 
   .icon-wrapper {
     cursor: pointer;
@@ -14,15 +24,19 @@
     img {
       width: 100%;
       height: auto;
+      min-height: 100px;
+      background-color: $color-gray-200;
       border: 1px solid $color-gray-150;
       border-radius: 4px;
     }
 
     .icon-container {
       display: flex;
+      flex-direction: row-reverse;
       justify-content: space-between;
       position: absolute;
       bottom: 1em;
+      z-index: 50;
       width: 100%;
       padding: 0 1em;
 
@@ -33,9 +47,13 @@
         border-radius: 100%;
         background-color: unquote($color-black + '80');
 
-        &.heart .icon {
-          font-size: 2.1em;
-          color: $color-pink;
+        &.heart {
+          padding-top: 0.2em;
+
+          .icon {
+            font-size: 2.1em;
+            color: $color-pink;
+          }
         }
 
         &.cart .icon {
@@ -46,6 +64,20 @@
             stroke: $color-main;
           }
         }
+      }
+    }
+
+    .sold-out {
+      @include flex-center();
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: unquote($color-black + '80');
+
+      .message {
+        font-size: 1.6em;
+        color: $color-white;
       }
     }
   }

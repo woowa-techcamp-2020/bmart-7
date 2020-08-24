@@ -19,7 +19,7 @@ export const MainCategoryList: React.FC = () => {
   return (
     <div className="main-category-list">
       <div className="category-text-wrap">
-        <div className="category-time-text">🕙배달시간 16~20분 예상</div>
+        <div className="category-time-text">🕙배달시간 16~20분 예상??</div>
         <div className="Dividing-line">||</div>
         <div className="category-deadline-text">24시까지 주문 가능</div>
       </div>

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const GET_RECOMMENDED = gql`
-  query($categoryId: Int!, $offset: Int!, $limit: Int!) {
-    getRecommended(categoryId: $categoryId, offset: $offset, limit: $limit) {
+export const GET_RECOMMENDED = ({ categoryId, offset, limit }) => gql`
+  query {
+    getRecommended(categoryId: ${categoryId}, offset: ${offset}, limit: ${limit}) {
       id
       title
       originPrice

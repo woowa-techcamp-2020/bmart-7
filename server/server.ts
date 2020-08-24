@@ -44,6 +44,10 @@ const apolloServer = new ApolloServer({
 
 apolloServer.applyMiddleware({ app })
 
+app.get('*', function (req, res) {
+  res.sendFile('index.html', { root: path.join(__dirname, '../client/build/') })
+})
+
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`)
 )

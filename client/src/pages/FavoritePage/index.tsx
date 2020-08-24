@@ -1,33 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { client } from '@/ApolloClient'
+import React, { useContext, useEffect, useState } from 'react'
 import { ProductList } from '@/components/common/ProductList'
-import './style.scss'
-import { GET_FAVORITES } from './gql'
-import { StoreContext, SetStoreContext } from '@/store'
+import { StoreContext } from '@/store'
+import { SubHeader } from '@/components/common/SubHeader'
 
 const COLUMN_NUM = 2
 
 export const FavoritePage = () => {
   const store = useContext(StoreContext)
-  const setStore = useContext(SetStoreContext)
-  const productList = store.favorites.map((favorite) => favorite.product)
+  const [productList, setProductList] = useState([])
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      const {
-        data: { getUserFavorites },
-      } = await client.query({ query: GET_FAVORITES(5) })
-
-      const newStore = { ...store }
-      newStore.favorites = getUserFavorites
-
-      setStore(newStore)
-    }
-    fetchFavorites()
+    setProductList(store.favorites.map((favorite) => favorite.product))
   }, [])
+
+  const subHeaderTitle = `찜한상품 ${store.favorites.length}개`
 
   return (
     <div id="favorite-page">
+      <SubHeader title={subHeaderTitle} filter={null} />
       <ProductList productList={productList} column={COLUMN_NUM} />
     </div>
   )

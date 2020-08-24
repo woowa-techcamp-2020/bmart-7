@@ -2,12 +2,13 @@ import React from 'react'
 import { SlickCarousel } from '@/components/common/Carousel'
 import { MainCategoryList } from '@/components/MainPage/MainCategoryList'
 import { RecommendedContainer } from '@/components/RecommendedContainer'
-import {CategoryPreviewSection} from '@/components/CategoryPreviewSection'
+import { CategoryPreviewSection } from '@/components/CategoryPreviewSection'
 import './style.scss'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { ProductSlide } from '@/components/common/ProductSlide'
 import { Divider } from '@/components/common/Divider'
+import { PreviewContainer } from '@/components/MainPage/PreviewContainer'
 
 export const MainPage: React.FC = () => {
   const newestResponse = useQuery(GET_PRODUCTS, {
@@ -39,12 +40,13 @@ export const MainPage: React.FC = () => {
     <div id="main-page">
       <SlickCarousel />
       <MainCategoryList />
+      <PreviewContainer />
       <Divider />
       <ProductSlide
         productList={hottestResponse.data.getProducts}
         title="김영지님을 위해 준비한 상품"
         moreLink=""
-        />
+      />
       <Divider />
       <RecommendedContainer title="지금 머먹지" categoryId={187} totalPageNum={3} />
       <Divider />
@@ -52,11 +54,11 @@ export const MainPage: React.FC = () => {
         productList={newestResponse.data.getProducts}
         title="새로 나왔어요"
         moreLink=""
-        />
+      />
       <Divider />
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
       <Divider />
-      <CategoryPreviewSection/>
+      <CategoryPreviewSection />
     </div>
   )
 }

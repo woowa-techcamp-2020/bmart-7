@@ -3,6 +3,10 @@
 html {
   font-size: $font-base-size;
 
+  @media (max-width: $mobile-max-width) {
+    font-size: $font-desktop-size;
+  }
+
   * {
     @include font-family();
     -webkit-tap-highlight-color: transparent;
@@ -10,10 +14,19 @@ html {
 }
 
 .hidden {
+  visibility: hidden !important;
+}
+
+.dp-none {
   display: none !important;
 }
 
+.stop-scroll {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 #app {
-  max-width: 800px;
+  max-width: $mobile-max-width;
   margin: 0 auto;
 }

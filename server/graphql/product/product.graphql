@@ -17,6 +17,7 @@ type Product {
 }
 
 enum SortBy {
+  Null
   hit
   createdAt
   salePrice
@@ -27,6 +28,7 @@ input ProductFilterInput {
   categoryId: Int
   mainCategoryId: Int
   sectionId: Int
+  searchQuery: String
   sortBy: SortBy
   isAscending: Boolean
   limit: Int
@@ -37,4 +39,5 @@ type Query {
   getProducts(input: ProductFilterInput): [Product!]!
   getRecommended(offset: Int!, limit: Int!, categoryId: Int!): [Product!]
   getSearchProducts(searchInput: String!): [Product!]
+  getPreviewProducts: [Product!]
 }

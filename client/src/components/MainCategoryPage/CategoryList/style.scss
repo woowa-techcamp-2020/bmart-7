@@ -1,0 +1,30 @@
+@import 'src/styles/package';
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  .category {
+    $border: 1px solid $color-gray-150;
+
+    font-size: 1.4rem;
+    border: {
+      right: $border;
+      bottom: $border;
+    }
+    padding: 12px 14px;
+    cursor: pointer;
+
+    &:nth-child(even) {
+      border-right: none;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+
+    &:nth-child(odd):last-of-type {
+      border-bottom: none;
+    }
+  }
+}

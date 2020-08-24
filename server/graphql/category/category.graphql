@@ -19,7 +19,13 @@ type Category {
   products: [Product!]
 }
 
+input MainCategoryInput {
+  id: Int
+  categories: Boolean
+}
+
 type Query {
   getSections: [Section!]!
-  getMainCategories : [MainCategory!]!
+  getMainCategories: [MainCategory!]!
+  getMainCategory(input: MainCategoryInput): MainCategory
 }
