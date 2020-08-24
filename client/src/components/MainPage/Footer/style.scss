@@ -1,0 +1,28 @@
+@import 'src/styles/package';
+
+.main-footer-container {
+  width: 100%;
+  background-color: $color-gray-150;
+  text-align: center;
+  input[type='button'] {
+    width: 80%;
+    height: 3rem;
+    margin: 1.4rem 0;
+    background-color: transparent;
+    border: 1px solid $color-gray-200;
+  }
+  p {
+    color: $color-gray-600;
+    padding: 0.3rem 0;
+  }
+  .footer-customer-center {
+    span {
+      font-size: 1.2rem;
+      color: $color-black;
+      margin-left: 0.5rem;
+    }
+  }
+  .footer-copyright {
+    padding-bottom: 1.2rem;
+  }
+}
