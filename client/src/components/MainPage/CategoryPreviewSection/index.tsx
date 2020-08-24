@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GET_MAIN_CATEGORIES } from './gql'
 import { useQuery } from 'react-apollo'
 import { CategoryPreview } from '../CategoryPreview'
-import { CategoryPreviewHeader } from '../CategoryPreviewHeader/'
+import { CategoryPreviewHeader } from '../CategoryPreviewHeader'
 import './style.scss'
 
 const firstCategoryId = 17
