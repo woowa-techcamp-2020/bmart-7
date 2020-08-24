@@ -6,7 +6,7 @@ import { StoreContext, SetStoreContext } from '@/store'
 export const CartIcon: React.FC<{ id: number }> = ({ id }) => {
   const store = useContext(StoreContext)
   const setStore = useContext(SetStoreContext)
-  console.log(store, setStore, id)
+  // console.log(store, setStore, id)
   //id가 카트 안에 있는지 검사 (전역 스토어에서 찾기)
   const isInCart = false
 
