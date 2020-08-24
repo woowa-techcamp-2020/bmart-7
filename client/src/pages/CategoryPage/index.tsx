@@ -6,12 +6,15 @@ import { ProductList } from '@/components/common/ProductList'
 import { Redirect } from 'react-router-dom'
 import { Filter } from '@/components/common/Filter'
 import { SubHeader } from '@/components/common/SubHeader'
+import { Header } from '@/components/common/Header'
+import { Divider } from '@/components/common/Divider'
 
 export const CategoryPage: React.FC<RouteProps> = (props) => {
   const {
     match: {
       params: { id },
     },
+    history,
   } = props
 
   const [filterCondition, setFilterCondition] = useState({
@@ -25,6 +28,7 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
         categoryId: +id,
         ...filterCondition,
       },
+      id: +id,
     },
     fetchPolicy: 'cache-and-network',
   })
@@ -32,10 +36,13 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
   if (loading) return <></>
   if (error) return <Redirect to="/" />
 
+  const categoryTitle = data.getCategory.title
   const productList = data.getProducts
 
   return (
     <div id="category-page">
+      <Header title={<h1>{categoryTitle}</h1>} history={history} />
+      <Divider />
       <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
     </div>
