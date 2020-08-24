@@ -11,6 +11,7 @@ import { ProductSlide } from '@/components/common/ProductSlide'
 import { Divider } from '@/components/common/Divider'
 import { PreviewContainer } from '@/components/MainPage/PreviewContainer'
 import { Header } from '@/components/common/Header'
+import { Footer } from '@/components/MainPage/Footer'
 
 export const MainPage: React.FC<RouteProps> = ({ history }) => {
   const newestResponse = useQuery(GET_PRODUCTS, {
@@ -69,6 +70,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
       <Divider />
       <CategoryPreviewSection />
+      <Footer />
     </div>
   )
 }
