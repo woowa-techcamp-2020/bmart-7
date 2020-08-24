@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SocialLoginBtn } from '@/components/SocialLoginBtn'
+import { SocialLoginBtn } from '@/components/Login/SocialLoginBtn'
 import './style.scss'
 import axios from 'axios'
 import queryParser from 'query-parser-url'
