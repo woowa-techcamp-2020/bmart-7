@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
-import { IoMdPaper } from 'react-icons/io'
+import { IoIosPaper } from 'react-icons/io'
 import { AiFillHeart } from 'react-icons/ai'
 import { IoIosArrowForward } from 'react-icons/io'
 
@@ -15,7 +15,7 @@ export const SideMenuHeader: React.FC = () => {
       <div className="show-detail-wrap">
         <div className="list-wrap">
           <div className="icon">
-            <IoMdPaper />
+            <IoIosPaper />
           </div>
           <div className="text">주문내역</div>
         </div>

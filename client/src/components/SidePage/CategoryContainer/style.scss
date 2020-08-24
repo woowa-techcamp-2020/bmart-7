@@ -1,0 +1,16 @@
+#category-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  .special-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .category-list {
+    .main-title {
+      font-weight: 600;
+      color: blue;
+    }
+  }
+}
