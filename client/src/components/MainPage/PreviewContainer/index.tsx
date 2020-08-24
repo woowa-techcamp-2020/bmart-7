@@ -4,6 +4,7 @@ import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { Product as ProductType } from '@/types'
 import { Product } from '@/components/common/Product'
+import { IoIosArrowForward } from 'react-icons/io'
 
 const imgCount = 4
 export const PreviewContainer: React.FC = () => {
@@ -11,6 +12,7 @@ export const PreviewContainer: React.FC = () => {
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: {
       input: {
+        sortBy: 'salePercent',
         limit: imgCount,
       },
     },
@@ -39,7 +41,9 @@ export const PreviewContainer: React.FC = () => {
           <div className="surprise-sale">번쩍 할인</div>
         </div>
         <div className="preview-header-right">
-          <div className="more-view">더보기 ›</div>
+          <div className="more-link">
+            더보기 <IoIosArrowForward className="arrow" />
+          </div>
         </div>
       </div>
 
@@ -51,6 +55,7 @@ export const PreviewContainer: React.FC = () => {
               <li
                 className={'product-small-item ' + isActive}
                 onClick={() => clickPreviewProduct(idx)}
+                key={idx}
               >
                 <img data-id={idx} src={`${S3_URL}${product.mainImage}`} alt="preview" />
               </li>
@@ -59,7 +64,7 @@ export const PreviewContainer: React.FC = () => {
         </ul>
 
         <div className="product-big-item">
-          <Product product={productList[previewIdx]} eagerLoading={false} />
+          <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
         </div>
       </div>
     </div>
