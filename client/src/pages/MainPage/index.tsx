@@ -2,9 +2,14 @@ import React from 'react'
 import { RouteProps } from 'react-router'
 import { SlickCarousel } from '@/components/common/Carousel'
 import { MainCategoryList } from '@/components/MainPage/MainCategoryList'
+<<<<<<< HEAD
 import { RecommendedContainer } from '@/components/MainPage/RecommendedContainer'
 import { CategoryPreviewSection } from '@/components/MainPage/CategoryPreviewSection'
 import './style.scss'
+=======
+import { RecommendedContainer } from '@/components/RecommendedContainer'
+import { CategoryPreviewSection } from '@/components/CategoryPreviewSection'
+>>>>>>> [feat][#99]SidePage-SideMenuHeader작업:
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { ProductSlide } from '@/components/common/ProductSlide'

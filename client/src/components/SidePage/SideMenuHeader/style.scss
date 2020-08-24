@@ -1,0 +1,45 @@
+@import 'src/styles/package';
+
+#side-menu-header {
+  .redirect-home {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    .strong-text {
+      font-weight: 600;
+    }
+    .normal-text {
+    }
+    .arrow-icon {
+      font-weight: 600;
+      color: $color-gray-500;
+      padding-top: 2px;
+    }
+  }
+  .show-detail-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid $color-gray-400;
+    padding: 15px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    .list-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon {
+      }
+
+      .text {
+      }
+    }
+    .border {
+      color: $color-gray-200;
+    }
+  }
+  .heart-icon {
+    color: $color-red;
+  }
+}
