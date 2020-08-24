@@ -1,20 +1,26 @@
 import React, { useState } from 'react'
 import './style.scss'
-import { GET_PREVIEW_PRODUCTS } from './gql'
+import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { Product as ProductType } from '@/types'
 import { Product } from '@/components/common/Product'
 
+const imgCount = 4
 export const PreviewContainer: React.FC = () => {
   const [previewIdx, setPreviewIdx] = useState(0)
-  const { loading, error, data } = useQuery(GET_PREVIEW_PRODUCTS, {
+  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+    variables: {
+      input: {
+        limit: imgCount,
+      },
+    },
     fetchPolicy: 'cache-and-network',
   })
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
 
-  const productList = data.getPreviewProducts
+  const productList = data.getProducts
   const S3_URL = process.env.REACT_APP_S3_URL
   const clickPreviewProduct = (idx: number) => {
     setPreviewIdx(idx)
@@ -34,15 +40,21 @@ export const PreviewContainer: React.FC = () => {
 
       <div className="preview-body-section">
         <ul className="preview-list-wrap">
-          {productList.map((product: ProductType, idx: number) => (
-            <li className="product-small-item" onClick={() => clickPreviewProduct(idx)}>
-              <img data-id={idx} src={`${S3_URL}${product.mainImage}`} alt="preview" />
-            </li>
-          ))}
+          {productList.map((product: ProductType, idx: number) => {
+            const isActive = idx === previewIdx ? 'active' : ''
+            return (
+              <li
+                className={'product-small-item ' + isActive}
+                onClick={() => clickPreviewProduct(idx)}
+              >
+                <img data-id={idx} src={`${S3_URL}${product.mainImage}`} alt="preview" />
+              </li>
+            )
+          })}
         </ul>
 
         <div className="product-big-item">
-          <Product product={productList[previewIdx]} />
+          <Product product={productList[previewIdx]} eagerLoading={false} />
         </div>
       </div>
     </div>
