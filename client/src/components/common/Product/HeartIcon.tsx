@@ -19,7 +19,7 @@ export const HeartIcon: React.FC<{ id: number }> = ({ id }) => {
     if (favoriteItem) {
       setFavoriteId(favoriteItem.id)
     }
-  }, [])
+  }, [id])
 
   const insertFavorite = async () => {
     if (favoriteId !== 0) return

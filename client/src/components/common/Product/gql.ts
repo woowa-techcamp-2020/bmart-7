@@ -12,6 +12,7 @@ export const INSERT_FAVORITES = gql`
         salePercent
         amount
         mainImage
+        bannerImage
       }
     }
   }

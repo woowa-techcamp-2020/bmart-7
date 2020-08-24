@@ -44,14 +44,13 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <Header
         title={
           <h1>
-            <img src="./images/bmart-logo.png" className="header-logo" />
+            <img src="./images/bmart-logo.png" alt="B마트" className="header-logo" />
           </h1>
         }
         history={history}
       />
       <SlickCarousel />
       <MainCategoryList />
-      <PreviewContainer />
       <Divider />
       <ProductSlide
         productList={hottestResponse.data.getProducts}
@@ -59,7 +58,9 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
         moreLink=""
       />
       <Divider />
-      <RecommendedContainer title="지금 머먹지" categoryId={187} totalPageNum={3} />
+      <PreviewContainer />
+      <Divider />
+      <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
       <Divider />
       <ProductSlide
         productList={newestResponse.data.getProducts}

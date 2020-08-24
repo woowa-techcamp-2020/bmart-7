@@ -9,23 +9,26 @@ const imageBaseUrl = process.env.REACT_APP_S3_URL
 
 export type ProductProps = {
   product: ProductType
+  isBannerImg?: boolean
   eagerLoading?: boolean
 }
 
 export const Product: React.FC<ProductProps> = (props) => {
   const {
-    product: { id, title, originPrice, salePrice, salePercent, amount, mainImage },
+    product: { id, title, originPrice, salePrice, salePercent, amount, mainImage, bannerImage },
     eagerLoading,
+    isBannerImg,
   } = props
   const priceProps = { originPrice, salePrice, salePercent }
+  const imageUrl = imageBaseUrl + (isBannerImg ? bannerImage : mainImage)
 
   return (
     <li className="product">
       <div className="image-wrapper">
         {eagerLoading ? (
-          <img src={imageBaseUrl + mainImage} loading="eager" alt="no image" />
+          <img src={imageUrl} loading="eager" alt="no" />
         ) : (
-          <img src={imageBaseUrl + mainImage} loading="lazy" alt="no image" />
+          <img src={imageUrl} loading="lazy" alt="no" />
         )}
 
         <div className="icon-container">

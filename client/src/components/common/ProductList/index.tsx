@@ -24,7 +24,7 @@ export const ProductList: React.FC<ProductListType> = (props) => {
     const fontResize: number =
       gap < 1 ? (BASE_COLUMN + BUFFER) / column : gap > 1 ? (BASE_COLUMN - BUFFER) / column : 1
     productListElement.current.style.fontSize = `${fontResize * FONT_SIZE}rem`
-  }, [])
+  }, [column])
 
   return (
     <ul className="product-list" ref={productListElement}>

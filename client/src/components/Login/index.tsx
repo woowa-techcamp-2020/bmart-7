@@ -20,7 +20,7 @@ export const Login = () => {
 
   return (
     <div className="login-section">
-      <img className="logo" src="./images/bmartlogo.jpeg" />
+      <img className="logo" src="./images/bmartlogo.jpeg" alt="logo" />
       <div className="social-login-wrap">
         {socialSites.map((site) => {
           return <SocialLoginBtn {...site} />
