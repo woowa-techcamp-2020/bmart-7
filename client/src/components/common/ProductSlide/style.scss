@@ -1,34 +1,24 @@
 @import 'src/styles/package';
 
 .product-slide {
-  $side-padding: 10px;
+  $side-padding: 1rem;
 
   width: 100%;
-  padding: 12px 0;
+  padding: 2rem 0 0.8rem 0;
 
   .title-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 calc(2px + #{$side-padding});
-    margin-bottom: 12px;
+    margin-bottom: 1.2rem;
 
     .title {
-      font-size: 1.8rem;
-      font-weight: 500;
+      @include section-title();
     }
 
     .more-link {
-      display: flex;
-      align-items: center;
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: $color-main;
-      cursor: pointer;
-
-      .arrow {
-        font-size: 1.4rem;
-      }
+      @include more-link();
     }
   }
 
