@@ -1,0 +1,65 @@
+name: Client build
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "client/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@master
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache node modules # node modules 캐싱
+        uses: actions/cache@v1
+        with:
+          path: client/node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('client/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-client/build-
+            ${{ runner.OS }}-
+
+      - name: Install # 의존 파일 설치
+        run: |
+          cd client
+          npm i
+
+      - name: Build
+        run: |
+          cd client
+          npm run build
+        env:
+          CI: false
+
+      - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+          AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            client/build s3://github-action-practice/client
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+          AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        run: |
+          aws deploy create-deployment \
+            --region ap-northeast-2 \
+            --application-name bmart-7-deploy \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name bmart7-deploy \
+            --s3-location bucket=bmart-7,key=$PROJECT_NAME/$GITHUB_SHA.tgz,bundleType=tgz
