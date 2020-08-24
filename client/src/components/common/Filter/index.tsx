@@ -70,7 +70,6 @@ export const Filter: React.FC<FilterProps> = (props) => {
   const filterContainerElement = useRef(null)
   const [isHidden, setIsHidden] = useState(true)
 
-  console.log('load', filterIndex)
   const changeCondition = (index: number) => {
     filterIndex = index
     toggleFilterContainer()
@@ -78,7 +77,6 @@ export const Filter: React.FC<FilterProps> = (props) => {
   }
 
   const toggleFilterContainer = () => {
-    console.log(filterIndex, isHidden)
     if (isHidden) {
       document.body.classList.add('stop-scroll')
       filterContainerElement.current.style.top = `${window.scrollY}px`

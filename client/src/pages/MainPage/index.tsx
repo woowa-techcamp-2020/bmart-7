@@ -1,4 +1,5 @@
 import React from 'react'
+import { RouteProps } from 'react-router'
 import { SlickCarousel } from '@/components/common/Carousel'
 import { MainCategoryList } from '@/components/MainPage/MainCategoryList'
 import { RecommendedContainer } from '@/components/MainPage/RecommendedContainer'
@@ -9,9 +10,10 @@ import { useQuery } from 'react-apollo'
 import { ProductSlide } from '@/components/common/ProductSlide'
 import { Divider } from '@/components/common/Divider'
 import { PreviewContainer } from '@/components/MainPage/PreviewContainer'
+import { Header } from '@/components/common/Header'
 import { Footer } from '@/components/MainPage/Footer'
 
-export const MainPage: React.FC = () => {
+export const MainPage: React.FC<RouteProps> = ({ history }) => {
   const newestResponse = useQuery(GET_PRODUCTS, {
     variables: {
       input: {
@@ -39,6 +41,14 @@ export const MainPage: React.FC = () => {
 
   return (
     <div id="main-page">
+      <Header
+        title={
+          <h1>
+            <img src="./images/bmart-logo.png" className="header-logo" />
+          </h1>
+        }
+        history={history}
+      />
       <SlickCarousel />
       <MainCategoryList />
       <PreviewContainer />

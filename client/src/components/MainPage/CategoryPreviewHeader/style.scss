@@ -31,6 +31,6 @@
 
 .sticky {
   position: sticky;
-  top: 0;
+  top: $height-header;
   z-index: 100; /* this is optional and should be different for every project */
 }

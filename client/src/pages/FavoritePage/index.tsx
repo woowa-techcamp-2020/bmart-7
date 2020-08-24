@@ -1,11 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { RouteProps } from 'react-router'
 import { ProductList } from '@/components/common/ProductList'
 import { StoreContext } from '@/store'
 import { SubHeader } from '@/components/common/SubHeader'
+import { Header } from '@/components/common/Header'
+import { Divider } from '@/components/common/Divider'
 
 const COLUMN_NUM = 2
 
-export const FavoritePage = () => {
+export const FavoritePage: React.FC<RouteProps> = (props) => {
+  const { history } = props
+
   const store = useContext(StoreContext)
   const [productList, setProductList] = useState([])
 
@@ -17,6 +22,8 @@ export const FavoritePage = () => {
 
   return (
     <div id="favorite-page">
+      <Header title={<h1>찜한상품</h1>} isShowSearch={false} isShowMenu={false} history={history} />
+      <Divider />
       <SubHeader title={subHeaderTitle} filter={null} />
       <ProductList productList={productList} column={COLUMN_NUM} />
     </div>

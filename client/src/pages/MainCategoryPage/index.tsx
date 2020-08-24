@@ -9,12 +9,14 @@ import { Divider } from '@/components/common/Divider'
 import { ProductSlide } from '@/components/common/ProductSlide'
 import { Filter } from '@/components/common/Filter'
 import { SubHeader } from '@/components/common/SubHeader'
+import { Header } from '@/components/common/Header'
 
 export const MainCategoryPage: React.FC<RouteProps> = (props) => {
   const {
     match: {
       params: { id },
     },
+    history,
   } = props
 
   const [filterCondition, setFilterCondition] = useState({
@@ -39,7 +41,7 @@ export const MainCategoryPage: React.FC<RouteProps> = (props) => {
   if (loading) return <></>
   if (error) return <Redirect to="/" />
 
-  const mainTitle = data.getMainCategory.title
+  const mainCategoryTitle = data.getMainCategory.title
   const categoryList = data.getMainCategory.categories.map((category) => ({
     id: category.id,
     title: category.title,
@@ -52,7 +54,7 @@ export const MainCategoryPage: React.FC<RouteProps> = (props) => {
 
   return (
     <div id="main-category-page">
-      <div className="title">{mainTitle}</div>
+      <Header title={<h1>{mainCategoryTitle}</h1>} history={history}></Header>
       <CategoryList categoryList={categoryList}></CategoryList>
       <Divider />
       <ProductSlide productList={sortedProductList} title="이 상품 어때요?" />
