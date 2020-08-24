@@ -43,7 +43,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <Header
         title={
           <h1>
-            <img src="./images/bmart-logo.png" className="header-logo" />
+            <img src="./images/bmart-logo.png" alt="B마트" className="header-logo" />
           </h1>
         }
         history={history}

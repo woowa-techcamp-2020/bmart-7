@@ -23,9 +23,9 @@ export const Product: React.FC<ProductProps> = (props) => {
     <li className="product">
       <div className="image-wrapper">
         {eagerLoading ? (
-          <img src={imageBaseUrl + mainImage} loading="eager" alt="no image" />
+          <img src={imageBaseUrl + mainImage} loading="eager" alt="no" />
         ) : (
-          <img src={imageBaseUrl + mainImage} loading="lazy" alt="no image" />
+          <img src={imageBaseUrl + mainImage} loading="lazy" alt="no" />
         )}
 
         <div className="icon-container">
