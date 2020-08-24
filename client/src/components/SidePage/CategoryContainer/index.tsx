@@ -8,7 +8,7 @@ export const CategoryContainer: React.FC = () => {
       {mockdata.data.getSections.map((special) => (
         <div className="special-wrap">
           <header className="special-title">{special.title}</header>
-          <ul className="category-list">
+          <ul className="main-category-list">
             {special.mainCategories.map((main) => (
               <li className="main-title">{main.title}</li>
             ))}

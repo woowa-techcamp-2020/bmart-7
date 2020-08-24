@@ -1,6 +1,7 @@
 @import 'src/styles/package';
 
 #side-menu-header {
+  padding: 1rem;
   .redirect-home {
     margin-bottom: 10px;
     font-size: 1.3rem;
@@ -9,8 +10,7 @@
     .strong-text {
       font-weight: 600;
     }
-    .normal-text {
-    }
+
     .arrow-icon {
       font-weight: 600;
       color: $color-gray-500;
@@ -29,11 +29,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      .icon {
-      }
-
-      .text {
-      }
     }
     .border {
       color: $color-gray-200;

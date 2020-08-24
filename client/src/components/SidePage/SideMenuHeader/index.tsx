@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './style.scss'
 import { IoIosPaper } from 'react-icons/io'
 import { AiFillHeart } from 'react-icons/ai'
@@ -7,11 +8,13 @@ import { IoIosArrowForward } from 'react-icons/io'
 export const SideMenuHeader: React.FC = () => {
   return (
     <header id="side-menu-header">
-      <div className="redirect-home">
-        <div className="strong-text">B마트 홈</div>
-        <div className="normal-text">으로 가기</div>
-        <IoIosArrowForward className="arrow-icon" />
-      </div>
+      <Link to="/">
+        <div className="redirect-home">
+          <div className="strong-text">B마트 홈</div>
+          <div className="normal-text">으로 가기</div>
+          <IoIosArrowForward className="arrow-icon" />
+        </div>
+      </Link>
       <div className="show-detail-wrap">
         <div className="list-wrap">
           <div className="icon">
