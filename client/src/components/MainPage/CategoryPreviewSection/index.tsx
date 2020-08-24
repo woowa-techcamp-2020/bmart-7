@@ -4,6 +4,7 @@ import { useQuery } from 'react-apollo'
 import { CategoryPreview } from '../CategoryPreview'
 import { CategoryPreviewHeader } from '../CategoryPreviewHeader'
 import './style.scss'
+import { Divider } from '@/components/common/Divider'
 
 const firstCategoryId = 17
 
@@ -55,13 +56,10 @@ export const CategoryPreviewSection: React.FC = () => {
       {mainCategoryList.map((category, idx) => {
         const { title, id } = category
         return (
-          <CategoryPreview
-            id={`catgory-${id}`}
-            title={title}
-            mainCategoryId={id}
-            key={id}
-            io={io}
-          />
+          <div key={id}>
+            <CategoryPreview id={`catgory-${id}`} title={title} mainCategoryId={id} io={io} />
+            <Divider />
+          </div>
         )
       })}
     </div>

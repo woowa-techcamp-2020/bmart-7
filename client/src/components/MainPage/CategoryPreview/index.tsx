@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { GET_PRODUCTS } from './gql'
 import './style.scss'
 import { ProductList } from '@/components/common/ProductList'
+import { IoIosArrowForward } from 'react-icons/io'
 
 interface IProps {
   title: string
@@ -45,7 +47,9 @@ export const CategoryPreview: React.FC<IProps> = (props) => {
       >
         <div className="header">
           <h2>{title}</h2>
-          <a href="#">더보기 &gt;</a>
+          <Link to={`/main/category/${mainCategoryId}`} className="more-link">
+            더보기 <IoIosArrowForward className="arrow" />
+          </Link>
         </div>
         <ProductList column={2} productList={productList} eagerLoading={true} />
       </div>
