@@ -52,3 +52,14 @@ jobs:
             --recursive \
             --region ap-northeast-2 \
             client/build s3://github-action-practice/client
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+          AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        run: |
+          aws deploy create-deployment \
+            --region ap-northeast-2 \
+            --application-name bmart-7-deploy \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name bmart7-deploy \
+            --s3-location bucket=bmart-7,key=$PROJECT_NAME/$GITHUB_SHA.tgz,bundleType=tgz
