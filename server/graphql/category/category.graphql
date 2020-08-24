@@ -28,4 +28,5 @@ type Query {
   getSections: [Section!]!
   getMainCategories: [MainCategory!]!
   getMainCategory(input: MainCategoryInput): MainCategory
+  getCategory(id: Int!): Category
 }

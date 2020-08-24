@@ -1,7 +1,10 @@
 import gql from 'graphql-tag'
 
 export const GET_PRODUCTS = gql`
-  query($input: ProductFilterInput) {
+  query($id: Int!, $input: ProductFilterInput) {
+    getCategory(id: $id) {
+      title
+    }
     getProducts(input: $input) {
       id
       title

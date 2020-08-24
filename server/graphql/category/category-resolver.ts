@@ -1,11 +1,12 @@
 import { Context } from '../context'
-import { FindOneMainCategoryArgs } from '@prisma/client'
+import { CategoryWhereUniqueInput } from '@prisma/client'
 
 export const categoryResolver = {
   Query: {
     getSections,
     getMainCategories,
     getMainCategory,
+    getCategory,
   },
 }
 
@@ -41,6 +42,15 @@ async function getMainCategory(parent, args: MainCategoryInput, context: Context
     },
     include: {
       categories,
+    },
+  })
+}
+
+async function getCategory(parent, args: CategoryWhereUniqueInput, context: Context) {
+  const id = args.id
+  return await context.prisma.category.findOne({
+    where: {
+      id,
     },
   })
 }
