@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { RouteProps } from 'react-router'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
-import { ProductList } from '@/components/common/ProductList'
+import { RouteProps } from 'react-router'
 import { Redirect } from 'react-router-dom'
+import { ProductList } from '@/components/common/ProductList'
 import { Filter } from '@/components/common/Filter'
 import { SubHeader } from '@/components/common/SubHeader'
 
-export const CategoryPage: React.FC<RouteProps> = (props) => {
+export const SearchResultPage: React.FC<RouteProps> = (props) => {
   const {
     match: {
-      params: { id },
+      params: { q },
     },
   } = props
 
@@ -22,21 +22,21 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: {
       input: {
-        categoryId: +id,
+        searchQuery: q,
         ...filterCondition,
       },
     },
-    fetchPolicy: 'cache-and-network',
   })
 
   if (loading) return <></>
   if (error) return <Redirect to="/" />
 
   const productList = data.getProducts
+  const subHeaderTitle = `검색결과 ${productList.length}개`
 
   return (
-    <div id="category-page">
-      <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
+    <div id="search-result-page">
+      <SubHeader title={subHeaderTitle} filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
     </div>
   )

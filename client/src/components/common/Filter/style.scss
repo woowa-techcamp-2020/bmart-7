@@ -1,13 +1,12 @@
 @import 'src/styles/package';
 
 .filter {
-  @include page-header(flex-end);
-
   .title-wrapper {
     display: flex;
     align-items: center;
 
     .title {
+      color: $color-black;
       margin-right: 4px;
     }
 

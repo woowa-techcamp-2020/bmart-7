@@ -28,6 +28,7 @@ input ProductFilterInput {
   categoryId: Int
   mainCategoryId: Int
   sectionId: Int
+  searchQuery: String
   sortBy: SortBy
   isAscending: Boolean
   limit: Int
