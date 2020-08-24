@@ -23,12 +23,14 @@ export const SideMenuHeader: React.FC = () => {
           <div className="text">주문내역</div>
         </div>
         <div className="border">|</div>
-        <div className="list-wrap">
-          <div className="icon">
-            <AiFillHeart className="heart-icon" />
+        <Link to="/favorite">
+          <div className="list-wrap">
+            <div className="icon">
+              <AiFillHeart className="heart-icon" />
+            </div>
+            <div className="text">찜한상품</div>
           </div>
-          <div className="text">찜한상품</div>
-        </div>
+        </Link>
       </div>
     </header>
   )

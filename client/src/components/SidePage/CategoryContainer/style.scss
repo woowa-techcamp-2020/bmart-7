@@ -1,17 +1,19 @@
 @import 'src/styles/package';
 
 #category-container {
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   .special-wrap {
-    .special-title {
-      display: inline-block;
-      font-size: 1.5rem;
-      font-weight: 600;
-      padding: 5px;
-      background: linear-gradient(to top, $color-underline 50%, transparent 50%);
+    .special-title-wrap {
+      padding: 0.5rem 1rem;
+      .special-title {
+        display: inline-block;
+        font-size: 1.5rem;
+        font-weight: 600;
+        padding: 5px;
+        background: linear-gradient(to top, $color-underline 50%, transparent 50%);
+      }
     }
     .main-category-list {
       display: grid;

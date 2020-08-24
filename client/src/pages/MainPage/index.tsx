@@ -11,6 +11,7 @@ import { Divider } from '@/components/common/Divider'
 import { PreviewContainer } from '@/components/MainPage/PreviewContainer'
 import { Header } from '@/components/common/Header'
 import { Footer } from '@/components/MainPage/Footer'
+import './style.scss'
 
 export const MainPage: React.FC<RouteProps> = ({ history }) => {
   const newestResponse = useQuery(GET_PRODUCTS, {
