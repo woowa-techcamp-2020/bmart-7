@@ -51,7 +51,7 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            client/build s3://github-action-practice/client
+            client/build s3://bmart-7/client
       - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
