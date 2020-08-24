@@ -30,7 +30,12 @@ export const PreviewContainer: React.FC = () => {
     <div className="preview-container">
       <div className="preview-header-section">
         <div className="preview-header-left">
-          <div className="now-buy">지금 사면 ⚡</div>
+          <div className="now-buy">
+            지금 사면{' '}
+            <span role="img" aria-label="thunder">
+              ⚡
+            </span>
+          </div>
           <div className="surprise-sale">번쩍 할인</div>
         </div>
         <div className="preview-header-right">
