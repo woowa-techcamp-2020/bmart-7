@@ -3,9 +3,7 @@ import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { RouteProps } from 'react-router'
 import { Redirect } from 'react-router-dom'
-import { ProductList } from '@/components/common/ProductList'
-import { Filter } from '@/components/common/Filter'
-import { SubHeader } from '@/components/common/SubHeader'
+import { ProductList, Filter, SubHeader, CartFloatButton } from '@/components/common'
 
 export const SearchResultPage: React.FC<RouteProps> = (props) => {
   const {
@@ -38,6 +36,7 @@ export const SearchResultPage: React.FC<RouteProps> = (props) => {
     <div id="search-result-page">
       <SubHeader title={subHeaderTitle} filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
+      <CartFloatButton />
     </div>
   )
 }

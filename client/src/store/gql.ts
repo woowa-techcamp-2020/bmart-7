@@ -14,5 +14,19 @@ export const GET_FAVORITES = gql`
         mainImage
       }
     }
+    getUserCartItems(id: $userId) {
+      id
+      count
+      product {
+        id
+        title
+        originPrice
+        salePrice
+        salePercent
+        amount
+        mainImage
+        bannerImage
+      }
+    }
   }
 `

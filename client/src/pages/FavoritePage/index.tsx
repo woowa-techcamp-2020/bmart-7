@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { RouteProps } from 'react-router'
-import { ProductList } from '@/components/common/ProductList'
+import { ProductList, SubHeader, Header, Divider, CartFloatButton } from '@/components/common'
 import { StoreContext } from '@/store'
-import { SubHeader } from '@/components/common/SubHeader'
-import { Header } from '@/components/common/Header'
-import { Divider } from '@/components/common/Divider'
 
 const COLUMN_NUM = 2
 
@@ -26,6 +23,7 @@ export const FavoritePage: React.FC<RouteProps> = (props) => {
       <Divider />
       <SubHeader title={subHeaderTitle} filter={null} />
       <ProductList productList={productList} column={COLUMN_NUM} />
+      <CartFloatButton />
     </div>
   )
 }

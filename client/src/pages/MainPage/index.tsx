@@ -9,10 +9,8 @@ import {
   PreviewContainer,
   Footer,
 } from '@/components/MainPage'
-import { SlickCarousel, ProductSlide, Divider, Header } from '@/components/common'
-import { client } from '@/ApolloClient'
+import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@/components/common'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
-import { useQuery } from 'react-apollo'
 
 const sortByList = {
   CREATED_AT: 'createdAt',
@@ -66,6 +64,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
       <Divider />
       <CategoryPreviewSection />
+      <CartFloatButton />
       <Footer />
     </div>
   )
