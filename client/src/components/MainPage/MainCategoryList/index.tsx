@@ -4,6 +4,7 @@ import './style.scss'
 import { MainCategoryItem } from './MainCategoryItem'
 
 const categoryimgUrlList: Array<string> = [
+<<<<<<< HEAD
   './mainIcons/1.jpeg',
   './mainIcons/2.jpeg',
   './mainIcons/3.jpeg',
@@ -13,6 +14,18 @@ const categoryimgUrlList: Array<string> = [
   './mainIcons/7.jpeg',
   './mainIcons/8.jpeg',
   './mainIcons/9.jpeg',
+=======
+  './mainIcons/1.png',
+  './mainIcons/2.png',
+  './mainIcons/3.png',
+  './mainIcons/4.png',
+  './mainIcons/5.png',
+  './mainIcons/6.png',
+  './mainIcons/7.png',
+  './mainIcons/8.png',
+  './mainIcons/9.png',
+  './mainIcons/10.png',
+>>>>>>> [feat][#127]MainCategory파일들 변경, DetailPage Component생성
 ]
 
 export const MainCategoryList: React.FC = () => {
