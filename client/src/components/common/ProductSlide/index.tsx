@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import './style.scss'
 import { Product as ProductType } from '@/types'
 import { Product } from '@/components/common/Product'
@@ -8,13 +8,21 @@ export type ProductSlideProps = {
   title: string
   moreLink?: string
   productList: ProductType[]
+  io?: {
+    observe: (HTMLElement) => void
+  }
 }
 
 export const ProductSlide: React.FC<ProductSlideProps> = (props) => {
-  const { title, moreLink, productList } = props
+  const { title, moreLink, productList, io } = props
+  const ref = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    io.observe(ref.current)
+  }, [])
 
   return (
-    <div className="product-slide">
+    <div className="product-slide" ref={ref}>
       <div className="title-wrapper">
         <div className="title">{title}</div>
         {moreLink ? (
