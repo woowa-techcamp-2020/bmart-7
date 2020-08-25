@@ -5,7 +5,6 @@ import { useQuery } from 'react-apollo'
 import { Product as ProductType } from '@/types'
 import { Product } from '@/components/common/Product'
 import { IoIosArrowForward } from 'react-icons/io'
-
 const imgCount = 4
 export const PreviewContainer: React.FC = () => {
   const [previewIdx, setPreviewIdx] = useState(0)
@@ -57,7 +56,12 @@ export const PreviewContainer: React.FC = () => {
                 onClick={() => clickPreviewProduct(idx)}
                 key={idx}
               >
-                <img data-id={idx} src={`${S3_URL}${product.mainImage}`} alt="preview" />
+                <img
+                  loading="lazy"
+                  data-id={idx}
+                  src={`${S3_URL}${product.mainImage}`}
+                  alt="preview"
+                />
               </li>
             )
           })}
