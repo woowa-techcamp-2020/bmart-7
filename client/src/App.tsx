@@ -17,6 +17,7 @@ import {
   SearchResultPage,
   SearchPage,
 } from './pages'
+import { CartPage } from './pages/CartPage'
 
 function App() {
   const [store, setStore] = useState<StoreType>(defaultStore)
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/favorite" exact component={FavoritePage} />
                   <Route path="/search/result/:q" exact component={SearchResultPage} />
                   <Route path="/search" exact component={SearchPage} />
+                  <Route path="/cart" exact component={CartPage} />
                   <Route path="/test" exact component={TestPage} />
                 </>
               )}
