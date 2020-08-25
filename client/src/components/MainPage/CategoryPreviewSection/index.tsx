@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { GET_MAIN_CATEGORIES } from './gql'
 import { useQuery } from 'react-apollo'
 import { CategoryPreview } from '../CategoryPreview'
 import { CategoryPreviewHeader } from '../CategoryPreviewHeader'
 import './style.scss'
-import { Divider } from '@/components/common/Divider'
+import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
+import { Divider } from '@/components/common'
 
 const firstCategoryId = 17
 
-const makeIntersectionObserver = (setCurrentCategoryId) => {
+const threshold = 0.1
+const rootMargin = '0.1px'
+
+const makeHeaderIntersectionObserver = (setCurrentCategoryId) => {
   return new IntersectionObserver(
     (entries, observer) => {
       entries.map((entry) => {
@@ -29,25 +33,27 @@ const makeIntersectionObserver = (setCurrentCategoryId) => {
 
 export const CategoryPreviewSection: React.FC = () => {
   const [currentCateogryId, setCurrentCategoryId] = useState(firstCategoryId)
+  const [mainCategoryList, setMainCategories] = useState([])
+  const containerRef = useRef()
 
-  const observer = makeIntersectionObserver(setCurrentCategoryId)
+  const fetchMainCategories = async () => {
+    const { getMainCategories } = await fetchQuery({ query: GET_MAIN_CATEGORIES })
+    setMainCategories(getMainCategories)
+  }
+
+  const observer = makeHeaderIntersectionObserver(setCurrentCategoryId)
   const [io] = useState(observer)
+  const [containerIo] = useState(makeIntersectionObserver(fetchMainCategories))
 
   const changeCategory = (categoryId) => {
     setCurrentCategoryId(categoryId)
   }
-
-  const { loading, error, data } = useQuery(GET_MAIN_CATEGORIES, {
-    fetchPolicy: 'cache-and-network',
-  })
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error...</p>
-
-  const mainCategoryList = data.getMainCategories
+  useEffect(() => {
+    containerIo.observe(containerRef.current)
+  }, [])
 
   return (
-    <div className="category-preview-section">
+    <div className="category-preview-section" ref={containerRef}>
       <CategoryPreviewHeader
         mainCategoryList={mainCategoryList}
         currentCategoryId={currentCateogryId}
