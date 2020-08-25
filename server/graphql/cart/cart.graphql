@@ -1,0 +1,26 @@
+type CartItem {
+  id: Int!
+  count: Int!
+  product: Product!
+  user: User!
+}
+
+type Query {
+  getUserCartItems(id: Int!): [CartItem!]
+}
+
+input CartItemInput {
+  productId: Int!
+  userId: Int!
+}
+
+input CartItemCountInput {
+  id: Int!
+  count: Int!
+}
+
+type Mutation {
+  insertCartItem(input: CartItemInput): CartItem!
+  putCartItemCount(input: CartItemCountInput): CartItem!
+  deleteCartItems(idList: [Int!]!): Int!
+}
