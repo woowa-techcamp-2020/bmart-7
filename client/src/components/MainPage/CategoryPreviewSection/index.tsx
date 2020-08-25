@@ -5,6 +5,8 @@ import { CategoryPreview } from '../CategoryPreview'
 import { CategoryPreviewHeader } from '../CategoryPreviewHeader'
 import './style.scss'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
+import { Divider } from '@/components/common'
+
 const firstCategoryId = 17
 
 const threshold = 0.1
@@ -60,13 +62,10 @@ export const CategoryPreviewSection: React.FC = () => {
       {mainCategoryList.map((category, idx) => {
         const { title, id } = category
         return (
-          <CategoryPreview
-            id={`catgory-${id}`}
-            title={title}
-            mainCategoryId={id}
-            key={id}
-            io={io}
-          />
+          <div key={id}>
+            <CategoryPreview id={`catgory-${id}`} title={title} mainCategoryId={id} io={io} />
+            <Divider />
+          </div>
         )
       })}
     </div>

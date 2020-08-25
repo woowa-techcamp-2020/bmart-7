@@ -11,3 +11,22 @@
     font-family: $font, $font-main, sans-serif;
   }
 }
+
+@mixin section-title($color: $color-black) {
+  color: $color;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+@mixin more-link($color: $color-main) {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: $color;
+  cursor: pointer;
+
+  .arrow {
+    font-size: 1.4rem;
+  }
+}

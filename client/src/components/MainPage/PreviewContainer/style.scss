@@ -4,31 +4,30 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem 1rem 0.8rem 1rem;
+
   .preview-header-section {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     font-weight: bold;
-    margin: 1rem 0;
+    margin-bottom: 1.2em;
+
     .preview-header-left {
+      @include section-title();
       display: flex;
       flex-direction: row;
       align-items: baseline;
-      font-size: 1.5rem;
 
-      .now-buy {
-        font-size: 1.5rem;
-      }
       .surprise-sale {
         color: $color-red;
       }
     }
+
     .preview-header-right {
-      .more-view {
-        margin-right: 5px;
-        color: mediumaquamarine;
-        font-size: 1.3rem;
+      .more-link {
+        @include more-link();
       }
     }
   }
@@ -36,20 +35,38 @@
   .preview-body-section {
     display: flex;
     flex-direction: column;
+
+    .price {
+      display: flex;
+      gap: 8px;
+    }
+
     .preview-list-wrap {
+      $gap: 4px;
+
       display: flex;
       justify-content: space-between;
-      margin-bottom: 2rem;
-      .active {
-        border: 2px solid $color-red;
-      }
+      margin-bottom: $gap;
+
       .product-small-item {
-        width: 23%;
-        box-sizing: content-box;
+        padding-right: $gap;
+        width: 25%;
+
+        &:last-child {
+          padding: 0;
+        }
 
         img {
           width: 100%;
           height: 100%;
+          border: 1px solid $color-gray-150;
+          border-radius: 4px;
+        }
+
+        &.active {
+          img {
+            border-color: $color-red;
+          }
         }
       }
     }

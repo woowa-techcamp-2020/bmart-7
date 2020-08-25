@@ -7,10 +7,12 @@ import {
   RecommendedContainer,
   CategoryPreviewSection,
   PreviewContainer,
+  Footer,
 } from '@/components/MainPage'
 import { SlickCarousel, ProductSlide, Divider, Header } from '@/components/common'
 import { client } from '@/ApolloClient'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
+import { useQuery } from 'react-apollo'
 
 const sortByList = {
   CREATED_AT: 'createdAt',
@@ -41,14 +43,13 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <Header
         title={
           <h1>
-            <img src="./images/bmart-logo.png" className="header-logo" />
+            <img src="./images/bmart-logo.png" alt="B마트" className="header-logo" />
           </h1>
         }
         history={history}
       />
       <SlickCarousel />
       <MainCategoryList />
-      <PreviewContainer />
       <Divider />
       <ProductSlide
         productList={hotProductList}
@@ -57,7 +58,9 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
         moreLink=""
       />
       <Divider />
-      <RecommendedContainer title="지금 머먹지" categoryId={187} totalPageNum={3} />
+      <PreviewContainer />
+      <Divider />
+      <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
       <Divider />
       <ProductSlide
         productList={newProductList}
@@ -69,6 +72,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
       <Divider />
       <CategoryPreviewSection />
+      <Footer />
     </div>
   )
 }

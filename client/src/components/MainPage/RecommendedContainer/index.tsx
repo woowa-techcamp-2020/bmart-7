@@ -53,7 +53,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
       <button onClick={onClickHandler}>
         <span>
           <BsArrowCounterclockwise className="title-icon" />
-          {title}?
+          {title}
         </span>
         다른 상품 보기 {pageNum}/{totalPageNum}
       </button>

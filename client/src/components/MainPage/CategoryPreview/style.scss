@@ -1,23 +1,25 @@
 @import 'src/styles/package';
 
-.category-buffer{
-  height: 5rem;
+.category-buffer {
+  height: 2rem;
 }
 
-.category-preview-container{
-  .header{
+.category-preview-container {
+  padding-bottom: 0.8rem;
+
+  .header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding : 0 1rem;
+    padding: 0 1rem;
+    margin-bottom: 1.2rem;
   }
-  h2{
-    padding:0;
+
+  h2 {
+    @include section-title();
   }
-  a{
-    margin: 1rem 0;
-    text-decoration: none;
-    color : $color-main;
-    font-weight : bold;
-    font-size : 1.5rem
+
+  .more-link {
+    @include more-link();
   }
 }
