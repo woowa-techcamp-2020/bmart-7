@@ -11,6 +11,7 @@ import {
 } from '@/components/MainPage'
 import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@/components/common'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
+import { useQuery } from 'react-apollo'
 
 const sortByList = {
   CREATED_AT: 'createdAt',
