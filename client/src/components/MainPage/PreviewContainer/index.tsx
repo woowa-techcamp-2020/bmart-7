@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './style.scss'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
@@ -69,9 +70,11 @@ export const PreviewContainer: React.FC = () => {
           })}
         </ul>
 
-        <div className="product-big-item">
-          <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
-        </div>
+        <Link to="/detail">
+          <div className="product-big-item">
+            <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
+          </div>
+        </Link>
       </div>
     </div>
   )

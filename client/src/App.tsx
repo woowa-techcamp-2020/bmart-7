@@ -46,6 +46,7 @@ function App() {
                   <Route path="/search" exact component={SearchPage} />
                   <Route path="/cart" exact component={CartPage} />
                   <Route path="/test" exact component={TestPage} />
+                  <Route path="/detail" exact component={DetailPage} />
                 </>
               )}
             </div>
