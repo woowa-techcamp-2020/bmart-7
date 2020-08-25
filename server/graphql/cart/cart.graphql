@@ -6,7 +6,7 @@ type CartItem {
 }
 
 type Query {
-  getCartList: [CartItem!]
+  getUserCartItems(id: Int!): [CartItem!]
 }
 
 input CartItemInput {
@@ -14,6 +14,13 @@ input CartItemInput {
   userId: Int!
 }
 
+input CartItemCountInput {
+  id: Int!
+  count: Int!
+}
+
 type Mutation {
   insertCartItem(input: CartItemInput): CartItem!
+  putCartItemCount(input: CartItemCountInput): CartItem!
+  deleteCartItems(idList: [Int!]!): Int!
 }
