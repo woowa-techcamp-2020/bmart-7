@@ -1,42 +1,40 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { RouteProps } from 'react-router'
-import { SlickCarousel } from '@/components/common/Carousel'
-import { MainCategoryList } from '@/components/MainPage/MainCategoryList'
-import { RecommendedContainer } from '@/components/MainPage/RecommendedContainer'
-import { CategoryPreviewSection } from '@/components/MainPage/CategoryPreviewSection'
 import './style.scss'
 import { GET_PRODUCTS } from './gql'
-import { useQuery } from 'react-apollo'
-import { ProductSlide } from '@/components/common/ProductSlide'
-import { Divider } from '@/components/common/Divider'
-import { PreviewContainer } from '@/components/MainPage/PreviewContainer'
-import { Header } from '@/components/common/Header'
+import {
+  MainCategoryList,
+  RecommendedContainer,
+  CategoryPreviewSection,
+  PreviewContainer,
+} from '@/components/MainPage'
+import { SlickCarousel, ProductSlide, Divider, Header } from '@/components/common'
+import { client } from '@/ApolloClient'
+import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
+
+const sortByList = {
+  CREATED_AT: 'createdAt',
+  HIT: 'hit',
+}
 
 export const MainPage: React.FC<RouteProps> = ({ history }) => {
-  const newestResponse = useQuery(GET_PRODUCTS, {
-    variables: {
-      input: {
-        sortBy: 'createdAt',
-        isAscending: false,
-        limit: 10,
+  const [hotProductList, setHotProductList] = useState([])
+  const [newProductList, setNewProductList] = useState([])
+  const fetchProducts = async (sortBy) => {
+    const { getProducts } = await fetchQuery({
+      query: GET_PRODUCTS,
+      variables: {
+        input: {
+          sortBy,
+          isAscending: false,
+          limit: 10,
+        },
       },
-    },
-    fetchPolicy: 'cache-and-network',
-  })
-
-  const hottestResponse = useQuery(GET_PRODUCTS, {
-    variables: {
-      input: {
-        sortBy: 'hit',
-        isAscending: false,
-        limit: 10,
-      },
-    },
-    fetchPolicy: 'cache-and-network',
-  })
-
-  if (newestResponse.loading || hottestResponse.loading) return <p>Loading...</p>
-  if (newestResponse.error || hottestResponse.error) return <p>Error...</p>
+    })
+    sortBy === sortByList.CREATED_AT
+      ? setNewProductList(getProducts)
+      : setHotProductList(getProducts)
+  }
 
   return (
     <div id="main-page">
@@ -53,16 +51,18 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <PreviewContainer />
       <Divider />
       <ProductSlide
-        productList={hottestResponse.data.getProducts}
+        productList={hotProductList}
         title="김영지님을 위해 준비한 상품"
+        io={makeIntersectionObserver(() => fetchProducts(sortByList.HIT))}
         moreLink=""
       />
       <Divider />
       <RecommendedContainer title="지금 머먹지" categoryId={187} totalPageNum={3} />
       <Divider />
       <ProductSlide
-        productList={newestResponse.data.getProducts}
+        productList={newProductList}
         title="새로 나왔어요"
+        io={makeIntersectionObserver(() => fetchProducts(sortByList.CREATED_AT))}
         moreLink=""
       />
       <Divider />
