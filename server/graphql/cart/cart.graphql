@@ -1,0 +1,19 @@
+type CartItem {
+  id: Int!
+  count: Int!
+  product: Product!
+  user: User!
+}
+
+type Query {
+  getCartList: [CartItem!]
+}
+
+input CartItemInput {
+  productId: Int!
+  userId: Int!
+}
+
+type Mutation {
+  insertCartItem(input: CartItemInput): CartItem!
+}
