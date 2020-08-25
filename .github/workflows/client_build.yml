@@ -59,7 +59,7 @@ jobs:
         run: |
           aws deploy create-deployment \
             --region ap-northeast-2 \
-            --application-name bmart-7-deploy \
+            --application-name bmart7-deploy \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --deployment-group-name bmart7-deploy \
             --s3-location bucket=bmart-7,key=$PROJECT_NAME/$GITHUB_SHA.tgz,bundleType=tgz
