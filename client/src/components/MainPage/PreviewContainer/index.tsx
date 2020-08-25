@@ -13,7 +13,12 @@ export const PreviewContainer: React.FC = () => {
     variables: {
       input: {
         sortBy: 'salePercent',
+<<<<<<< HEAD
         limit: imgCount,
+=======
+        isAscending: false,
+        limit: 4,
+>>>>>>> [feat][#71]PreviewContainer api요청 변경:
       },
     },
     fetchPolicy: 'cache-and-network',
