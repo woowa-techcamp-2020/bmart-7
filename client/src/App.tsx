@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { client } from './ApolloClient'
 import { ApolloProvider } from 'react-apollo'
-import { LoginPage } from '@/pages/LoginPage/LoginPage'
-import { FavoritePage } from '@/pages/FavoritePage'
 import '@/styles/reset.scss'
 import '@/styles/base.scss'
 import '@/styles/fonts.scss'
-import { MainPage } from './pages/MainPage'
 import { StoreContext, SetStoreContext, StoreType, defaultStore, InitStore } from '@/store'
-import { TestPage } from './pages/TestPage'
-import { CategoryPage } from './pages/CategoryPage'
-import { MainCategoryPage } from './pages/MainCategoryPage'
-import { SearchResultPage } from './pages/SearchResultPage'
+import {
+  LoginPage,
+  FavoritePage,
+  MainCategoryPage,
+  TestPage,
+  MainPage,
+  CategoryPage,
+  SearchResultPage,
+  SearchPage,
+} from './pages'
 
 function App() {
   const [store, setStore] = useState<StoreType>(defaultStore)
@@ -33,6 +36,7 @@ function App() {
                   <Route path="/main/category/:id" exact component={MainCategoryPage} />
                   <Route path="/favorite" exact component={FavoritePage} />
                   <Route path="/search/result/:q" exact component={SearchResultPage} />
+                  <Route path="/search" exact component={SearchPage} />
                   <Route path="/test" exact component={TestPage} />
                 </>
               )}
