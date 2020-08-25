@@ -63,8 +63,8 @@ export const CategoryPreviewSection: React.FC = () => {
         const { title, id } = category
         return (
           <div key={id}>
+            {idx !== 0 ? <Divider /> : null}
             <CategoryPreview id={`catgory-${id}`} title={title} mainCategoryId={id} io={io} />
-            <Divider />
           </div>
         )
       })}
