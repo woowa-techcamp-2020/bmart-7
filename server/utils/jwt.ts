@@ -2,12 +2,11 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import path from 'path'
 
-if (process.env.NODE_ENV == 'test')
-  dotenv.config({ path: path.join(__dirname, '../.env.test') })
+if (process.env.NODE_ENV == 'test') dotenv.config({ path: path.join(__dirname, '../.env.test') })
 
 type IDecoded = {
   id: number
-  username: string
+  userId: string
   iat?: number
   exp?: number
   iss?: string
@@ -22,14 +21,14 @@ type IUser = {
 const jwtOption = {
   expiresIn: '30d',
   issuer: 'jihwan',
-  subject: 'userInfo'
+  subject: 'userInfo',
 }
 
-export const encodeJwt = async ({id, userId} : IUser): Promise<string> => {
+export const encodeJwt = async ({ id, userId }: IUser): Promise<string> => {
   const token = await jwt.sign(
     {
       id,
-      userId
+      userId,
     },
     process.env.JWT_SECRET,
     jwtOption
