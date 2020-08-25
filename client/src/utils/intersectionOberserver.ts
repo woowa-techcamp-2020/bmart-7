@@ -1,5 +1,5 @@
-const rootMargin: string = '10px'
-const threshold: number = 0.1
+const rootMargin: string = '60px'
+const threshold: number = 0
 
 export const makeIntersectionObserver = (loadData) => {
   return new IntersectionObserver(
