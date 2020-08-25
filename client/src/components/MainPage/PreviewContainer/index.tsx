@@ -6,19 +6,14 @@ import { Product as ProductType } from '@/types'
 import { Product } from '@/components/common/Product'
 import { IoIosArrowForward } from 'react-icons/io'
 
-const imgCount = 4
 export const PreviewContainer: React.FC = () => {
   const [previewIdx, setPreviewIdx] = useState(0)
   const { loading, error, data } = useQuery(GET_PRODUCTS, {
     variables: {
       input: {
         sortBy: 'salePercent',
-<<<<<<< HEAD
-        limit: imgCount,
-=======
         isAscending: false,
         limit: 4,
->>>>>>> [feat][#71]PreviewContainer api요청 변경:
       },
     },
     fetchPolicy: 'cache-and-network',
