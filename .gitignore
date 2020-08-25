@@ -7,10 +7,12 @@ node_modules
 .DS_Store
 .map
 
-migrations
+/.pnp
+.pnp.js
 
-test.*
-test
-__test__
+migrations
+build
 
 react-app-env.d.ts
+
+npm-debug.log*

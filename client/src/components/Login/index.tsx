@@ -15,6 +15,8 @@ export const Login = () => {
 
     axios.get(`/api/github-login/?code=${code}`).then((res) => {
       localStorage.setItem('token', res.data.token)
+      // router 적용 필요
+      window.location.href = '/'
     })
   }, [])
 
