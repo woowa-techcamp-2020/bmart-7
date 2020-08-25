@@ -20,22 +20,17 @@
       display: grid;
       grid-template-columns: repeat(2, 50%);
       $border: 1px solid $color-gray-150;
+      border-top: $border;
+
       .title {
         padding: 10px;
         border-radius: 2px;
-        // border: 1px solid $color-gray-150;
         font-size: 1.3rem;
-        border: {
-          top: $border;
-          left: $border;
-        }
-        &:nth-child(even) {
-          border-right: $border;
-        }
         &:nth-child(even),
         &:nth-child(odd) {
           &:last-of-type {
             border-bottom: $border;
+            border-right: $border;
           }
         }
       }
