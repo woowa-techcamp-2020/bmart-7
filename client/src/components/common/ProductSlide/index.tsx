@@ -7,20 +7,12 @@ import { IoIosArrowForward } from 'react-icons/io'
 export type ProductSlideProps = {
   title: string
   moreLink?: string
-  productList: ProductType[]
-  io?: {
-    observe: (HTMLElement) => void
-  }
+  productList?: ProductType[]
 }
 
 export const ProductSlide: React.FC<ProductSlideProps> = (props) => {
-  const { title, moreLink, productList, io } = props
+  const { title, moreLink, productList } = props
   const ref = useRef<HTMLDivElement>()
-
-  useEffect(() => {
-    io.observe(ref.current)
-  }, [])
-
   return (
     <div className="product-slide" ref={ref}>
       <div className="title-wrapper">
