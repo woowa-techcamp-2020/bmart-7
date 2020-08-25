@@ -8,12 +8,10 @@ import { Footer } from '@/components/MainPage/Footer'
 export const SidePage: React.FC = () => {
   return (
     <div id="side-page">
-      <SideMenuHeader></SideMenuHeader>
+      <SideMenuHeader />
       <Divider />
-      <CategoryContainer></CategoryContainer>
-      {/* <div className="footer"> */}
+      <CategoryContainer />
       <Footer />
-      {/* </div> */}
     </div>
   )
 }
