@@ -8,11 +8,14 @@ export const CartFloatButton: React.FC = () => {
   const allCartCount = store.cartItems.length
 
   return (
-    <div className="cart-float-button">
-      <div className="count-wrapper">
-        <div className={'count' + (allCartCount ? '' : ' dp-none')}>{allCartCount}</div>
+    <div className="cart-float-button-wrapper">
+      <div className="cart-float-button">
+        <div className="count-wrapper">
+          <div className={'count' + (allCartCount ? '' : ' dp-none')}>{allCartCount}</div>
+        </div>
+        <GrCart className="icon" />
       </div>
-      <GrCart className="icon" />
+      <div className="buffer"></div>
     </div>
   )
 }
