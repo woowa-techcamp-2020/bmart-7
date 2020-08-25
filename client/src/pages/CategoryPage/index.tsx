@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { RouteProps } from 'react-router'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
-import { ProductList } from '@/components/common/ProductList'
+import {
+  ProductList,
+  Filter,
+  SubHeader,
+  Header,
+  Divider,
+  CartFloatButton,
+} from '@/components/common'
 import { Redirect } from 'react-router-dom'
-import { Filter } from '@/components/common/Filter'
-import { SubHeader } from '@/components/common/SubHeader'
-import { Header } from '@/components/common/Header'
-import { Divider } from '@/components/common/Divider'
 
 export const CategoryPage: React.FC<RouteProps> = (props) => {
   const {
@@ -45,6 +48,7 @@ export const CategoryPage: React.FC<RouteProps> = (props) => {
       <Divider />
       <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
+      <CartFloatButton />
     </div>
   )
 }

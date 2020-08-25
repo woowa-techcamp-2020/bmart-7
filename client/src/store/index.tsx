@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { createContext, useEffect } from 'react'
-import { Favorite } from '@/types'
+import { Favorite, CartItem } from '@/types'
 import { useQuery } from 'react-apollo'
 import { GET_FAVORITES } from './gql'
 
@@ -12,11 +12,13 @@ export const SetStoreContext = createContext<React.Dispatch<React.SetStateAction
 export type StoreType = {
   isLoading: boolean
   favorites: Favorite[]
+  cartItems: CartItem[]
 }
 
 export const defaultStore = {
   isLoading: true,
   favorites: [],
+  cartItems: [],
 }
 
 export const InitStore: React.FC = () => {
@@ -34,6 +36,7 @@ export const InitStore: React.FC = () => {
       setStore({
         isLoading: false,
         favorites: data.getUserFavorites,
+        cartItems: data.getUserCartItems,
       })
     }
   }, [loading, error, data])

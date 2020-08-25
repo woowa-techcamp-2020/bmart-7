@@ -37,3 +37,9 @@ export type Favorite = {
   id: number
   product: Product
 }
+
+export type CartItem = {
+  id: number
+  count: number
+  product: Product
+}

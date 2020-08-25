@@ -3,13 +3,16 @@ import { RouteProps } from 'react-router'
 import { Redirect } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { GET_MAIN_CATEGORY } from './gql'
-import { ProductList } from '@/components/common/ProductList'
+import {
+  ProductList,
+  Divider,
+  ProductSlide,
+  Filter,
+  SubHeader,
+  Header,
+  CartFloatButton,
+} from '@/components/common'
 import { CategoryList } from '@/components/MainCategoryPage/CategoryList'
-import { Divider } from '@/components/common/Divider'
-import { ProductSlide } from '@/components/common/ProductSlide'
-import { Filter } from '@/components/common/Filter'
-import { SubHeader } from '@/components/common/SubHeader'
-import { Header } from '@/components/common/Header'
 
 export const MainCategoryPage: React.FC<RouteProps> = (props) => {
   const {
@@ -61,6 +64,7 @@ export const MainCategoryPage: React.FC<RouteProps> = (props) => {
       <Divider />
       <SubHeader title="" filter={<Filter setCondition={setFilterCondition} />} />
       <ProductList productList={productList} column={2} />
+      <CartFloatButton />
     </div>
   )
 }
