@@ -19,24 +19,27 @@ const sortByList = {
   HIT: 'hit',
 }
 
-export const MainPage: React.FC<RouteProps> = ({ history }) => {
-  const [hotProductList, setHotProductList] = useState([])
-  const [newProductList, setNewProductList] = useState([])
-  const fetchProducts = async (sortBy) => {
-    const { getProducts } = await fetchQuery({
-      query: GET_PRODUCTS,
-      variables: {
-        input: {
-          sortBy,
-          isAscending: false,
-          limit: 10,
-        },
+const useGetProducts = (sortBy) => {
+  return useQuery(GET_PRODUCTS, {
+    variables: {
+      input: {
+        sortBy,
+        isAscending: false,
+        limit: 10,
       },
-    })
-    sortBy === sortByList.CREATED_AT
-      ? setNewProductList(getProducts)
-      : setHotProductList(getProducts)
-  }
+    },
+  })
+}
+
+export const MainPage: React.FC<RouteProps> = ({ history }) => {
+  const newestResponse = useGetProducts(sortByList.CREATED_AT)
+  const hottestResponse = useGetProducts(sortByList.HIT)
+
+  if (newestResponse.loading || hottestResponse.loading) return <p>로딩</p>
+  if (newestResponse.error || hottestResponse.error) return <p>에러</p>
+
+  const hotProducList = hottestResponse.data.getProducts
+  const newProducList = newestResponse.data.getProducts
 
   return (
     <div id="main-page">
@@ -51,23 +54,14 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       <SlickCarousel />
       <MainCategoryList />
       <Divider />
-      <ProductSlide
-        productList={hotProductList}
-        title="김영지님을 위해 준비한 상품"
-        io={makeIntersectionObserver(() => fetchProducts(sortByList.HIT))}
-        moreLink=""
-      />
+      <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
       <Divider />
       <PreviewContainer />
       <Divider />
       <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
       <Divider />
-      <ProductSlide
-        productList={newProductList}
-        title="새로 나왔어요"
-        io={makeIntersectionObserver(() => fetchProducts(sortByList.CREATED_AT))}
-        moreLink=""
-      />
+
+      <ProductSlide productList={newProducList} title="새로 나왔어요" moreLink="" />
       <Divider />
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
       <Divider />
