@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './style.scss'
 import { ProductList } from '@/components/common/ProductList'
 import { GET_RECOMMENDED } from './gql'
 import { client } from '@/ApolloClient'
 import { BsArrowCounterclockwise } from 'react-icons/bs'
+import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 interface IProps {
   title: string
   categoryId: number
@@ -17,21 +18,24 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
   const [pageNum, setPageNum] = useState(1)
   const [productList, setProductList] = useState([])
   const offset = (pageNum - 1) * count
+  const ref = useRef()
+  const fetchRecommended = async () => {
+    const { getRecommended } = await fetchQuery({
+      query: GET_RECOMMENDED,
+      variables: {
+        categoryId,
+        offset,
+        limit,
+      },
+    })
+
+    setProductList(getRecommended)
+  }
+
+  const [io] = useState(makeIntersectionObserver(fetchRecommended))
 
   useEffect(() => {
-    client
-      .query({
-        query: GET_RECOMMENDED({
-          categoryId,
-          offset,
-          limit,
-        }),
-      })
-      .then(({ data, loading, errors }) => {
-        if (loading) return <p>Loading...</p>
-        if (errors) return <p>Error...</p>
-        setProductList(data.getRecommended)
-      })
+    io.observe(ref.current)
   }, [])
 
   const onClickHandler = () => {
@@ -39,7 +43,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
   }
 
   return (
-    <div className="recommended-container">
+    <div className="recommended-container" ref={ref}>
       <h2>{title}</h2>
       <ProductList
         column={3}
