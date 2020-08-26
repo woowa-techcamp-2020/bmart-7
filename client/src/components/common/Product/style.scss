@@ -35,33 +35,50 @@
       flex-direction: row-reverse;
       justify-content: space-between;
       position: absolute;
-      bottom: 1em;
+      bottom: 0.7em;
       z-index: 50;
       width: 100%;
-      padding: 0 1em;
+      padding: 0 0.7em;
 
       .icon-wrapper {
         @include flex-center();
-        width: 3em;
-        height: 3em;
-        border-radius: 100%;
+        position: relative;
+        width: 3.7em;
+        height: 3.7em;
+        border-radius: 50%;
         background-color: unquote($color-black + '80');
 
         &.heart {
           padding-top: 0.2em;
 
           .icon {
-            font-size: 2.1em;
+            font-size: 2.7em;
             color: $color-pink;
           }
         }
 
-        &.cart .icon {
-          font-size: 1.8em;
-          color: $color-main;
+        &.cart {
+          .icon {
+            font-size: 2.5em;
+            color: $color-main;
 
-          * {
-            stroke: $color-main;
+            * {
+              stroke: $color-main;
+            }
+          }
+
+          .count {
+            position: absolute;
+            top: 1em;
+            width: 100%;
+            padding: {
+              left: 1.1em;
+              right: 0.7em;
+            }
+            text-align: center;
+            color: $color-white;
+            font-weight: 500;
+            font-size: 1em;
           }
         }
       }

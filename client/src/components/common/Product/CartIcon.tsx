@@ -7,19 +7,25 @@ export const CartIcon: React.FC<{ id: number }> = ({ id }) => {
   const store = useContext(StoreContext)
   const setStore = useContext(SetStoreContext)
 
-  const [cartItemId, setCartItemId] = useState(0)
-  const isInCart = false
+  const [cartItem, setCartItem] = useState(undefined)
 
   useEffect(() => {
     const cartItem = store.cartItems.find((cartItem) => cartItem.product.id === id)
     if (cartItem) {
-      setCartItemId(cartItem.id)
+      setCartItem(cartItem)
     }
   }, [id])
 
   return (
-    <div className={'cart icon-wrapper ' + (isInCart ? 'active' : '')}>
-      {cartItemId ? <FaShoppingCart className="icon" /> : <GrCart className="icon" />}
+    <div className="cart icon-wrapper">
+      {cartItem ? (
+        <>
+          <FaShoppingCart className="icon" />
+          <div className="count">{cartItem.count}</div>
+        </>
+      ) : (
+        <GrCart className="icon" />
+      )}
     </div>
   )
 }
