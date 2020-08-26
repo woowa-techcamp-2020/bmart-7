@@ -1,0 +1,8 @@
+export { CategoryPage } from './CategoryPage'
+export { FavoritePage } from './FavoritePage'
+export { LoginPage } from './LoginPage/LoginPage'
+export { MainCategoryPage } from './MainCategoryPage'
+export { MainPage } from './MainPage'
+export { SearchPage } from './SearchPage'
+export { SearchResultPage } from './SearchResultPage'
+export { TestPage } from './TestPage'
