@@ -1,0 +1,21 @@
+@import 'src/styles/package';
+
+.cart-list {
+  .cart-item-container {
+    padding: 0 1rem;
+  }
+
+  .main-link {
+    @include flex-center();
+    padding: 1.3rem 0;
+    border-top: 1px solid $color-gray-150;
+    color: $color-main;
+    font-size: 1.3rem;
+    font-weight: 500;
+
+    .plus-btn {
+      font-size: 1.8rem;
+      margin-right: 0.3rem;
+    }
+  }
+}
