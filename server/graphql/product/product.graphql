@@ -34,9 +34,25 @@ input ProductFilterInput {
   limit: Int
 }
 
+input ProductFilterInput {
+  categoryId: Int
+  mainCategoryId: Int
+  sectionId: Int
+  searchQuery: String
+  sortBy: SortBy
+  isAscending: Boolean
+  limit: Int
+}
+
+input ProductMultipleFilterInput {
+  categoryIdList: [Int]
+  limit: Int
+}
+
 type Query {
   getProduct(id: Int!): Product
   getProducts(input: ProductFilterInput): [Product!]!
   getRecommended(offset: Int!, limit: Int!, categoryId: Int!): [Product!]
   getSearchProducts(searchInput: String!): [Product!]
+  getMultipleProducts(input: ProductMultipleFilterInput): [Product]
 }

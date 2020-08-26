@@ -17,6 +17,9 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
   const limit = count * totalPageNum
   const [pageNum, setPageNum] = useState(1)
   const [productList, setProductList] = useState([])
+  const [srcLoading, setSrcLoading] = useState(false)
+  const [io] = useState(makeIntersectionObserver(() => setSrcLoading(true)))
+
   const offset = (pageNum - 1) * count
   const ref = useRef()
   const fetchRecommended = async () => {
@@ -32,15 +35,14 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
     setProductList(getRecommended)
   }
 
-  const [io] = useState(makeIntersectionObserver(fetchRecommended))
-
-  useEffect(() => {
-    io.observe(ref.current)
-  }, [])
-
   const onClickHandler = () => {
     pageNum === totalPageNum ? setPageNum(1) : setPageNum(pageNum + 1)
   }
+  useEffect(() => {
+    fetchRecommended()
+  }, [])
+
+  if (ref.current) io.observe(ref.current)
 
   return (
     <div className="recommended-container" ref={ref}>
@@ -48,7 +50,8 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
       <ProductList
         column={3}
         productList={productList.slice(offset, offset + count)}
-        eagerLoading={offset ? true : false}
+        srcLoading={srcLoading}
+        eagerLoading={true}
       />
       <button onClick={onClickHandler}>
         <span>
