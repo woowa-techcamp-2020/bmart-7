@@ -39,7 +39,6 @@ export const CategoryPreviewSection: React.FC = () => {
   const [containerIo] = useState(makeIntersectionObserver(() => setSrcLoading(true)))
   const [mainCategoryList, setMainCategories] = useState([])
   const [multipleProducts, setMultipleProducts] = useState([])
-  const [mainCategoryIdList, setMainCategoryIdList] = useState([])
   const containerRef = useRef()
 
   const changeCategory = (categoryId) => {
@@ -51,9 +50,6 @@ export const CategoryPreviewSection: React.FC = () => {
       data: { getMainCategories },
     } = await client.query({ query: GET_MAIN_CATEGORIES, fetchPolicy: 'cache-first' })
     setMainCategories(getMainCategories)
-    const mainCategoryIdList = getMainCategories.map((category) => category.id)
-    setMainCategoryIdList(mainCategoryIdList)
-    return mainCategoryIdList
   }
   useEffect(() => {
     fetchCategories()
@@ -81,16 +77,16 @@ export const CategoryPreviewSection: React.FC = () => {
         currentCategoryId={currentCateogryId}
         changeCategory={changeCategory}
       />
-      {mainCategoryIdList.map((categoryId, idx) => {
+      {mainCategoryList.map(({ id }, idx) => {
         const producList = multipleProducts.filter((product) => {
-          return categoryId === product.category.mainCategory.id
+          return id === product.category.mainCategory.id
         })
         return (
           <CategoryPreview
-            id={`catgory-${categoryId}`}
+            id={`catgory-${id}`}
             io={io}
             title={mainCategoryList[idx].title}
-            mainCategoryId={categoryId}
+            mainCategoryId={id}
             srcLoading={srcLoading}
             productList={producList}
           />
