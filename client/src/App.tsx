@@ -18,6 +18,7 @@ import {
   SearchPage,
 } from './pages'
 import { CartPage } from './pages/CartPage'
+import { DetailPage } from './pages/DetailPage'
 
 function App() {
   const [store, setStoreOrigin] = useState<StoreType>(defaultStore)
