@@ -12,6 +12,11 @@ export const DetailPage: React.FC<RouteProps> = (props) => {
     history,
   } = props
 
+  const addCartAndMovePage = () => {
+    // cart에 담는 로직 추가
+    window.location.assign('/favorite')
+  }
+
   return (
     <div id="detail-page">
       <div className="back-btn">
@@ -20,7 +25,9 @@ export const DetailPage: React.FC<RouteProps> = (props) => {
       <DetailMainContainer productId={parseInt(id)} />
       <div className="buffer">
         <div className="order-btn">
-          <div className="order-text">구매하기</div>
+          <div className="order-text" onClick={addCartAndMovePage}>
+            구매하기
+          </div>
         </div>
       </div>
     </div>

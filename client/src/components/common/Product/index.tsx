@@ -28,25 +28,25 @@ export const Product: React.FC<ProductProps> = (props) => {
   const imgLoading = eagerLoading ? 'eager' : 'lazy'
   return (
     <li className="product">
-      <Link to={`/detail/${id}`} key={id}>
-        <div className="image-wrapper">
+      <div className="image-wrapper">
+        <Link to={`/detail/${id}`} key={id}>
           {eagerLoading ? (
             <img src={imageUrl} loading="eager" alt="no" />
           ) : (
             <img src={imageUrl} loading="lazy" alt="no" />
           )}
+        </Link>
 
-          <div className="icon-container">
-            <HeartIcon id={id} />
-            {amount ? <CartIcon id={id} /> : null}
-          </div>
-          {amount ? null : (
-            <div className="sold-out">
-              <p className="message">다 팔렸어요</p>
-            </div>
-          )}
+        <div className="icon-container">
+          <HeartIcon id={id} />
+          {amount ? <CartIcon id={id} /> : null}
         </div>
-      </Link>
+        {amount ? null : (
+          <div className="sold-out">
+            <p className="message">다 팔렸어요</p>
+          </div>
+        )}
+      </div>
       <div className="product-wrapper">
         <div className="info-wrapper">
           <h3 className="title">{title}</h3>
