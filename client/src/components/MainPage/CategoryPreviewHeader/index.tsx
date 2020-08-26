@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import './style.scss'
 
 interface IProps {
-  mainCategoryList: []
+  mainCategoryList: any[]
   currentCategoryId: number
   changeCategory: (categoryId: number) => void
 }
@@ -26,6 +26,7 @@ export const CategoryPreviewHeader: React.FC<IProps> = (props) => {
   }
 
   const scrollHeader = () => {
+    if (!aRef[currentCategoryId]) return
     const $header = headerRef.current
     const $currentCategory = aRef[currentCategoryId]
     const diff =
