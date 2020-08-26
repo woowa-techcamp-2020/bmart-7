@@ -3,6 +3,7 @@ import { RouteProps } from 'react-router'
 import { Header, Divider } from '@/components/common'
 import { StoreContext } from '@/store'
 import { CartList } from '@/components/CartPage/CartList'
+import { CartSummary } from '@/components/CartPage/CartSummary'
 
 export const CartPage: React.FC<RouteProps> = ({ history }) => {
   const { cartItems } = useContext(StoreContext)
@@ -17,6 +18,7 @@ export const CartPage: React.FC<RouteProps> = ({ history }) => {
       <Divider />
       <CartList />
       <Divider />
+      <CartSummary totalPrice={totalPrice} />
     </div>
   )
 }
