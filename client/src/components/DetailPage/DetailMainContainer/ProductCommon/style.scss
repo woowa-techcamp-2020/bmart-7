@@ -1,0 +1,50 @@
+@import 'src/styles/package';
+
+.common-info-wrap {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  .info-wrap {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+
+    .title {
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    .del-info {
+      padding: 4px 0px;
+    }
+
+    .text-wrap {
+      .speed-delivery-text-wrap {
+        margin-bottom: 10px;
+        .speed-delivery-title {
+          color: #236afa;
+          font-weight: 600;
+          background-color: #b4f6fe;
+          padding: 4px 10px;
+          display: inline-block;
+          border-radius: 20px;
+        }
+      }
+      .time-info-wrap {
+        display: flex;
+        flex-direction: row;
+        font-size: 1.1rem;
+        font-weight: 600;
+        .time-text {
+          color: #3c3c3c;
+        }
+        .Dividing-line {
+          margin: 0px 5px;
+          color: #d2d2d2;
+        }
+        .category-deadline-text {
+          color: #d79b4f;
+        }
+      }
+    }
+  }
+}

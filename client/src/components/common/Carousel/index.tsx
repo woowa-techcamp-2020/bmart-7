@@ -25,6 +25,7 @@ export const SlickCarousel: React.FC = () => {
     className: 'slides',
     arrow: false,
   }
+
   return (
     <div className="slick-carousel">
       <Slider className="images" {...settings}>

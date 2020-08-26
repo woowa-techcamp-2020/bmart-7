@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import { Link } from 'react-router-dom'
 import { Product as ProductType } from '@/types'
 import { HeartIcon } from './HeartIcon'
 import { CartIcon } from './CartIcon'
@@ -27,22 +28,25 @@ export const Product: React.FC<ProductProps> = (props) => {
   const imgLoading = eagerLoading ? 'eager' : 'lazy'
   return (
     <li className="product">
-      <div className="image-wrapper">
-        {srcLoading ? (
-          <img src={imageUrl} loading={imgLoading} alt="no" />
-        ) : (
-          <div className="like-img"></div>
-        )}
-        <div className="icon-container">
-          <HeartIcon id={id} />
-          {amount ? <CartIcon id={id} /> : null}
-        </div>
-        {amount ? null : (
-          <div className="sold-out">
-            <p className="message">다 팔렸어요</p>
+      <Link to={`/detail/${id}`} key={id}>
+        <div className="image-wrapper">
+          {eagerLoading ? (
+            <img src={imageUrl} loading="eager" alt="no" />
+          ) : (
+            <img src={imageUrl} loading="lazy" alt="no" />
+          )}
+
+          <div className="icon-container">
+            <HeartIcon id={id} />
+            {amount ? <CartIcon id={id} /> : null}
           </div>
-        )}
-      </div>
+          {amount ? null : (
+            <div className="sold-out">
+              <p className="message">다 팔렸어요</p>
+            </div>
+          )}
+        </div>
+      </Link>
       <div className="product-wrapper">
         <div className="info-wrapper">
           <h3 className="title">{title}</h3>
