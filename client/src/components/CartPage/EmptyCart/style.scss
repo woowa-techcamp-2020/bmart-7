@@ -1,0 +1,30 @@
+@import 'src/styles/package';
+
+.empty-cart {
+  @include flex-center(column);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  .empty-cart-img {
+    width: 18rem;
+    margin-bottom: 2rem;
+  }
+
+  .message {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .main-link {
+    padding: 1rem 1.8rem;
+    border-radius: 8px;
+    background-color: $color-main;
+    box-shadow: 0px 1px 2px 0px unquote($color-black + '70');
+    color: $color-white;
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
