@@ -6,6 +6,7 @@ import { Divider } from '@/components/common'
 import { client } from '@/ApolloClient'
 import { GET_PRODUCTS } from './gql'
 import { Header } from './Header'
+import { Link } from 'react-router-dom'
 import { getItem, setItem, removeItem } from './utils'
 const limit = 5
 export const SearchPage: React.FC<RouteProps> = ({ history }) => {
@@ -35,15 +36,14 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
   }
 
   const inputHandler = (e) => {
-    console.log(e)
     const value = e.target.value
     setKeyword(value)
     fetchQuery(value)
     // if (!timeOut) {
     //   const newTimeOut = window.setTimeout(() => {
     //     setTimeOut(null)
-    //     fetchQuery(keyword)
-    //   }, 300)
+    //     fetchQuery(value)
+    //   }, 66)
     //   setTimeOut(newTimeOut)
     // }
   }
@@ -56,6 +56,11 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
   const deleteHandler = () => {
     setKeyword('')
     setResultList([])
+  }
+  const keyUpHandler = (e) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+      return searchHandler()
+    }
   }
   const deleteRecordHandler = (index) => {
     const deletedRecords = [...keywordRecords].filter((keyword, idx) => {
@@ -72,10 +77,11 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
 
   const classHidden = keyword.length ? '' : 'hidden'
   return (
-    <div>
+    <div className="search-page">
       <Header
         keyword={keyword}
         inputHandler={inputHandler}
+        keyUpHandler={keyUpHandler}
         deleteHandler={deleteHandler}
         searchHandler={searchHandler}
         clickBackHandler={history.goBack}
@@ -83,17 +89,17 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
       <div id="header-buffer"></div>
       <Divider />
       <ul className="result-list">
-        {resultList.map((result) => (
-          <li>{result.title}</li>
+        {resultList.map((result, idx) => (
+          <li key={idx}>{result.title}</li>
         ))}
       </ul>
       <h3>최근 검색어</h3>
       <ul className="record-list">
         {keywordRecords.map((keyword, idx) => {
           return (
-            <li>
-              {keyword}
-              <IoMdClose onClick={() => deleteRecordHandler(idx)} />
+            <li key={idx}>
+              <Link to={`/search/result/${keyword}`}>{keyword}</Link>
+              <IoMdClose className="close-button" onClick={() => deleteRecordHandler(idx)} />
             </li>
           )
         })}

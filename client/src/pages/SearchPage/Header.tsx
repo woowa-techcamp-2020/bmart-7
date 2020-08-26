@@ -8,12 +8,20 @@ interface IProps {
   keyword: string
   clickBackHandler: () => void
   inputHandler: (e: FormEvent<HTMLElement>) => void
+  keyUpHandler: (e: FormEvent<HTMLElement>) => void
   deleteHandler: (_: any) => void
   searchHandler: (_: any) => void
 }
 
 export const Header: React.FC<IProps> = (props) => {
-  const { keyword, inputHandler, deleteHandler, searchHandler, clickBackHandler } = props
+  const {
+    keyword,
+    inputHandler,
+    keyUpHandler,
+    deleteHandler,
+    searchHandler,
+    clickBackHandler,
+  } = props
   const classHidden = keyword.length ? '' : 'hidden'
 
   return (
@@ -26,7 +34,8 @@ export const Header: React.FC<IProps> = (props) => {
           type="text"
           placeholder="어떤 상품을 찾으시나요?"
           value={keyword}
-          onInput={inputHandler}
+          onChange={inputHandler}
+          onKeyUp={keyUpHandler}
           autoFocus
         />
       </div>
