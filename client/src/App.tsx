@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { client } from './ApolloClient'
 import { ApolloProvider } from 'react-apollo'
@@ -20,7 +20,11 @@ import {
 import { CartPage } from './pages/CartPage'
 
 function App() {
-  const [store, setStore] = useState<StoreType>(defaultStore)
+  const [store, setStoreOrigin] = useState<StoreType>(defaultStore)
+
+  const setStore = useCallback((newStore: StoreType) => {
+    setStoreOrigin(newStore)
+  }, [])
 
   return (
     <ApolloProvider client={client}>
