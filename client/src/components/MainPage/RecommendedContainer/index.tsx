@@ -51,7 +51,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
         column={3}
         productList={productList.slice(offset, offset + count)}
         srcLoading={srcLoading}
-        eagerLoading={offset ? true : false}
+        eagerLoading={true}
       />
       <button onClick={onClickHandler}>
         <span>
