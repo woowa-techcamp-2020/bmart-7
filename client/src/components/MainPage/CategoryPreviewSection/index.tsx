@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { GET_MAIN_CATEGORIES } from './gql'
-import { useQuery } from 'react-apollo'
+import { GET_MAIN_CATEGORIES, GET_MULTIPLE_PRODUCTS } from './gql'
 import { CategoryPreview } from '../CategoryPreview'
 import { CategoryPreviewHeader } from '../CategoryPreviewHeader'
 import './style.scss'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 import { Divider } from '@/components/common'
+import { client } from '@/ApolloClient'
 
 const firstCategoryId = 17
 
@@ -33,24 +33,46 @@ const makeHeaderIntersectionObserver = (setCurrentCategoryId) => {
 
 export const CategoryPreviewSection: React.FC = () => {
   const [currentCateogryId, setCurrentCategoryId] = useState(firstCategoryId)
-  const [mainCategoryList, setMainCategories] = useState([])
-  const containerRef = useRef()
-
-  const fetchMainCategories = async () => {
-    const { getMainCategories } = await fetchQuery({ query: GET_MAIN_CATEGORIES })
-    setMainCategories(getMainCategories)
-  }
-
   const observer = makeHeaderIntersectionObserver(setCurrentCategoryId)
   const [io] = useState(observer)
-  const [containerIo] = useState(makeIntersectionObserver(fetchMainCategories))
+  const [srcLoading, setSrcLoading] = useState(false)
+  const [containerIo] = useState(makeIntersectionObserver(() => setSrcLoading(true)))
+  const [mainCategoryList, setMainCategories] = useState([])
+  const [multipleProducts, setMultipleProducts] = useState([])
+  const [mainCategoryIdList, setMainCategoryIdList] = useState([])
+  const containerRef = useRef()
 
   const changeCategory = (categoryId) => {
     setCurrentCategoryId(categoryId)
   }
+
+  const fetchCategories = async () => {
+    const {
+      data: { getMainCategories },
+    } = await client.query({ query: GET_MAIN_CATEGORIES, fetchPolicy: 'cache-first' })
+    setMainCategories(getMainCategories)
+    const mainCategoryIdList = getMainCategories.map((category) => category.id)
+    setMainCategoryIdList(mainCategoryIdList)
+    return mainCategoryIdList
+  }
   useEffect(() => {
-    containerIo.observe(containerRef.current)
+    fetchCategories()
+    fetchMutipleProducts()
   }, [])
+
+  const fetchMutipleProducts = async () => {
+    const { getMultipleProducts } = await fetchQuery({
+      query: GET_MULTIPLE_PRODUCTS,
+      variables: {
+        input: {
+          limit: 100,
+        },
+      },
+    })
+    setMultipleProducts(getMultipleProducts)
+  }
+
+  if (containerRef.current) containerIo.observe(containerRef.current)
 
   return (
     <div className="category-preview-section" ref={containerRef}>
@@ -59,13 +81,19 @@ export const CategoryPreviewSection: React.FC = () => {
         currentCategoryId={currentCateogryId}
         changeCategory={changeCategory}
       />
-      {mainCategoryList.map((category, idx) => {
-        const { title, id } = category
+      {mainCategoryIdList.map((categoryId, idx) => {
+        const producList = multipleProducts.filter((product) => {
+          return categoryId === product.category.mainCategory.id
+        })
         return (
-          <div key={id}>
-            {idx !== 0 ? <Divider /> : null}
-            <CategoryPreview id={`catgory-${id}`} title={title} mainCategoryId={id} io={io} />
-          </div>
+          <CategoryPreview
+            id={`catgory-${categoryId}`}
+            io={io}
+            title={mainCategoryList[idx].title}
+            mainCategoryId={categoryId}
+            srcLoading={srcLoading}
+            productList={producList}
+          />
         )
       })}
     </div>
