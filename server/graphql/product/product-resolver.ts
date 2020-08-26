@@ -7,6 +7,7 @@ export const productResolver = {
     getProducts,
     getRecommended,
     getSearchProducts,
+    getPreviewProducts,
   },
 }
 
@@ -115,5 +116,11 @@ async function getSearchProducts(parent, args: { searchInput: string }, context:
         contains: searchInput,
       },
     },
+  })
+}
+
+async function getPreviewProducts(parent, args, context: Context) {
+  return await context.prisma.product.findMany({
+    take: 4,
   })
 }
