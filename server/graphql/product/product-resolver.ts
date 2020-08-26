@@ -40,8 +40,9 @@ async function getMultipleProducts(
   args: { input: ProductMultipleFilterInput },
   context: Context
 ) {
-  console.log(args.input)
-  const { categoryIdList, limit } = args.input
+  const categoryList = await context.prisma.mainCategory.findMany()
+  const categoryIdList = categoryList.map((category) => category.id)
+  const { limit } = args.input
   return await context.prisma.product.findMany({
     include: {
       category: {
