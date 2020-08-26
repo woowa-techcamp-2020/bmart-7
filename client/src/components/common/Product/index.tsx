@@ -11,26 +11,28 @@ export type ProductProps = {
   product: ProductType
   isBannerImg?: boolean
   eagerLoading?: boolean
+  srcLoading?: boolean
 }
 
 export const Product: React.FC<ProductProps> = (props) => {
   const {
     product: { id, title, originPrice, salePrice, salePercent, amount, mainImage, bannerImage },
     eagerLoading,
+    srcLoading = true,
     isBannerImg,
   } = props
   const priceProps = { originPrice, salePrice, salePercent }
   const imageUrl = imageBaseUrl + (isBannerImg ? bannerImage : mainImage)
 
+  const imgLoading = eagerLoading ? 'eager' : 'lazy'
   return (
     <li className="product">
       <div className="image-wrapper">
-        {eagerLoading ? (
-          <img src={imageUrl} loading="eager" alt="no" />
+        {srcLoading ? (
+          <img src={imageUrl} loading={imgLoading} alt="no" />
         ) : (
-          <img src={imageUrl} loading="lazy" alt="no" />
+          <div className="like-img"></div>
         )}
-
         <div className="icon-container">
           <HeartIcon id={id} />
           {amount ? <CartIcon id={id} /> : null}
