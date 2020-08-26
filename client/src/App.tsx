@@ -6,6 +6,7 @@ import '@/styles/reset.scss'
 import '@/styles/base.scss'
 import '@/styles/fonts.scss'
 import { StoreContext, SetStoreContext, StoreType, defaultStore, InitStore } from '@/store'
+import { SidePage } from './pages/SidePage'
 import {
   LoginPage,
   FavoritePage,
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/login" exact component={LoginPage} />
                   <Route path="/category/:id" exact component={CategoryPage} />
                   <Route path="/main/category/:id" exact component={MainCategoryPage} />
+                  <Route path="/side" exact component={SidePage} />
                   <Route path="/favorite" exact component={FavoritePage} />
                   <Route path="/search/result/:q" exact component={SearchResultPage} />
                   <Route path="/search" exact component={SearchPage} />

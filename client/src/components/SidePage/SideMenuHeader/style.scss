@@ -1,0 +1,46 @@
+@import 'src/styles/package';
+
+#side-menu-header {
+  padding: 1rem;
+  .redirect-home {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: row;
+    .strong-text {
+      font-weight: 600;
+    }
+
+    .arrow-icon {
+      font-weight: 600;
+      color: $color-gray-500;
+      padding-top: 0.1rem;
+    }
+  }
+  .show-detail-wrap {
+    display: flex;
+    // margin: 9px;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid $color-gray-200;
+    padding: 1.5rem;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    .list-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon {
+        margin-bottom: 3px;
+      }
+    }
+    .border {
+      color: $color-gray-200;
+      margin-top: 5px;
+      font-size: 2rem;
+    }
+  }
+  .heart-icon {
+    color: $color-red;
+  }
+}

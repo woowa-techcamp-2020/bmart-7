@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './style.scss'
 import { MainCategoryItem } from './MainCategoryItem'
 
@@ -12,10 +13,12 @@ const categoryimgUrlList: Array<string> = [
   './mainIcons/7.jpeg',
   './mainIcons/8.jpeg',
   './mainIcons/9.jpeg',
-  './mainIcons/10.jpeg',
 ]
 
 export const MainCategoryList: React.FC = () => {
+  const sidebarIdx: number = 10
+  const sideImgUrl: string = './mainIcons/10.jpeg'
+
   return (
     <div className="main-category-list">
       <div className="category-text-wrap">
@@ -32,6 +35,9 @@ export const MainCategoryList: React.FC = () => {
         {categoryimgUrlList.map((url: string, idx: number) => (
           <MainCategoryItem id={idx} url={url} key={idx} />
         ))}
+        <Link to="side">
+          <img className="category-item" data-id={sidebarIdx} src={sideImgUrl} alt="cat" />
+        </Link>
       </ul>
     </div>
   )
