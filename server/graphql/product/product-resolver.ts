@@ -7,6 +7,7 @@ export const productResolver = {
     getProducts,
     getRecommended,
     getSearchProducts,
+    getMultipleProducts,
   },
 }
 
@@ -27,6 +28,41 @@ type ProductFilterInput = {
   sortBy?: string
   isAscending?: boolean
   limit?: number
+}
+
+type ProductMultipleFilterInput = {
+  categoryIdList: number[]
+  limit?: number
+}
+
+async function getMultipleProducts(
+  parent,
+  args: { input: ProductMultipleFilterInput },
+  context: Context
+) {
+  console.log(args.input)
+  const { categoryIdList, limit } = args.input
+  return await context.prisma.product.findMany({
+    include: {
+      category: {
+        include: {
+          mainCategory: true,
+        },
+      },
+    },
+    where: {
+      isMain: 1,
+      category: {
+        mainCategoryId: {
+          in: categoryIdList,
+        },
+      },
+    },
+    orderBy: {
+      categoryId: 'asc',
+    },
+    take: limit,
+  })
 }
 
 async function getProducts(parent, args: { input: ProductFilterInput }, context: Context) {
