@@ -5,9 +5,7 @@ import { StoreContext } from '@/store'
 
 const COLUMN_NUM = 2
 
-export const FavoritePage: React.FC<RouteProps> = (props) => {
-  const { history } = props
-
+export const FavoritePage: React.FC<RouteProps> = ({ history }) => {
   const store = useContext(StoreContext)
   const [productList, setProductList] = useState([])
 

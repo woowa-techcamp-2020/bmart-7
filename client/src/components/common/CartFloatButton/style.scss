@@ -1,51 +1,52 @@
 @import 'src/styles/package';
 
-.cart-float-button {
-  @include flex-center();
-  position: sticky;
-  right: 1.5rem;
-  bottom: 2rem;
-  z-index: 900;
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  background-color: $color-main;
-  box-shadow: 0px 1px 3px 1px unquote($color-black + '80');
-  margin: {
-    top: 3rem;
-    left: auto;
-    bottom: 1rem;
-  }
-
-  .count-wrapper {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
+.cart-float-button-wrapper {
+  .cart-float-button {
+    @include flex-center();
+    position: fixed;
+    right: 1.5rem;
+    bottom: 2rem;
+    z-index: 900;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     background-color: $color-main;
+    box-shadow: 0px 1px 3px 1px unquote($color-black + '80');
 
-    .count {
-      @include flex-center();
-      width: 1.7rem;
-      height: 1.7rem;
-      background-color: $color-white;
+    .count-wrapper {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
       border-radius: 50%;
-      color: $color-main;
-      font-size: 1.1rem;
-      margin: 1px;
+      background-color: $color-main;
+
+      .count {
+        @include flex-center();
+        width: 1.7rem;
+        height: 1.7rem;
+        background-color: $color-white;
+        border-radius: 50%;
+        color: $color-main;
+        font-size: 1.1rem;
+        margin: 1px;
+      }
+    }
+
+    .icon {
+      font-size: 2.6rem;
+      color: $color-white;
+      margin: {
+        top: 0.1rem;
+        right: 0.1rem;
+      }
+
+      * {
+        stroke: $color-white;
+      }
     }
   }
 
-  .icon {
-    font-size: 2.6rem;
-    color: $color-white;
-    margin: {
-      top: 0.1rem;
-      right: 0.1rem;
-    }
-
-    * {
-      stroke: $color-white;
-    }
+  .buffer {
+    height: 9rem;
   }
 }
