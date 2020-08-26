@@ -2,14 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './style.scss'
 import { CartItem as CartItemType } from '@/types'
-import { formatPrice } from '@/utils'
-import { FiMinus, FiPlus } from 'react-icons/fi'
 import { IoIosCheckbox } from 'react-icons/io'
+import { Price } from './Price'
+import { Count } from './Count'
+import { RemoveButton } from './RemoveButton'
 
 const imageBaseUrl = process.env.REACT_APP_S3_URL
 
 export const CartItem: React.FC<CartItemType> = (props) => {
-  const { id, count, product } = props
+  const { id, product } = props
   const imageUrl = imageBaseUrl + product.mainImage
 
   return (
@@ -24,29 +25,15 @@ export const CartItem: React.FC<CartItemType> = (props) => {
             </label>
             <h3 className="product-title">{product.title}</h3>
           </div>
-          <div className="remove-btn">삭제</div>
+          <RemoveButton id={id} />
         </div>
         <div className="info-row">
           <Link to="/" className="product-link">
             <img src={imageUrl} alt="product" className="product-img" />
           </Link>
           <div className="info-wrapper">
-            <div className="price-wrapper">
-              <div className="origin-price">({formatPrice(product.originPrice)})원</div>
-              <div className="sale-wrapper">
-                {product.salePercent ? (
-                  <div className="origin-total-price">
-                    {formatPrice(product.originPrice * count)}원
-                  </div>
-                ) : null}
-                <div className="sale-price">{formatPrice(product.salePrice * count)}원</div>
-              </div>
-            </div>
-            <div className="count-wrapper">
-              <FiMinus className="minus-btn count-btn" />
-              <div className="count">{count}</div>
-              <FiPlus className="plus-btn count-btn active" />
-            </div>
+            <Price {...props} />
+            <Count {...props} />
           </div>
         </div>
       </div>
