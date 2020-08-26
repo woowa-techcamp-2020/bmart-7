@@ -16,7 +16,7 @@ export const CartPage: React.FC<RouteProps> = ({ history }) => {
     <div id="cart-page">
       <Header title={<h1>장바구니</h1>} isShowSearch={false} isShowMenu={false} history={history} />
       <Divider />
-      <CartList />
+      <CartList cartItems={cartItems} />
       <Divider />
       <CartSummary totalPrice={totalPrice} />
     </div>
