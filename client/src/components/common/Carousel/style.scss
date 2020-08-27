@@ -2,7 +2,11 @@
 
 .slick-carousel {
   width: 100%;
-
+  .images {
+    img {
+      width: 100%;
+    }
+  }
   .slick-slider {
     .slick-dots {
       bottom: 0px;
