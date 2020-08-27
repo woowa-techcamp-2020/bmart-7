@@ -30,10 +30,10 @@ export const Product: React.FC<ProductProps> = (props) => {
     <li className="product">
       <div className="image-wrapper">
         <Link to={`/detail/${id}`}>
-          {eagerLoading ? (
-            <img src={imageUrl} loading="eager" alt="no" />
+          {srcLoading ? (
+            <img src={imageUrl} loading={imgLoading} alt="no" />
           ) : (
-            <img src={imageUrl} loading="lazy" alt="no" />
+            <div className="like-img"></div>
           )}
         </Link>
 
