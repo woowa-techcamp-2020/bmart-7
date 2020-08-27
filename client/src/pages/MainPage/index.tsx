@@ -9,7 +9,7 @@ import {
   PreviewContainer,
   Footer,
 } from '@/components/MainPage'
-import { Loading } from '@/components/common'
+import { Loading, Spinner } from '@/components/common'
 import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@/components/common'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 import { useQuery } from 'react-apollo'
@@ -75,7 +75,8 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
   }
   return (
     <>
-      <Loading class={loadingClass} />
+      {/* <Loading class={loadingClass} /> */}
+      <Spinner isHidden={!isLoading} />
       <div id="main-page">
         <Header
           title={

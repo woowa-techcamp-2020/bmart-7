@@ -6,7 +6,7 @@
   height: 100vh;
 }
 .display-none {
-  display: none;
+  display: none !important;
 }
 @keyframes run {
   0% {
