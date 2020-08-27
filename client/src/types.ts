@@ -43,4 +43,5 @@ export type CartItem = {
   id: number
   count: number
   product: Product
+  isSelected?: boolean
 }

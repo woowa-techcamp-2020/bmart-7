@@ -1,0 +1,24 @@
+@import 'src/styles/package';
+
+.cart-select-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+
+    .checkbox-icon {
+      font-size: 2.6rem;
+      margin-top: 0.2rem;
+      color: $color-gray-200;
+
+      &.checked {
+        color: $color-main;
+      }
+    }
+  }
+}

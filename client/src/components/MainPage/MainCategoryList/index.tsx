@@ -11,7 +11,7 @@ type MainCategoryListProps = {
 const CATEGORY_NUM = 10
 
 export const MainCategoryList: React.FC<MainCategoryListProps> = ({ mainCategoryList }) => {
-  const imageBaseUrl = process.env.REACT_APP_S3_URL + 'main-category/'
+  const imageBaseUrl = process.env.REACT_APP_S3_URL + 'category/'
   const sideImgUrl: string = '10.png'
 
   return (

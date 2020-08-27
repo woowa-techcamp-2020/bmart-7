@@ -10,6 +10,10 @@ export const RemoveButton: React.FC<{ id: number }> = ({ id }) => {
   const [deleteCartItem] = useMutation(DELETE_CART_ITEM)
 
   const removeCartItem = async () => {
+    const isConfirm = window.confirm('정말 삭제하시겠습니까?')
+
+    if (!isConfirm) return
+
     await deleteCartItem({
       variables: {
         idList: [id],

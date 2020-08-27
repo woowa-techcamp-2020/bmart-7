@@ -9,7 +9,6 @@ interface IProps {
 
 export const SubCategoryContainer: React.FC<IProps> = (props) => {
   const { subCategories } = props
-  console.log(subCategories)
   return (
     <>
       {subCategories.map((data, idx) => (
