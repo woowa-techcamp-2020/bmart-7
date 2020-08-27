@@ -19,6 +19,7 @@ import {
 } from './pages'
 import { CartPage } from './pages/CartPage'
 import { DetailPage } from './pages/DetailPage'
+import { OrderPage } from './pages/OrderPage'
 
 function App() {
   const [store, setStoreOrigin] = useState<StoreType>(defaultStore)
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/search/result/:q" exact component={SearchResultPage} />
                   <Route path="/search" exact component={SearchPage} />
                   <Route path="/cart" exact component={CartPage} />
+                  <Route path="/order" exact component={OrderPage} />
                   <Route path="/test" exact component={TestPage} />
                   <Route path="/detail/:id" exact component={DetailPage} />
                 </>

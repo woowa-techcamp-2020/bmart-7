@@ -20,7 +20,9 @@ export const SideMenuHeader: React.FC = () => {
           <div className="icon">
             <IoIosPaper />
           </div>
-          <div className="text">주문내역</div>
+          <Link to="/order">
+            <div className="text">주문내역</div>
+          </Link>
         </div>
         <div className="border">|</div>
         <Link to="/favorite">
