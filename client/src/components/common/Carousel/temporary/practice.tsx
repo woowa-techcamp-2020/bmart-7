@@ -4,10 +4,11 @@ import { FiArrowLeftCircle } from 'react-icons/fi'
 import { FiArrowRightCircle } from 'react-icons/fi'
 
 const imgArr: Array<string> = [
-  './images/carousel1.png',
-  './images/carousel2.png',
-  './images/carousel3.png',
-  './images/carousel4.png',
+  './images/banner1.gif',
+  './images/banner2.gif',
+  './images/banner3.gif',
+  './images/banner4.gif',
+  './images/banner5.gif',
 ]
 
 export const MyCarousel: React.FC = () => {

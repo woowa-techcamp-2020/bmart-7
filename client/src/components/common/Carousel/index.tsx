@@ -5,10 +5,11 @@ import Slider from 'react-slick'
 import './style.scss'
 
 const imgUrlArr: Array<string> = [
-  './images/carousel1.png',
-  './images/carousel2.png',
-  './images/carousel3.png',
-  './images/carousel4.png',
+  './images/banner1.gif',
+  './images/banner2.gif',
+  './images/banner3.gif',
+  './images/banner4.gif',
+  './images/banner5.gif',
 ]
 
 export const SlickCarousel: React.FC = () => {
