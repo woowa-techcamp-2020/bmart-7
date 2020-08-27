@@ -8,10 +8,13 @@
   .special-wrap {
     .special-title-wrap {
       padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      margin-top: 1.5rem;
+
       .special-title {
         display: inline-block;
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 2rem;
+        font-weight: 500;
         padding: 5px;
         background: linear-gradient(to top, $color-underline 50%, transparent 50%);
       }
@@ -24,8 +27,9 @@
 
       .title {
         padding: 15px;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         height: 50px;
+
         &:nth-child(even),
         &:nth-child(odd) {
           &:last-of-type {
@@ -33,20 +37,14 @@
             border-right: $border;
           }
         }
-        &:hover {
-          background-color: $color-gray-150;
-          font-weight: 600;
-        }
       }
-      .hidden {
-        display: none;
+      .clicked {
+        background-color: $color-gray-150;
+        font-weight: 600;
       }
-
-      .show {
-        display: block;
-      }
-      .none {
-        display: none;
+      .unclicked {
+        background-color: $color-white;
+        font-weight: 0;
       }
     }
   }

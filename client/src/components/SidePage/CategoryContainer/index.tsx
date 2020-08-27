@@ -8,12 +8,11 @@ import { Redirect } from 'react-router-dom'
 
 export const CategoryContainer: React.FC = () => {
   const [mainTitleId, setMainTitleId] = useState(0)
-  const func = (mainId) => {
+
+  const clickMainTitle = (mainId) => {
     if (mainId === -1) {
-      console.log(mainId)
       return
     }
-    console.log(mainTitleId)
     setMainTitleId(mainId)
     if (mainTitleId === mainId) {
       setMainTitleId(0)
@@ -27,7 +26,6 @@ export const CategoryContainer: React.FC = () => {
   })
   if (loading) return <></>
   if (error) return <Redirect to="/" />
-  console.log(data)
 
   data.getSections.map((special) => {
     if (special.mainCategories.length % 2 === 1) {
@@ -53,9 +51,8 @@ export const CategoryContainer: React.FC = () => {
                 <React.Fragment key={main.id}>
                   <div className="main-category-title-wrap">
                     <li
-                      className="title main-title"
-                      // onClick={(e) => setMainTitleId(main.id)}
-                      onClick={() => func(main.id)}
+                      className={`title ${mainTitleId === main.id ? 'clicked' : 'unclicked'}`}
+                      onClick={() => clickMainTitle(main.id)}
                     >
                       {main.title}
                     </li>
