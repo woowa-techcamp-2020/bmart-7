@@ -2,19 +2,23 @@ import React, { useState, useRef } from 'react'
 import './style.scss'
 import { GET_SECTIONS } from './gql'
 import { useQuery } from 'react-apollo'
-// import mockdata from './mock.json'
 import { Divider } from '@/components/common/Divider'
 import { SubCategoryContainer } from './SubCategoryContainer'
 import { Redirect } from 'react-router-dom'
 
 export const CategoryContainer: React.FC = () => {
-  const [subCategoryList, setSubCategoryList] = useState(false)
-
-  const clickMainTitle = (e) => {
-    if (subCategoryList) {
-      setSubCategoryList(false)
+  const [mainTitleId, setMainTitleId] = useState(0)
+  const func = (mainId) => {
+    if (mainId === -1) {
+      console.log(mainId)
+      return
+    }
+    console.log(mainTitleId)
+    setMainTitleId(mainId)
+    if (mainTitleId === mainId) {
+      setMainTitleId(0)
     } else {
-      setSubCategoryList(true)
+      setMainTitleId(mainId)
     }
   }
 
@@ -25,32 +29,52 @@ export const CategoryContainer: React.FC = () => {
   if (error) return <Redirect to="/" />
   console.log(data)
 
+  data.getSections.map((special) => {
+    if (special.mainCategories.length % 2 === 1) {
+      special.mainCategories.push({
+        id: -1,
+        categories: [],
+      })
+    }
+  })
+
   return (
     <div id="category-container">
       {data.getSections.map((special, idx) => (
         <React.Fragment key={idx}>
           <div className="special-wrap">
             <div className="special-title-wrap">
-              <header className="special-title" key={idx}>
+              <header className="special-title" key={special.id}>
                 {special.title}
               </header>
             </div>
             <ul className="main-category-wrap">
               {special.mainCategories.map((main, idx) => (
-                <div className="main-category-title-wrap" onClick={clickMainTitle}>
-                  <li className="title main-title" key={idx} data-mainId={main.id}>
-                    {main.title}
-                  </li>
-                  <div className="sub-category-title-wrap">
-                    {subCategoryList ? (
-                      <SubCategoryContainer
-                        mainId={main.id}
-                        subCategories={main.categories}
-                        key={idx}
-                      />
-                    ) : null}
+                <React.Fragment key={main.id}>
+                  <div className="main-category-title-wrap">
+                    <li
+                      className="title main-title"
+                      // onClick={(e) => setMainTitleId(main.id)}
+                      onClick={() => func(main.id)}
+                    >
+                      {main.title}
+                    </li>
                   </div>
-                </div>
+                  {idx % 2 === 1 ? (
+                    <>
+                      <SubCategoryContainer
+                        isShow={special.mainCategories[idx - 1].id === mainTitleId}
+                        subCategories={special.mainCategories[idx - 1].categories}
+                        key={`category-${idx - 1}`}
+                      />
+                      <SubCategoryContainer
+                        isShow={main.id === mainTitleId}
+                        subCategories={main.categories}
+                        key={`category-${idx}`}
+                      />
+                    </>
+                  ) : null}
+                </React.Fragment>
               ))}
             </ul>
           </div>

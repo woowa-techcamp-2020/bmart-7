@@ -25,6 +25,7 @@
       .title {
         padding: 15px;
         font-size: 1.3rem;
+        height: 50px;
         &:nth-child(even),
         &:nth-child(odd) {
           &:last-of-type {
@@ -32,6 +33,13 @@
             border-right: $border;
           }
         }
+        &:hover {
+          background-color: $color-gray-150;
+          font-weight: 600;
+        }
+      }
+      .hidden {
+        display: none;
       }
 
       .show {

@@ -3,7 +3,7 @@ import './style.scss'
 import { Link } from 'react-router-dom'
 
 interface IProps {
-  mainId: string
+  isShow: boolean
   subCategories: {
     title: string
     id: string
@@ -11,16 +11,19 @@ interface IProps {
 }
 
 export const SubCategoryContainer: React.FC<IProps> = (props) => {
-  const { mainId, subCategories } = props
+  const { isShow, subCategories } = props
+  if (subCategories.length % 2 === 1) subCategories.push({ title: '', id: '' })
   return (
     <>
-      {subCategories.map((data, idx) => (
-        <Link to={`/category/${data.id}`}>
-          <li key={idx} className="title sub-title">
-            {data.title}
-          </li>
-        </Link>
-      ))}
+      {isShow
+        ? subCategories.map((data, idx) => (
+            <Link to={`/category/${data.id}`}>
+              <li key={idx} className="title sub-title">
+                {data.title}
+              </li>
+            </Link>
+          ))
+        : null}
     </>
   )
 }
