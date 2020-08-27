@@ -3,8 +3,9 @@ import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { RouteProps } from 'react-router'
 import { Redirect } from 'react-router-dom'
-import { ProductList, Filter, SubHeader, CartFloatButton } from '@/components/common'
+import { ProductList, Filter, SubHeader, CartFloatButton, Loading } from '@/components/common'
 import { SearchHeader } from '@/components/common'
+import { Spinner } from '@/components/common'
 export const SearchResultPage: React.FC<RouteProps> = (props) => {
   const {
     match: {
@@ -27,12 +28,11 @@ export const SearchResultPage: React.FC<RouteProps> = (props) => {
     },
   })
 
-  if (loading) return <></>
+  if (loading) return <Spinner />
   if (error) return <Redirect to="/" />
 
   const productList = data.getProducts
   const subHeaderTitle = `검색결과 ${productList.length}개`
-
   const deleteHandler = () => {
     history.go(-2)
   }
