@@ -46,12 +46,13 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
       return
     }
 
+    const userId = +localStorage.getItem('userId')
     const {
       data: { insertCartItem },
     } = await createCartItem({
       variables: {
         input: {
-          userId: 5,
+          userId,
           productId,
         },
       },

@@ -25,13 +25,14 @@ export const HeartIcon: React.FC<{ id: number }> = ({ id }) => {
     if (favoriteId !== 0) return
 
     setIsPending(true)
+    const userId = +localStorage.getItem('userId')
     const {
       data: { insertFavorite },
     } = await createFavorite({
       variables: {
         input: {
           productId: id,
-          userId: 5,
+          userId,
         },
       },
     })
