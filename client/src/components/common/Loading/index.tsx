@@ -1,9 +1,12 @@
 import React from 'react'
 import './style.scss'
 
-export const Loading: React.FC = () => {
+interface IProps {
+  class: string
+}
+export const Loading: React.FC<IProps> = (props) => {
   return (
-    <div className="loading-container">
+    <div className={`loading-container ${props.class}`}>
       <img src="./images/bmart-loading.png" alt="" className="loading-img" />
     </div>
   )

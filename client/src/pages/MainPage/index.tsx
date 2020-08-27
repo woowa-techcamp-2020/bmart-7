@@ -42,12 +42,13 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
     },
     fetchPolicy: 'cache-and-network',
   })
+  let hotProducList = []
+  let mainCategoryList = []
   const isLoading = hottestResponse.loading || mainCategoryResponse.loading
   const isError = hottestResponse.error || mainCategoryResponse.error
-  if (isLoading) return <Loading />
-  if (isError) return <p>에러</p>
-  const hotProducList = hottestResponse.data.getProducts
-  const mainCategoryList = mainCategoryResponse.data.getMainCategories
+  const loadingClass = isLoading ? '' : 'display-none'
+  if (hottestResponse.data) hotProducList = hottestResponse.data.getProducts
+  if (mainCategoryResponse.data) mainCategoryList = mainCategoryResponse.data.getMainCategories
 
   let temp = 0
   let diff = 0
@@ -69,34 +70,42 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
     temp = e.clientY
   }
   return (
-    <div id="main-page">
-      <Header
-        title={
-          <h1>
-            <img src="./images/bmart-logo.png" alt="B마트" className="header-logo" />
-          </h1>
-        }
-        history={history}
-      />
-      {isResize ? <RandomRecommend resetHandler={() => setIsResize(false)} /> : <></>}
-      <div onPointerMove={pointerHandler} onPointerEnter={pointerEnterHandelr}>
-        <SlickCarousel />
-        <MainCategoryList mainCategoryList={mainCategoryList} />
+    <>
+      <Loading class={loadingClass} />
+      <div id="main-page">
+        <Header
+          title={
+            <h1>
+              <img src="./images/bmart-logo.png" alt="B마트" className="header-logo" />
+            </h1>
+          }
+          history={history}
+        />
+        {isResize ? <RandomRecommend resetHandler={() => setIsResize(false)} /> : <></>}
+        <div onPointerMove={pointerHandler} onPointerEnter={pointerEnterHandelr}>
+          <SlickCarousel />
+          <MainCategoryList mainCategoryList={mainCategoryList} />
+          <Divider />
+        </div>
+        <ProductSlide
+          eagerLoading={false}
+          productList={hotProducList}
+          title="김영지님을 위해 준비한 상품"
+          moreLink=""
+        />
         <Divider />
+        <PreviewContainer />
+        <Divider />
+        <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
+        <Divider />
+        <ProductSlideFetch sortBy={sortByList.CREATED_AT} />
+        <Divider />
+        <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
+        <Divider />
+        <CategoryPreviewSection />
+        <CartFloatButton isLoading={isLoading} />
+        <Footer />
       </div>
-      <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
-      <Divider />
-      <PreviewContainer />
-      <Divider />
-      <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
-      <Divider />
-      <ProductSlideFetch sortBy={sortByList.CREATED_AT} />
-      <Divider />
-      <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
-      <Divider />
-      <CategoryPreviewSection />
-      <CartFloatButton />
-      <Footer />
-    </div>
+    </>
   )
 }
