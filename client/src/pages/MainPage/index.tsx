@@ -50,22 +50,28 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
   if (hottestResponse.data) hotProducList = hottestResponse.data.getProducts
   if (mainCategoryResponse.data) mainCategoryList = mainCategoryResponse.data.getMainCategories
 
-  let temp = 0
-  let diff = 0
-
+  let tempY = 0
+  let tempX = 0
+  let diffX = 0
+  let diffY = 0
   const pointerHandler = (e) => {
     if (isResize) return
-    if (temp > e.clientY) return
-    diff = e.clientY - temp
-    temp = e.clientY
-    if (diff > 100) {
+    if (tempY > e.clientY) return
+    diffX = e.clientX - tempX
+    if (Math.abs(diffX) > 5) return
+    diffY = e.clientY - tempY
+    tempY = e.clientY
+    tempX = e.clientX
+    if (diffY > 20) {
       if (!isResize) setIsResize(true)
     }
   }
   const pointerEnterHandelr = (e) => {
     if (isResize) return
-    diff = 0
-    temp = e.clientY
+    diffX = 0
+    diffY = 0
+    tempY = e.clientY
+    tempX = e.clientX
   }
   return (
     <>

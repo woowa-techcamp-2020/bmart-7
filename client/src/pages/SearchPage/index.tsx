@@ -71,9 +71,15 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
       const updatedKeywords = [state, ...previousKeywords]
       setItem(updatedKeywords)
     }
-    history.push(`/search`, {
-      query: state,
-    })
+    if (state) {
+      history.replace(`/search`, {
+        query: state,
+      })
+    } else {
+      history.push(`/search`, {
+        query: state,
+      })
+    }
     history.push(`/search/result/${state}`)
   }
   const deleteHandler = () => {
