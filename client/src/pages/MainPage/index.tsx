@@ -82,17 +82,23 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
           history={history}
         />
         {isResize ? <RandomRecommend resetHandler={() => setIsResize(false)} /> : <></>}
-        <div onPointerMove={pointerHandler} onPointerEnter={pointerEnterHandelr}>
+        <div
+          className={'scroll-top'}
+          onPointerMove={pointerHandler}
+          onPointerEnter={pointerEnterHandelr}
+        >
           <SlickCarousel />
           <MainCategoryList mainCategoryList={mainCategoryList} />
           <Divider />
         </div>
-        <ProductSlide
-          eagerLoading={false}
-          productList={hotProducList}
-          title="김영지님을 위해 준비한 상품"
-          moreLink=""
-        />
+        <div className={'scroll-top'}>
+          <ProductSlide
+            eagerLoading={false}
+            productList={hotProducList}
+            title="김영지님을 위해 준비한 상품"
+            moreLink=""
+          />
+        </div>
         <Divider />
         <PreviewContainer />
         <Divider />
