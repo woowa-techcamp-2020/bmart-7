@@ -1,13 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { StoreContext } from '@/store'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import { StoreContext, SetStoreContext } from '@/store'
 
 import './style.scss'
 import { GET_PRODUCT } from './gql'
 import { Divider } from '@/components/common'
-import { useQuery } from 'react-apollo'
+import { useQuery, useMutation } from 'react-apollo'
 import { formatPrice } from '@/utils/formatPrice'
 import { ProductCommon } from './ProductCommon'
 import { HeartIcon } from '@/components/common/Product/HeartIcon'
+import { INSERT_CART_ITEM } from '@/components/common/Product/gql'
 
 interface ProductId {
   productId: number
@@ -15,12 +17,11 @@ interface ProductId {
 
 export const DetailMainContainer: React.FC<ProductId> = (props) => {
   const { productId } = props
-  const [isMovedCart, setIsMovedCart] = useState(false)
-  const { cartItems } = useContext(StoreContext)
 
-  useEffect(() => {
-    console.log(cartItems)
-  }, [isMovedCart])
+  const history = useHistory()
+  const store = useContext(StoreContext)
+  const setStore = useContext(SetStoreContext)
+  const [createCartItem] = useMutation(INSERT_CART_ITEM)
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: {
@@ -32,7 +33,35 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
   const productInfo = data.getProduct
-  const S3_URL = process.env.REACT_APP_S3_URL
+  const S3_URL = process.env.REACT_APP_S3_URL + 'product/'
+
+  const insertCartItem = async () => {
+    const itemInCart = store.cartItems.find((item) => item.product.id === productId)
+    if (itemInCart) {
+      const isGoCart = window.confirm(
+        '이미 장바구니에 담긴 상품입니다.\n장바구니로 이동하시겠습니까?'
+      )
+      if (isGoCart) history.push('/cart')
+
+      return
+    }
+
+    const {
+      data: { insertCartItem },
+    } = await createCartItem({
+      variables: {
+        input: {
+          userId: 5,
+          productId,
+        },
+      },
+    })
+    const newStore = { ...store }
+    newStore.cartItems = [...newStore.cartItems, insertCartItem]
+    setStore(newStore)
+    alert('장바구니에 물건이 담겼습니다.')
+    history.push('/cart')
+  }
 
   return (
     <>
@@ -43,13 +72,16 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
             <div className="left">
               <h1 className="main-title">{productInfo.title}</h1>
               <div className="price-wrap">
-                <div className="sale-percent num">{productInfo.salePercent}%</div>
-                <div className="original-price num">{formatPrice(productInfo.originPrice)}원</div>
+                {productInfo.salePercent ? (
+                  <>
+                    <div className="sale-percent num">{productInfo.salePercent}%</div>
+                    <div className="original-price num">
+                      {formatPrice(productInfo.originPrice)}원
+                    </div>
+                  </>
+                ) : null}
                 <div className="sale-price">{formatPrice(productInfo.salePrice)}원</div>
               </div>
-            </div>
-
-            <div className="right">
               <div className="favorite">
                 <HeartIcon id={productId} />
               </div>
@@ -65,17 +97,21 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
         <img className="product-image sub-content" src={`${S3_URL}${productInfo.bannerImage}`} />
         <h2 className="desc-sub-text sub-content">{productInfo.title}</h2>
         <div className="words-wrap">
-          <h3 className="words ">'바로먹는 간편함'을 주기적으로 만나 보세요.</h3>
-          <h3 className="words ">
-            맛있는 음식을 국내로 수입하는 브랜드, 엄격하게 품질을 관리하여 담아낸 제품입니다.
-          </h3>
+          <article className="words">
+            <p>지금 주문하면 동네에 배치된 비마트 거점으로부터</p>
+            <p>30분 이내에 신속하게 배달됩니다.</p>
+          </article>
+          <article className="words ">
+            <p>이벤트 기간동안 전 상품 무료로 배달해드립니다.</p>
+            <p>지금 바로 만나보세요!</p>
+          </article>
         </div>
         <img className="product-image sub-content" src={`${S3_URL}${productInfo.mainImage}`} />
       </div>
 
-      <div className="buffer">
+      <div className="order-buffer">
         <div className="order-btn">
-          <div className="order-text" onClick={() => setIsMovedCart(true)}>
+          <div className="order-text" onClick={() => insertCartItem()}>
             구매하기
           </div>
         </div>
