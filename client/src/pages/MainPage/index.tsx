@@ -12,6 +12,7 @@ import {
 import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@/components/common'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 import { useQuery } from 'react-apollo'
+import { RandomRecommend } from './RandomRecommend'
 
 const sortByList = {
   CREATED_AT: 'createdAt',
@@ -33,6 +34,7 @@ const useGetProducts = (sortBy) => {
 export const MainPage: React.FC<RouteProps> = ({ history }) => {
   const newestResponse = useGetProducts(sortByList.CREATED_AT)
   const hottestResponse = useGetProducts(sortByList.HIT)
+  const [isResize, setIsResize] = useState(false)
   const mainCategoryResponse = useQuery(GET_MAIN_CATEGORIES, {
     variables: {
       isMain: true,
@@ -51,7 +53,22 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
     newProducList = newestResponse.data.getProducts
     mainCategoryList = mainCategoryResponse.data.getMainCategories
   }
-
+  let temp = 0
+  let diff = 0
+  const pointerHandler = (e) => {
+    if (isResize) return
+    if (temp > e.clientY) return
+    diff = e.clientY - temp
+    temp = e.clientY
+    if (diff > 3) {
+      if (!isResize) setIsResize(true)
+    }
+  }
+  const pointerEnterHandelr = (e) => {
+    if (isResize) return
+    diff = 0
+    temp = e.clientY
+  }
   return (
     <div id="main-page">
       <Header
@@ -62,16 +79,18 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
         }
         history={history}
       />
-      <SlickCarousel />
-      <MainCategoryList mainCategoryList={mainCategoryList} />
-      <Divider />
-      <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
-      <Divider />
+      {isResize ? <RandomRecommend resetHandler={() => setIsResize(false)} /> : <></>}
+      <div onPointerMove={pointerHandler} onPointerEnter={pointerEnterHandelr}>
+        <SlickCarousel />
+        <MainCategoryList mainCategoryList={mainCategoryList} />
+        <Divider />
+        <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
+        <Divider />
+      </div>
       <PreviewContainer />
       <Divider />
       <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
       <Divider />
-
       <ProductSlide productList={newProducList} title="새로 나왔어요" moreLink="" />
       <Divider />
       <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
