@@ -11,6 +11,17 @@ import { Link } from 'react-router-dom'
 import { getItem, setItem, removeItem } from './utils'
 const limit = 5
 
+const useDebounce = (fn: Function, timeout: number) => {
+  const [timeoutId, setTimeoutId] = useState(null)
+  return (...args: any) => {
+    if (timeoutId) clearTimeout(timeoutId)
+    const newTimeoutId = setTimeout(() => {
+      fn(...args)
+    }, timeout)
+    setTimeoutId(newTimeoutId)
+  }
+}
+
 export const SearchPage: React.FC<RouteProps> = (props) => {
   const { history } = props
   const state = history.location.state
@@ -45,19 +56,15 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
     setResultList(getProducts)
   }
 
+  const debounceQuery = useDebounce((value) => {
+    if (!value.length) return setResultList([])
+    fetchQuery(value)
+  }, 100)
   const inputHandler = (e) => {
     const value = e.target.value
     setKeyword(value)
-    fetchQuery(value)
-    // if (!timeOut) {
-    //   const newTimeOut = window.setTimeout(() => {
-    //     setTimeOut(null)
-    //     fetchQuery(value)
-    //   }, 300)
-    //   setTimeOut(newTimeOut)
-    // }
+    debounceQuery(value)
   }
-  // useDebounce(inputHandler, 300)
   const searchHandler = (input?) => {
     const state = input || keyword
     if (!previousKeywords.includes(state)) {
