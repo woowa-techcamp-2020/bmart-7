@@ -30,3 +30,12 @@ export const GET_INIT_DATA = gql`
     }
   }
 `
+
+export const GET_USER = gql`
+  query {
+    initAuthUser {
+      id
+      userId
+    }
+  }
+`
