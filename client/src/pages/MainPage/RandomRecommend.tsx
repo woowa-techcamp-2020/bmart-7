@@ -28,5 +28,9 @@ export const RandomRecommend: React.FC<IProps> = (props) => {
     }, 2500)
   }, [])
 
-  return <div className="recommend-container">{menu} 땡겨요</div>
+  return (
+    <div className="recommend-container">
+      <span className="menu">{menu}</span> 땡겨요
+    </div>
+  )
 }

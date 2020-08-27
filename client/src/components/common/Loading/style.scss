@@ -1,0 +1,29 @@
+@import 'src/styles/package';
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+.display-none {
+  display: none !important;
+}
+@keyframes run {
+  0% {
+    left: 50%;
+  }
+  90% {
+    left: -5%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+.loading-img {
+  width: 50%;
+  height: 50vw;
+  display: block;
+  margin: 0 auto;
+  animation: run 0.5s;
+  position: relative;
+}

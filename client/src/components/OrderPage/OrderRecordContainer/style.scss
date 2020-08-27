@@ -1,0 +1,50 @@
+@import 'src/styles/package';
+
+.order-record-container {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 10px;
+  .date-wrap {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    align-items: center;
+    .order-icon {
+      width: 4rem;
+    }
+    .today {
+      font-size: 1.5rem;
+    }
+  }
+
+  .text-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .sub-text {
+      font-size: 1.3rem;
+    }
+  }
+  .bottom-wrap {
+    margin-bottom: 10px;
+
+    .content-btn-wrap {
+      display: flex;
+      align-content: 10px;
+      padding: 10px;
+      border: 1px solid $color-gray-400;
+      border-radius: 4px;
+      justify-content: center;
+      font-size: 1.5rem;
+      .content-btn {
+        background-color: $color-white;
+      }
+    }
+  }
+}

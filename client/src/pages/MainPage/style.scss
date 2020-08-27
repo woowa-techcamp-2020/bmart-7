@@ -17,3 +17,24 @@
     text-align: center;
   }
 }
+
+.scroll-top {
+  touch-action: pan-down;
+}
+
+.menu {
+  position: relative;
+  animation: random ease 3s;
+}
+
+@keyframes random {
+  0% {
+    top: 100%;
+    opacity: 0.2;
+  }
+
+  100% {
+    top: 0%;
+    opacity: 1;
+  }
+}

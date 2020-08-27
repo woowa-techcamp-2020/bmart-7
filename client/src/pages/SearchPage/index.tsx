@@ -66,15 +66,21 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
     debounceQuery(value)
   }
   const searchHandler = (input?) => {
-    const state = input || keyword
-    if (!previousKeywords.includes(state)) {
-      const updatedKeywords = [state, ...previousKeywords]
+    const inputKeyword = input || keyword
+    if (!previousKeywords.includes(inputKeyword)) {
+      const updatedKeywords = [inputKeyword, ...previousKeywords]
       setItem(updatedKeywords)
     }
-    history.push(`/search`, {
-      query: state,
-    })
-    history.push(`/search/result/${state}`)
+    if (state) {
+      history.replace(`/search`, {
+        query: inputKeyword,
+      })
+    } else {
+      history.push(`/search`, {
+        query: inputKeyword,
+      })
+    }
+    history.push(`/search/result/${inputKeyword}`)
   }
   const deleteHandler = () => {
     setKeyword('')
@@ -114,7 +120,9 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
       <Divider />
       <ul className="result-list">
         {resultList.map((result, idx) => (
-          <li key={idx}>{result.title}</li>
+          <Link to={`/detail/${result.id}`}>
+            <li key={idx}>{result.title}</li>
+          </Link>
         ))}
       </ul>
       <h3>최근 검색어</h3>

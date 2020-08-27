@@ -24,10 +24,9 @@ export const CategoryPreview: React.FC<IProps> = (props) => {
 
   const previewRef = useRef<HTMLDivElement>()
   if (previewRef.current) io.observe(previewRef.current)
-  const firstBuffer = idx ? '' : 'first-buffer'
   return (
     <div>
-      <div className={'category-buffer ' + firstBuffer} id={id}></div>
+      <div className="category-buffer" id={id}></div>
       <div
         className="category-preview-container"
         ref={previewRef}

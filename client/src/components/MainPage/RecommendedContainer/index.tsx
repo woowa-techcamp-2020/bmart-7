@@ -33,6 +33,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
     })
 
     setProductList(getRecommended)
+    io.observe(ref.current)
   }
 
   const onClickHandler = () => {
@@ -42,7 +43,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
     fetchRecommended()
   }, [])
 
-  if (ref.current) io.observe(ref.current)
+  // if (ref.current) io.observe(ref.current)
 
   return (
     <div className="recommended-container" ref={ref}>

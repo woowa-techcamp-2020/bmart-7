@@ -11,7 +11,7 @@ interface IProps {
   inputHandler?: (e: FormEvent<HTMLElement>) => void
   keyUpHandler?: (e: FormEvent<HTMLElement>) => void
   deleteHandler?: (_: any) => void
-  searchHandler?: (_: any) => void
+  searchHandler?: (input?) => void
   focusHandler?: () => void
 }
 
@@ -56,7 +56,12 @@ export const SearchHeader: React.FC<IProps> = (props) => {
       </div>
       <div className="right-side row">
         <AiFillCloseCircle className={`icon ${classHidden}`} onClick={deleteHandler} />
-        <GrSearch className="search-btn icon" onClick={searchHandler} />
+        <GrSearch
+          className="search-btn icon"
+          onClick={(e) => {
+            searchHandler()
+          }}
+        />
       </div>
     </header>
   )
