@@ -16,6 +16,7 @@ import { useQuery } from 'react-apollo'
 import { RandomRecommend } from './RandomRecommend'
 import { ProductSlideFetch } from './ProductSlideFetch'
 
+
 const sortByList = {
   CREATED_AT: 'createdAt',
   HIT: 'hit',

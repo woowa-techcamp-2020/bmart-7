@@ -3,62 +3,81 @@ import './style.scss'
 import { FiArrowLeftCircle } from 'react-icons/fi'
 import { FiArrowRightCircle } from 'react-icons/fi'
 
-const imgUrlArr: Array<string> = [
-  'https://lh3.googleusercontent.com/proxy/uamYJBhUo06Ke0OeQS3chx6_oz61FGl0wQwleDmXJcjieEJOQYyis3fIXoR85cke8pXuvXBCcw3QUKVBcVozV7bK8Wlm_0SIwNLbOMOeDwjCx0m1aP-byq3OCgOmvL2dotpTajJNs5CExyEzyMNHr6BSAm7BwdbKqJgdIIH3jA6xKsIh8GuLRqLk_DUV8O6CQAfQsYr0hU0n0KBAP5sAYsszVrsjqUHpRmcwO74Ze2vL0Jr5tLtuAsPPs35eIB6JycwbFdtckfKQyhB-fPRPDItAPW6Q28NKEHutGEuV3l-JN4xSckwI5pE9eT7cfk233U6mwGXW3_dZMjGdvAilIKVDYsYhIMNc-Sy2WhdfqOoaxPL_pU0DUCa2eZbtrJ6YuEmwGA',
-  'https://photo.jtbc.joins.com/news/2018/01/22/20180122172000506.jpg',
-  'https://menu.mt.co.kr/moneyweek/thumb/2020/04/13/06/2020041315148091718_1.jpg',
-  'https://photo.jtbc.joins.com/news/2018/01/22/20180122172000506.jpg',
-  'https://menu.mt.co.kr/moneyweek/thumb/2020/04/09/06/2020040910318013214_1.jpg',
+const imgArr: Array<string> = [
+  './images/banner1.gif',
+  './images/banner2.gif',
+  './images/banner3.gif',
+  './images/banner4.gif',
+  './images/banner5.gif',
 ]
 
-export const Carousel: React.FC = () => {
-  const totalSlides = imgUrlArr.length - 1
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const slideRef = useRef(null)
+export const MyCarousel: React.FC = () => {
+  const slides = imgArr.length + 1
+  const imageBox = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(1)
+  console.log(currentSlide)
+  // const [goFirst, setgoFirst] = useState(true)
 
   const clickLRightBtn = () => {
-    if (currentSlide >= totalSlides) {
-      setCurrentSlide(0)
-    } else {
+    if (currentSlide < 5) {
       setCurrentSlide(currentSlide + 1)
+    } else {
+      imageBox.current.style.transform = `translateX(-100%)`
+      setCurrentSlide(1)
     }
   }
 
   const clickLeftBtn = () => {
-    if (currentSlide === 0) {
-      setCurrentSlide(totalSlides)
-    } else {
+    if (currentSlide > 1) {
       setCurrentSlide(currentSlide - 1)
+    } else {
+      imageBox.current.style.transform = `translateX(0%)`
+      setCurrentSlide(4)
     }
   }
 
   useEffect(() => {
-    slideRef.current.style.transition = 'all 0.5s ease-in-out'
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`
+    if (currentSlide < 5) {
+      imageBox.current.style.transition = 'all 1s ease-in-out'
+      imageBox.current.style.transform = `translateX(-${currentSlide}00%)`
+    } else if (currentSlide > 1) {
+      imageBox.current.style.transition = 'all 1s ease-in-out'
+      imageBox.current.style.transform = `translateX(+${currentSlide}00%)`
+    }
   }, [currentSlide])
 
-  setInterval(() => {
-    clickLRightBtn()
-    if (currentSlide === imgUrlArr.length + 1) {
-      setCurrentSlide(0)
-    } else {
-      setCurrentSlide(currentSlide + 1)
-    }
-    // todo: 5가되면 0으로 돌아가게
-  }, 2000)
+  // useEffect(() => {
+  //   setCurrentSlide(0)
+  // }, [goFirst])
+
+  // setInterval(() => {
+  //   clickLRightBtn()
+  //   if (currentSlide === imgUrlArr.length + 1) {
+  //     setCurrentSlide(0)
+  //   } else {
+  //     setCurrentSlide(currentSlide + 1)
+  //   }
+  //   // todo: 5가되면 0으로 돌아가게
+  // }, 2000)
 
   return (
     <div className="carousel">
-      <div className="images" ref={slideRef}>
-        {imgUrlArr.map((url: string, idx: number) => (
-          <img data-id={idx} src={url} alt="cat" />
+      <div className="image-box" ref={imageBox}>
+        <img src={imgArr[3]} alt="loading..." loading="eager" />
+        {imgArr.map((url: string, idx: number) => (
+          <img key={idx} src={url} alt="loading..." loading="eager" />
         ))}
+        <img src={imgArr[0]} alt="loading..." loading="eager" />
       </div>
-      <div className="cur-number">
-        {currentSlide + 1}/{imgUrlArr.length}
-      </div>
+
       <FiArrowLeftCircle className="left-arrow-btn" onClick={clickLeftBtn} />
       <FiArrowRightCircle className="right-arrow-btn" onClick={clickLRightBtn} />
+      {/* <div className="dots">
+        <div className={`num ${currentSlide === 1 || 5 ? 'cur' : ''}`}>1</div>
+        <div className={`num ${currentSlide === 2 ? 'cur' : ''}`}>2</div>
+        <div className={`num ${currentSlide === 3 ? 'cur' : ''}`}>3</div>
+        <div className={`num ${currentSlide === 4 || 0 ? 'cur' : ''}`}>4</div>
+      </div> */}
     </div>
   )
 }
