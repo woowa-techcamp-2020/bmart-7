@@ -19,10 +19,6 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
   const { cartItems } = useContext(StoreContext)
 
   useEffect(() => {
-    // if (isMovedCart) {
-    //   // todo:cartItem에 추가
-    // }
-    // window.location.assign('/cart')
     console.log(cartItems)
   }, [isMovedCart])
 
