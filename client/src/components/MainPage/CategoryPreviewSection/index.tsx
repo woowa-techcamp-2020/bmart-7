@@ -91,6 +91,7 @@ export const CategoryPreviewSection: React.FC = () => {
             mainCategoryId={id}
             srcLoading={srcLoading}
             productList={producList}
+            key={id}
           />
         )
       })}
