@@ -25,3 +25,31 @@ export const DELETE_FAVORITES = gql`
     }
   }
 `
+
+export const INSERT_CART_ITEM = gql`
+  mutation($input: CartItemInput) {
+    insertCartItem(input: $input) {
+      id
+      count
+      product {
+        id
+        title
+        originPrice
+        salePrice
+        salePercent
+        amount
+        mainImage
+        bannerImage
+      }
+    }
+  }
+`
+
+export const PUT_CART_ITEM_COUNT = gql`
+  mutation($input: CartItemCountInput) {
+    putCartItemCount(input: $input) {
+      id
+      count
+    }
+  }
+`
