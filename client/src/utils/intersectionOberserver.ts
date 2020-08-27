@@ -9,7 +9,6 @@ export const makeIntersectionObserver = (loadData) => {
           return
         }
         const target = entry.target
-        console.log(target)
         loadData()
         observer.unobserve(target)
       })
