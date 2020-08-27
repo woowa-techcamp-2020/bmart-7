@@ -85,6 +85,7 @@ export const CategoryPreviewSection: React.FC = () => {
           <CategoryPreview
             id={`catgory-${id}`}
             idx={idx}
+            key={id}
             io={io}
             title={mainCategoryList[idx].title}
             mainCategoryId={id}
