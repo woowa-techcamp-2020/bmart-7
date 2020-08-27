@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { RouteProps } from 'react-router'
 import './style.scss'
 import { GET_PRODUCTS, GET_MAIN_CATEGORIES } from './gql'
@@ -11,11 +11,9 @@ import {
 } from '@/components/MainPage'
 import { Loading, Spinner } from '@/components/common'
 import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@/components/common'
-import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 import { useQuery } from 'react-apollo'
 import { RandomRecommend } from './RandomRecommend'
 import { ProductSlideFetch } from './ProductSlideFetch'
-
 
 const sortByList = {
   CREATED_AT: 'createdAt',

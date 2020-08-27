@@ -21,13 +21,14 @@ export const CartIcon: React.FC<{ id: number }> = ({ id }) => {
   }, [id])
 
   const insertCartItem = async () => {
+    const userId = +localStorage.getItem('userId')
     const {
       data: { insertCartItem },
     } = await createCartItem({
       variables: {
         input: {
           productId: id,
-          userId: 5,
+          userId,
         },
       },
     })

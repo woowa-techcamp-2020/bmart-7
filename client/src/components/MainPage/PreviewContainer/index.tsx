@@ -71,7 +71,13 @@ export const PreviewContainer: React.FC = () => {
         </ul>
 
         <div className="product-big-item">
-          <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
+          {productList.map((product, index) =>
+            index === previewIdx ? (
+              <Product product={product} eagerLoading={false} isBannerImg={true} key={index} />
+            ) : (
+              <React.Fragment key={index}></React.Fragment>
+            )
+          )}
         </div>
       </div>
     </div>

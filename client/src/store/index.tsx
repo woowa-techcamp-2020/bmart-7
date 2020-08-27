@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { createContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Favorite, CartItem } from '@/types'
-import { GET_INIT_DATA } from './gql'
+import { GET_INIT_DATA, GET_USER } from './gql'
 import { fetchQuery } from '@/utils'
 
 export const StoreContext = createContext<StoreType>(undefined)
@@ -23,20 +24,41 @@ export const defaultStore = {
 
 export const InitStore: React.FC = () => {
   const setStore = useContext(SetStoreContext)
+  const history = useHistory()
 
   useEffect(() => {
-    fetchQuery({
-      query: GET_INIT_DATA,
-      variables: {
-        userId: 5,
-      },
-    }).then((data) => {
-      setStore({
-        isLoading: false,
-        favorites: data.getUserFavorites,
-        cartItems: data.getUserCartItems,
-      })
-    })
+    const init = async () => {
+      try {
+        const { initAuthUser } = await fetchQuery({
+          query: GET_USER,
+        })
+
+        if (!initAuthUser.id) {
+          history.push('/login')
+          return
+        }
+        localStorage.setItem('userId', initAuthUser.id)
+
+        const data = await fetchQuery({
+          query: GET_INIT_DATA,
+          variables: {
+            userId: initAuthUser.id,
+          },
+        })
+        setStore({
+          isLoading: false,
+          favorites: data.getUserFavorites,
+          cartItems: data.getUserCartItems,
+        })
+
+        if (history.location.pathname === '/login') {
+          history.push('/')
+        }
+      } catch (e) {
+        history.push('/login')
+      }
+    }
+    init()
   }, [])
 
   return <></>

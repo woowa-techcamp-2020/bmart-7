@@ -17,12 +17,14 @@ export const OrderButton: React.FC<OrderButtonType> = ({ totalPrice }) => {
   }
 
   return (
-    <div className="order-button-wrapper">
-      <div className="order-button" onClick={() => orderItems()}>
-        <div className="count">{count}</div>
-        <div className="text">{formatPrice(totalPrice)}원 배달 주문하기</div>
+    <>
+      <div className="order-button-wrapper">
+        <div className="order-button" onClick={() => orderItems()}>
+          <div className="count">{count}</div>
+          <div className="text">{formatPrice(totalPrice)}원 배달 주문하기</div>
+        </div>
       </div>
-      <div className="buffer"></div>
-    </div>
+      <div className="order-button-buffer"></div>
+    </>
   )
 }

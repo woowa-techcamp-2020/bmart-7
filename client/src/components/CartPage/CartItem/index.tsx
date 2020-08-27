@@ -39,7 +39,7 @@ export const CartItem: React.FC<CartItemType> = (props) => {
           <RemoveButton id={id} />
         </div>
         <div className="info-row">
-          <Link to="/" className="product-link">
+          <Link to={`/detail/${product.id}`} className="product-link">
             <img src={imageUrl} alt="product" className="product-img" />
           </Link>
           <div className="info-wrapper">
