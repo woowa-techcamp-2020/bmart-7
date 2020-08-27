@@ -13,3 +13,14 @@ export const GET_PRODUCTS = gql`
     }
   }
 `
+
+export const GET_MAIN_CATEGORIES = gql`
+  query($isMain: Boolean) {
+    getMainCategories(isMain: $isMain) {
+      id
+      title
+      isMain
+      imageUrl
+    }
+  }
+`
