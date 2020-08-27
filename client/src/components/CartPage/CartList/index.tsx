@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './style.scss'
-import { CartItem as CartItemType } from '@/types'
 import { CartItem } from '../CartItem'
 import { FiPlus } from 'react-icons/fi'
+import { CartItemsContext } from '@/pages/CartPage'
 
-type CartListProps = {
-  cartItems: CartItemType[]
-}
+export const CartList: React.FC = () => {
+  const cartItems = useContext(CartItemsContext)
 
-export const CartList: React.FC<CartListProps> = ({ cartItems }) => {
   return (
     <div className="cart-list">
       <div className="cart-item-container">
