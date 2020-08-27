@@ -10,6 +10,7 @@ export const CategoryContainer: React.FC = () => {
   const [mainTitleId, setMainTitleId] = useState(0)
 
   const clickMainTitle = (mainId) => {
+    console.log(mainId)
     if (mainId === -1) {
       return
     }
@@ -60,11 +61,13 @@ export const CategoryContainer: React.FC = () => {
                   {idx % 2 === 1 ? (
                     <>
                       <SubCategoryContainer
+                        mainId={special.mainCategories[idx - 1].id}
                         isShow={special.mainCategories[idx - 1].id === mainTitleId}
                         subCategories={special.mainCategories[idx - 1].categories}
                         key={`category-${idx - 1}`}
                       />
                       <SubCategoryContainer
+                        mainId={main.id}
                         isShow={main.id === mainTitleId}
                         subCategories={main.categories}
                         key={`category-${idx}`}
