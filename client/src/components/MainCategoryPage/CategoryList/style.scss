@@ -23,7 +23,7 @@
       }
     }
 
-    &:nth-child(odd):last-of-type {
+    &:nth-child(odd):nth-last-of-type(2) {
       border-bottom: none;
     }
   }

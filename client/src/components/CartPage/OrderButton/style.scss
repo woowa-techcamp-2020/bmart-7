@@ -1,0 +1,37 @@
+@import 'src/styles/package';
+
+.order-button-wrapper {
+  .order-button {
+    @include flex-center();
+    position: fixed;
+    bottom: 0.5rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    width: calc(100% - 1rem);
+    margin: 0 0.5rem;
+    background-color: $color-main;
+    cursor: pointer;
+
+    .count {
+      @include flex-center();
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      background-color: $color-white;
+      color: $color-main;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-right: 1rem;
+    }
+
+    .text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $color-white;
+    }
+  }
+
+  .buffer {
+    height: 4rem;
+  }
+}

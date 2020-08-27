@@ -27,15 +27,13 @@
         display: flex;
         align-items: center;
 
-        label {
-          .checkbox-icon {
-            font-size: 2.6rem;
-            margin-top: 0.3rem;
-            color: $color-gray-200;
+        .checkbox-icon {
+          font-size: 2.6rem;
+          margin-top: 0.3rem;
+          color: $color-gray-200;
 
-            &.checked {
-              color: $color-main;
-            }
+          &.checked {
+            color: $color-main;
           }
         }
 
