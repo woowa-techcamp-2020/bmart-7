@@ -1,6 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { RouteProps } from 'react-router'
-import { ProductList, SubHeader, Header, Divider, CartFloatButton } from '@/components/common'
+import {
+  ProductList,
+  SubHeader,
+  Header,
+  Divider,
+  CartFloatButton,
+  EmptyPage,
+} from '@/components/common'
 import { StoreContext } from '@/store'
 
 const COLUMN_NUM = 2
@@ -18,10 +25,16 @@ export const FavoritePage: React.FC<RouteProps> = ({ history }) => {
   return (
     <div id="favorite-page">
       <Header title={<h1>찜한상품</h1>} isShowSearch={false} isShowMenu={false} history={history} />
-      <Divider />
-      <SubHeader title={subHeaderTitle} filter={null} />
-      <ProductList productList={productList} column={COLUMN_NUM} />
-      <CartFloatButton />
+      {productList.length ? (
+        <>
+          <Divider />
+          <SubHeader title={subHeaderTitle} filter={null} />
+          <ProductList productList={productList} column={COLUMN_NUM} />
+          <CartFloatButton />
+        </>
+      ) : (
+        <EmptyPage title="찜한 상품이 없습니다." buttonText="찜하러 가기" />
+      )}
     </div>
   )
 }
