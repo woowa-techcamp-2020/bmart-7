@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { StoreContext } from '@/store'
+
 import './style.scss'
 import { GET_PRODUCT } from './gql'
 import { Divider } from '@/components/common'
@@ -13,6 +15,17 @@ interface ProductId {
 
 export const DetailMainContainer: React.FC<ProductId> = (props) => {
   const { productId } = props
+  const [isMovedCart, setIsMovedCart] = useState(false)
+  const { cartItems } = useContext(StoreContext)
+
+  useEffect(() => {
+    if (isMovedCart) {
+      // todo:cartItem에 추가
+    }
+    // window.location.assign('/cart:')
+    console.log(cartItems)
+  }, [isMovedCart])
+
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: {
       id: productId,
@@ -22,11 +35,8 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
-
   const productInfo = data.getProduct
   const S3_URL = process.env.REACT_APP_S3_URL
-
-  console.log(data.getProduct)
 
   return (
     <>
@@ -65,6 +75,14 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
           </h3>
         </div>
         <img className="product-image sub-content" src={`${S3_URL}${productInfo.mainImage}`} />
+      </div>
+
+      <div className="buffer">
+        <div className="order-btn">
+          <div className="order-text" onClick={() => setIsMovedCart(true)}>
+            구매하기
+          </div>
+        </div>
       </div>
     </>
   )

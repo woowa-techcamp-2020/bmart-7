@@ -97,3 +97,24 @@
     }
   }
 }
+.buffer {
+  height: $height-buffer;
+  .order-btn {
+    position: fixed;
+    width: 100%;
+    padding: 0 5px 5px 5px;
+    bottom: 0;
+    display: block;
+    text-align: center;
+    background-color: $color-white;
+    max-width: 800px;
+    .order-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background-color: #0fd4e4;
+      border-radius: 5px;
+      color: $color-white;
+      padding: 10px;
+    }
+  }
+}
