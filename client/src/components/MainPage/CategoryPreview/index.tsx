@@ -15,17 +15,19 @@ interface IProps {
   }
   productList: any[]
   srcLoading: boolean
+  idx: number
 }
 const limit = 10
 
 export const CategoryPreview: React.FC<IProps> = (props) => {
-  const { title, mainCategoryId, id, io, productList, srcLoading } = props
+  const { title, mainCategoryId, id, io, productList, srcLoading, idx } = props
 
   const previewRef = useRef<HTMLDivElement>()
   if (previewRef.current) io.observe(previewRef.current)
+  const firstBuffer = idx ? '' : 'first-buffer'
   return (
     <div>
-      <div className="category-buffer" id={id}></div>
+      <div className={'category-buffer ' + firstBuffer} id={id}></div>
       <div
         className="category-preview-container"
         ref={previewRef}

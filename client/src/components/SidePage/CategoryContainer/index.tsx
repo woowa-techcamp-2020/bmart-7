@@ -17,7 +17,7 @@ export const CategoryContainer: React.FC = () => {
   return (
     <div id="category-container">
       {mockdata.data.getSections.map((special, idx) => (
-        <>
+        <React.Fragment key={idx}>
           <div className="special-wrap">
             <div className="special-title-wrap">
               <header className="special-title" key={idx}>
@@ -26,7 +26,7 @@ export const CategoryContainer: React.FC = () => {
             </div>
             <ul className="main-category-wrap">
               {special.mainCategories.map((main, idx) => (
-                <div className="main-category-title-wrap" onClick={clickMainTitle}>
+                <div className="main-category-title-wrap" onClick={clickMainTitle} key={idx}>
                   <li className="title main-title" key={idx}>
                     {main.title}
                   </li>
@@ -40,7 +40,7 @@ export const CategoryContainer: React.FC = () => {
             </ul>
           </div>
           <Divider />
-        </>
+        </React.Fragment>
       ))}
     </div>
   )

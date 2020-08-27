@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
 import { RouteProps } from 'react-router'
 import { IoMdClose } from 'react-icons/io'
@@ -6,12 +6,33 @@ import { Divider } from '@/components/common'
 import { client } from '@/ApolloClient'
 import { GET_PRODUCTS } from './gql'
 import { Header } from './Header'
+import { SearchHeader } from '@/components/common'
 import { Link } from 'react-router-dom'
 import { getItem, setItem, removeItem } from './utils'
 const limit = 5
-export const SearchPage: React.FC<RouteProps> = ({ history }) => {
+
+const useDebounce = (fn: Function, timeout: number) => {
+  const [timeoutId, setTimeoutId] = useState(null)
+  return (...args: any) => {
+    if (timeoutId) clearTimeout(timeoutId)
+    const newTimeoutId = setTimeout(() => {
+      fn(...args)
+    }, timeout)
+    setTimeoutId(newTimeoutId)
+  }
+}
+
+export const SearchPage: React.FC<RouteProps> = (props) => {
+  const { history } = props
+  const state = history.location.state
   const [keyword, setKeyword] = useState('')
   const [resultList, setResultList] = useState([])
+  // const [timeOut, setTimeOut] = useState(null)
+
+  useEffect(() => {
+    state ? setKeyword(state.query) : setKeyword('')
+  }, [state])
+
   // const [timeOut, setTimeOut] = useState(0)
   const item = getItem()
   const previousKeywords = item ? item : []
@@ -35,23 +56,25 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
     setResultList(getProducts)
   }
 
+  const debounceQuery = useDebounce((value) => {
+    if (!value.length) return setResultList([])
+    fetchQuery(value)
+  }, 100)
   const inputHandler = (e) => {
     const value = e.target.value
     setKeyword(value)
-    fetchQuery(value)
-    // if (!timeOut) {
-    //   const newTimeOut = window.setTimeout(() => {
-    //     setTimeOut(null)
-    //     fetchQuery(value)
-    //   }, 66)
-    //   setTimeOut(newTimeOut)
-    // }
+    debounceQuery(value)
   }
-
-  const searchHandler = () => {
-    const updatedKeywords = [keyword, ...previousKeywords]
-    setItem(updatedKeywords)
-    history.push(`/search/result/${keyword}`)
+  const searchHandler = (input?) => {
+    const state = input || keyword
+    if (!previousKeywords.includes(state)) {
+      const updatedKeywords = [state, ...previousKeywords]
+      setItem(updatedKeywords)
+    }
+    history.push(`/search`, {
+      query: state,
+    })
+    history.push(`/search/result/${state}`)
   }
   const deleteHandler = () => {
     setKeyword('')
@@ -78,8 +101,9 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
   const classHidden = keyword.length ? '' : 'hidden'
   return (
     <div className="search-page">
-      <Header
+      <SearchHeader
         keyword={keyword}
+        result={false}
         inputHandler={inputHandler}
         keyUpHandler={keyUpHandler}
         deleteHandler={deleteHandler}
@@ -98,7 +122,7 @@ export const SearchPage: React.FC<RouteProps> = ({ history }) => {
         {keywordRecords.map((keyword, idx) => {
           return (
             <li key={idx}>
-              <Link to={`/search/result/${keyword}`}>{keyword}</Link>
+              <span onClick={() => searchHandler(keyword)}>{keyword}</span>
               <IoMdClose className="close-button" onClick={() => deleteRecordHandler(idx)} />
             </li>
           )
