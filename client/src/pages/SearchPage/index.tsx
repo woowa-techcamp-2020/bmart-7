@@ -66,21 +66,21 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
     debounceQuery(value)
   }
   const searchHandler = (input?) => {
-    const state = input || keyword
-    if (!previousKeywords.includes(state)) {
-      const updatedKeywords = [state, ...previousKeywords]
+    const inputKeyword = input || keyword
+    if (!previousKeywords.includes(inputKeyword)) {
+      const updatedKeywords = [inputKeyword, ...previousKeywords]
       setItem(updatedKeywords)
     }
     if (state) {
       history.replace(`/search`, {
-        query: state,
+        query: inputKeyword,
       })
     } else {
       history.push(`/search`, {
-        query: state,
+        query: inputKeyword,
       })
     }
-    history.push(`/search/result/${state}`)
+    history.push(`/search/result/${inputKeyword}`)
   }
   const deleteHandler = () => {
     setKeyword('')
