@@ -14,9 +14,7 @@ export const SidePage: React.FC<RouteProps> = ({ history }) => {
       <SideMenuHeader />
       <Divider />
       <CategoryContainer />
-      <div className="footer-buffer">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   )
 }

@@ -1,12 +1,10 @@
 @import 'src/styles/package';
 
 #side-page {
+  Footer {
+    margin-top: 6rem;
+  }
   .footer-buffer {
     height: 150px;
-    Footer {
-      position: fixed;
-      bottom: 0;
-      max-width: 800px;
-    }
   }
 }
