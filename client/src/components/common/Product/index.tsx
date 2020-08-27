@@ -29,7 +29,7 @@ export const Product: React.FC<ProductProps> = (props) => {
   return (
     <li className="product">
       <div className="image-wrapper">
-        <Link to={`/detail/${id}`} key={id}>
+        <Link to={`/detail/${id}`}>
           {eagerLoading ? (
             <img src={imageUrl} loading="eager" alt="no" />
           ) : (

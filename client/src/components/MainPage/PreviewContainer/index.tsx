@@ -70,11 +70,9 @@ export const PreviewContainer: React.FC = () => {
           })}
         </ul>
 
-        <Link to="/detail">
-          <div className="product-big-item">
-            <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
-          </div>
-        </Link>
+        <div className="product-big-item">
+          <Product product={productList[previewIdx]} eagerLoading={false} isBannerImg={true} />
+        </div>
       </div>
     </div>
   )
