@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './style.scss'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'

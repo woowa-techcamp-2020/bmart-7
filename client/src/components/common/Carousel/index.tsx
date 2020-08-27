@@ -21,8 +21,11 @@ export const SlickCarousel: React.FC = () => {
     arrowa: true,
     slideToScroll: 1,
     autoplay: true,
+    autoplaySpeed: 1500,
     className: 'slides',
+    arrow: false,
   }
+
   return (
     <div className="slick-carousel">
       <Slider className="images" {...settings}>

@@ -1,0 +1,120 @@
+@import 'src/styles/package';
+
+.detail-main-container {
+  display: flex;
+  flex-direction: column;
+
+  .logo {
+    width: 100%;
+  }
+  .contents {
+    padding: 20px 10px;
+    .product-info-wrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 0px;
+      .left {
+        display: flex;
+        flex-direction: column;
+        .main-title {
+          font-size: 1.6em;
+          padding: 0px 0px 25px 0px;
+        }
+        .price-wrap {
+          display: flex;
+          flex-direction: row;
+          font-size: 1.3rem;
+
+          .num {
+            margin-right: 7px;
+          }
+
+          .sale-percent {
+            color: $color-red;
+            font-weight: 600;
+          }
+          .original-price {
+            color: $color-gray-400;
+            text-decoration: line-through;
+          }
+          .sale-price {
+            font-weight: 600;
+          }
+        }
+      }
+      .right {
+        .favorite {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 3em;
+          height: 3em;
+          border-radius: 100%;
+          background-color: #1f1f1f80;
+          padding-top: 0.2em;
+          position: absolute;
+          right: 20px;
+          top: 420px;
+          .icon-wrapper {
+            color: #fe9c8f;
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.detail-sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0px;
+  .sub-content {
+    margin-bottom: 15px;
+  }
+  .desc-text {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  .desc-sub-text {
+    font-size: 1.5rem;
+  }
+  .product-image {
+    width: 100%;
+  }
+  .words-wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 1.2rem;
+
+    .words {
+      padding: 5px;
+      line-height: 1.4;
+    }
+  }
+}
+.buffer {
+  height: $height-buffer;
+  .order-btn {
+    position: fixed;
+    width: 100%;
+    padding: 0 5px 5px 5px;
+    bottom: 0;
+    display: block;
+    text-align: center;
+    background-color: $color-white;
+    max-width: 800px;
+    .order-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background-color: #0fd4e4;
+      border-radius: 5px;
+      color: $color-white;
+      padding: 10px;
+    }
+  }
+}

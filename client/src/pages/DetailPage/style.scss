@@ -1,0 +1,18 @@
+@import 'src/styles/package';
+
+#detail-page {
+  .back-btn {
+    position: fixed;
+    z-index: 800;
+    width: 100%;
+    height: $height-header;
+    background-color: #ffffff;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    .icon {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
+}

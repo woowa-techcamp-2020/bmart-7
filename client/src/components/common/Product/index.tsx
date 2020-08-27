@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.scss'
+import { Link } from 'react-router-dom'
 import { Product as ProductType } from '@/types'
 import { HeartIcon } from './HeartIcon'
 import { CartIcon } from './CartIcon'
@@ -28,11 +29,14 @@ export const Product: React.FC<ProductProps> = (props) => {
   return (
     <li className="product">
       <div className="image-wrapper">
-        {srcLoading ? (
-          <img src={imageUrl} loading={imgLoading} alt="no" />
-        ) : (
-          <div className="like-img"></div>
-        )}
+        <Link to={`/detail/${id}`}>
+          {eagerLoading ? (
+            <img src={imageUrl} loading="eager" alt="no" />
+          ) : (
+            <img src={imageUrl} loading="lazy" alt="no" />
+          )}
+        </Link>
+
         <div className="icon-container">
           <HeartIcon id={id} />
           {amount ? <CartIcon id={id} /> : null}
