@@ -105,11 +105,10 @@ export const Filter: React.FC<FilterProps> = (props) => {
           {filterList.map((filterItem, index) => (
             <div
               className={'condition-wrapper' + (index === filterIndex ? ' active' : '')}
+              onClick={() => changeCondition(index)}
               key={index}
             >
-              <div className="title" onClick={() => changeCondition(index)}>
-                {filterItem.title}
-              </div>
+              <div className="title">{filterItem.title}</div>
               <FaCheck className="check-icon" />
             </div>
           ))}

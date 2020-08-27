@@ -29,6 +29,7 @@ export const SubCategoryContainer: React.FC<IProps> = (props) => {
   }
 
   if (newsubCategories.length % 2 === 1) newsubCategories.push({ title: '', id: '' })
+
   return (
     <>
       {isShow
