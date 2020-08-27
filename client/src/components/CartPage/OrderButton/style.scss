@@ -1,14 +1,18 @@
 @import 'src/styles/package';
 
 .order-button-wrapper {
+  position: fixed;
+  bottom: 0;
+  background-color: $color-white;
+  width: 100%;
+  height: 4.8rem;
+  padding: 0 1rem 0.5rem 1rem;
+
   .order-button {
     @include flex-center();
-    position: fixed;
-    bottom: 0.5rem;
-    padding: 1rem;
     border-radius: 0.4rem;
-    width: calc(100% - 1rem);
-    margin: 0 0.5rem;
+    width: 100%;
+    height: 100%;
     background-color: $color-main;
     cursor: pointer;
 
@@ -30,8 +34,8 @@
       color: $color-white;
     }
   }
+}
 
-  .buffer {
-    height: 4rem;
-  }
+.order-button-buffer {
+  height: 4.8rem;
 }

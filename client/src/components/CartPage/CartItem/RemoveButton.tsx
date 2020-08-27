@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 import { DELETE_CART_ITEM } from './gql'
 import { StoreContext, SetStoreContext } from '@/store'
 import { useMutation } from 'react-apollo'
+import { SetCartItemsContext } from '@/pages/CartPage'
 
 export const RemoveButton: React.FC<{ id: number }> = ({ id }) => {
   const store = useContext(StoreContext)
   const setStore = useContext(SetStoreContext)
+  const setCartItems = useContext(SetCartItemsContext)
 
   const [deleteCartItem] = useMutation(DELETE_CART_ITEM)
 
@@ -23,6 +25,7 @@ export const RemoveButton: React.FC<{ id: number }> = ({ id }) => {
     const newStore = { ...store }
     newStore.cartItems = newStore.cartItems.filter((cartItem) => cartItem.id !== id)
     setStore(newStore)
+    setCartItems(newStore.cartItems)
   }
 
   return (

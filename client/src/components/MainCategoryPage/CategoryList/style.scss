@@ -10,21 +10,21 @@
     font-size: 1.4rem;
     border: {
       right: $border;
-      bottom: $border;
+      top: $border;
     }
-    padding: 12px 14px;
+    padding: 1.2rem 1.4rem;
     cursor: pointer;
 
     &:nth-child(even) {
       border-right: none;
 
       &:last-of-type {
-        border-bottom: none;
+        border-bottom: $border;
       }
     }
 
     &:nth-child(odd):nth-last-of-type(2) {
-      border-bottom: none;
+      border-bottom: $border;
     }
   }
 }
