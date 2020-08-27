@@ -8,6 +8,7 @@ type MainCategory {
   id: Int!
   title: String!
   isMain: Boolean!
+  imageUrl: String
   section: Section!
   categories: [Category!]
 }
@@ -26,7 +27,7 @@ input MainCategoryInput {
 
 type Query {
   getSections: [Section!]!
-  getMainCategories: [MainCategory!]!
+  getMainCategories(isMain: Boolean): [MainCategory!]!
   getMainCategory(input: MainCategoryInput): MainCategory
   getCategory(id: Int!): Category
 }

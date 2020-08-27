@@ -7,7 +7,7 @@ import { Price } from './Price'
 import { Count } from './Count'
 import { RemoveButton } from './RemoveButton'
 
-const imageBaseUrl = process.env.REACT_APP_S3_URL
+const imageBaseUrl = process.env.REACT_APP_S3_URL + 'product/'
 
 export const CartItem: React.FC<CartItemType> = (props) => {
   const { id, product } = props

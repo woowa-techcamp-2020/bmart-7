@@ -22,7 +22,16 @@ async function getSections(parent, args, context: Context) {
   })
 }
 
-async function getMainCategories(parent, args, context: Context) {
+async function getMainCategories(parent, args: { isMain: boolean }, context: Context) {
+  const isMain = args.isMain ? 1 : 0
+
+  if (isMain)
+    return await context.prisma.mainCategory.findMany({
+      where: {
+        isMain,
+      },
+    })
+
   return await context.prisma.mainCategory.findMany()
 }
 
