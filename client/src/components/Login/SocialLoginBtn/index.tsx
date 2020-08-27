@@ -20,11 +20,9 @@ const getIcon = (icon: string) => {
 export const SocialLoginBtn = (props: IProps) => {
   const { icon, href, text } = props
   return (
-    <a href={href}>
-      <button className="login-btn-wrap">
-        {getIcon(icon)}
-        <div className="login-text">{text}</div>
-      </button>
+    <a href={href} className="button-wrapper">
+      <button className="login-btn-wrap">{getIcon(icon)}</button>
+      <div className="text">Click to Login</div>
     </a>
   )
 }

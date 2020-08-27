@@ -4,26 +4,24 @@ a {
   text-decoration: none;
 }
 
-.login-btn-wrap {
+.button-wrapper {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 15px;
-  background-color: lightgray;
-  border-radius: 1em;
-  cursor: pointer;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
 
-  .login-text {
-    margin: 0 auto;
-    font-size: 1.5rem;
+  .login-btn-wrap {
+    margin-top: 2rem;
+    background-color: $color-main;
+    cursor: pointer;
+
+    .github {
+      box-shadow: 0 6px 20px #00000070;
+      border-radius: 0.4rem;
+    }
   }
 
-  .github {
-    size: 2rem;
-  }
-  .facebook {
-    color: #3b5998;
-    size: 2rem;
+  .text {
+    font-size: 1.1rem;
+    margin-top: 1rem;
   }
 }

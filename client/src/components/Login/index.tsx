@@ -22,12 +22,17 @@ export const Login = () => {
 
   return (
     <div className="login-section">
-      <img className="logo" src="./images/bmartlogo.jpeg" alt="logo" />
-      <div className="social-login-wrap">
-        {socialSites.map((site, index) => {
-          return <SocialLoginBtn {...site} key={index} />
-        })}
-        <div className="social-login-title">click social login</div>
+      <div className="login-wrapper">
+        <img className="logo" src="./images/bmart-logo.png" alt="logo" />
+        <article>
+          <p>우아한 테크캠프 7팀</p>
+          <p>김영지·박지환·최범수</p>
+        </article>
+        <div className="social-login-wrap">
+          {socialSites.map((site, index) => {
+            return <SocialLoginBtn {...site} key={index} />
+          })}
+        </div>
       </div>
     </div>
   )
