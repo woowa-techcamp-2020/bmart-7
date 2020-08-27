@@ -13,6 +13,7 @@ import { SlickCarousel, ProductSlide, Divider, Header, CartFloatButton } from '@
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 import { useQuery } from 'react-apollo'
 import { RandomRecommend } from './RandomRecommend'
+import { MyCarousel } from '@/components/common/Carousel/temporary/practice.tsx'
 
 const sortByList = {
   CREATED_AT: 'createdAt',
@@ -82,6 +83,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
       {isResize ? <RandomRecommend resetHandler={() => setIsResize(false)} /> : <></>}
       <div onPointerMove={pointerHandler} onPointerEnter={pointerEnterHandelr}>
         <SlickCarousel />
+        {/* <MyCarousel /> */}
         <MainCategoryList mainCategoryList={mainCategoryList} />
         <Divider />
         <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
