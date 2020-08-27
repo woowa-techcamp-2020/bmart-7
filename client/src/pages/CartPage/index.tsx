@@ -1,11 +1,10 @@
-import React, { useContext, useState, createContext, useEffect } from 'react'
+import React, { useContext, useState, createContext } from 'react'
 import { RouteProps } from 'react-router'
 import { CartItem as CartItemType } from '@/types'
-import { Header, Divider } from '@/components/common'
+import { Header, Divider, EmptyPage } from '@/components/common'
 import { StoreContext } from '@/store'
 import { CartList } from '@/components/CartPage/CartList'
 import { CartSummary } from '@/components/CartPage/CartSummary'
-import { EmptyCart } from '@/components/CartPage/EmptyCart'
 import { CartSelectBar } from '@/components/CartPage/CartSelectBar'
 import { OrderButton } from '@/components/CartPage/OrderButton'
 
@@ -49,7 +48,7 @@ export const CartPage: React.FC<RouteProps> = ({ history }) => {
               <OrderButton totalPrice={totalPrice} />
             </>
           ) : (
-            <EmptyCart />
+            <EmptyPage title="장바구니가 텅 비어있어요" buttonText="담으러 가기" />
           )}
         </SetCartItemsContext.Provider>
       </CartItemsContext.Provider>
