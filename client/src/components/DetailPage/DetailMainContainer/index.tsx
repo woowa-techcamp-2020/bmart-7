@@ -18,13 +18,13 @@ export const DetailMainContainer: React.FC<ProductId> = (props) => {
   const [isMovedCart, setIsMovedCart] = useState(false)
   const { cartItems } = useContext(StoreContext)
 
-  // useEffect(() => {
-  //   if (isMovedCart) {
-  //     // todo:cartItem에 추가
-  //   }
-  //   window.location.assign('/cart')
-  //   console.log(cartItems)
-  // }, [isMovedCart])
+  useEffect(() => {
+    // if (isMovedCart) {
+    //   // todo:cartItem에 추가
+    // }
+    // window.location.assign('/cart')
+    console.log(cartItems)
+  }, [isMovedCart])
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: {
