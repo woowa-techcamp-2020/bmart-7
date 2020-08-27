@@ -54,17 +54,15 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
   let diff = 0
 
   const pointerHandler = (e) => {
-    e.preventDefault()
     if (isResize) return
     if (temp > e.clientY) return
     diff = e.clientY - temp
     temp = e.clientY
-    if (diff > 4) {
+    if (diff > 100) {
       if (!isResize) setIsResize(true)
     }
   }
   const pointerEnterHandelr = (e) => {
-    e.preventDefault()
     if (isResize) return
     diff = 0
     temp = e.clientY
