@@ -2,22 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './style.scss'
 import { MainCategoryItem } from './MainCategoryItem'
+import { MainCategory } from '@/types'
 
-const categoryimgUrlList: Array<string> = [
-  './mainIcons/1.png',
-  './mainIcons/2.png',
-  './mainIcons/3.png',
-  './mainIcons/4.png',
-  './mainIcons/5.png',
-  './mainIcons/6.png',
-  './mainIcons/7.png',
-  './mainIcons/8.png',
-  './mainIcons/9.png',
-]
+type MainCategoryListProps = {
+  mainCategoryList: MainCategory[]
+}
 
-export const MainCategoryList: React.FC = () => {
-  const sidebarIdx: number = 10
-  const sideImgUrl: string = './mainIcons/10.jpeg'
+const CATEGORY_NUM = 10
+
+export const MainCategoryList: React.FC<MainCategoryListProps> = ({ mainCategoryList }) => {
+  const imageBaseUrl = process.env.REACT_APP_S3_URL + 'main-category/'
+  const sideImgUrl: string = '10.png'
 
   return (
     <div className="main-category-list">
@@ -32,12 +27,24 @@ export const MainCategoryList: React.FC = () => {
         <div className="category-deadline-text">24시까지 주문 가능</div>
       </div>
       <ul className="category-wrap">
-        {categoryimgUrlList.map((url: string, idx: number) => (
-          <MainCategoryItem id={idx} url={url} key={idx} />
-        ))}
-        <Link to="side">
-          <img className="category-item" data-id={sidebarIdx} src={sideImgUrl} alt="cat" />
-        </Link>
+        {mainCategoryList.length ? (
+          <>
+            {mainCategoryList.map((mainCategory, idx: number) => (
+              <MainCategoryItem
+                id={mainCategory.id}
+                url={`${imageBaseUrl}${mainCategory.imageUrl}`}
+                title={mainCategory.title}
+                key={idx}
+              />
+            ))}
+            <Link to="/side" className="category-item">
+              <img src={`${imageBaseUrl}${sideImgUrl}`} alt="cat" />
+              <div className="title">더보기</div>
+            </Link>
+          </>
+        ) : (
+          [...new Array(CATEGORY_NUM)].map((_, i) => <div className="loading-block" key={i}></div>)
+        )}
       </ul>
     </div>
   )
