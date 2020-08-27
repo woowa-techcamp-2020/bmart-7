@@ -26,7 +26,7 @@ export const CategoryContainer: React.FC = () => {
             </div>
             <ul className="main-category-wrap">
               {special.mainCategories.map((main, idx) => (
-                <div className="main-category-title-wrap" onClick={clickMainTitle}>
+                <div className="main-category-title-wrap" onClick={clickMainTitle} key={idx}>
                   <li className="title main-title" key={idx}>
                     {main.title}
                   </li>
