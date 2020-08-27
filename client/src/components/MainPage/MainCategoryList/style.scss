@@ -24,6 +24,19 @@
     }
   }
   .category-wrap {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, minmax(3rem, 1fr));
+    justify-items: center;
+
+    .loading-block {
+      background-color: $color-gray-100;
+      border: 1px solid $color-gray-150;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px 1px unquote($color-black + '30');
+      width: 4.2rem;
+      padding: 2.3rem;
+      margin: 0.5rem 0 1rem 0;
+    }
   }
 }

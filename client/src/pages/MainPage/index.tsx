@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { RouteProps } from 'react-router'
 import './style.scss'
-import { GET_PRODUCTS } from './gql'
+import { GET_PRODUCTS, GET_MAIN_CATEGORIES } from './gql'
 import {
   MainCategoryList,
   RecommendedContainer,
@@ -33,12 +33,24 @@ const useGetProducts = (sortBy) => {
 export const MainPage: React.FC<RouteProps> = ({ history }) => {
   const newestResponse = useGetProducts(sortByList.CREATED_AT)
   const hottestResponse = useGetProducts(sortByList.HIT)
+  const mainCategoryResponse = useQuery(GET_MAIN_CATEGORIES, {
+    variables: {
+      isMain: true,
+    },
+    fetchPolicy: 'cache-and-network',
+  })
 
-  if (newestResponse.loading || hottestResponse.loading) return <p>로딩</p>
-  if (newestResponse.error || hottestResponse.error) return <p>에러</p>
-
-  const hotProducList = hottestResponse.data.getProducts
-  const newProducList = newestResponse.data.getProducts
+  const isLoading =
+    newestResponse.loading || hottestResponse.loading || mainCategoryResponse.loading
+  const isError = newestResponse.error || hottestResponse.error || mainCategoryResponse.error
+  let hotProducList = []
+  let newProducList = []
+  let mainCategoryList = []
+  if (!isLoading && !isError) {
+    hotProducList = hottestResponse.data.getProducts
+    newProducList = newestResponse.data.getProducts
+    mainCategoryList = mainCategoryResponse.data.getMainCategories
+  }
 
   return (
     <div id="main-page">
@@ -51,7 +63,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
         history={history}
       />
       <SlickCarousel />
-      <MainCategoryList />
+      <MainCategoryList mainCategoryList={mainCategoryList} />
       <Divider />
       <ProductSlide productList={hotProducList} title="김영지님을 위해 준비한 상품" moreLink="" />
       <Divider />

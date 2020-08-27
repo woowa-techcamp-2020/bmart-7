@@ -7,6 +7,7 @@ export type Section = {
 export type MainCategory = {
   id: number
   title: string
+  imageUrl?: string
   section?: Section
   categories?: Category[]
 }

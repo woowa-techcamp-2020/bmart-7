@@ -25,7 +25,7 @@ export const PreviewContainer: React.FC = () => {
   if (error) return <p>Error...</p>
 
   const productList = data.getProducts
-  const S3_URL = process.env.REACT_APP_S3_URL
+  const S3_URL = process.env.REACT_APP_S3_URL + 'product/'
   const clickPreviewProduct = (idx: number) => {
     setPreviewIdx(idx)
   }

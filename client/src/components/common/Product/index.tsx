@@ -6,7 +6,7 @@ import { HeartIcon } from './HeartIcon'
 import { CartIcon } from './CartIcon'
 import { Price } from './Price'
 
-const imageBaseUrl = process.env.REACT_APP_S3_URL
+const imageBaseUrl = process.env.REACT_APP_S3_URL + 'product/'
 
 export type ProductProps = {
   product: ProductType
