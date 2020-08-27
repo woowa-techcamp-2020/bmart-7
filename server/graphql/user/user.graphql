@@ -16,17 +16,9 @@ type Favorite {
   product: Product!
 }
 
-input UserSearchInput {
-  id: Int
-  userId: String
-  email: String
-  phone: String
-  address: String
-}
-
 type Query {
+  initAuthUser: User
   getUserById(id: Int!): User
-  getUsers(input: UserSearchInput): [User!]!
   getUserFavorites(id: Int!): [Favorite!]
 }
 
