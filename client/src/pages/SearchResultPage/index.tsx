@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GET_PRODUCTS } from './gql'
 import { useQuery } from 'react-apollo'
 import { RouteProps } from 'react-router'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { ProductList, Filter, SubHeader, CartFloatButton, Loading } from '@/components/common'
 import { SearchHeader } from '@/components/common'
 import { Spinner } from '@/components/common'
@@ -47,9 +47,26 @@ export const SearchResultPage: React.FC<RouteProps> = (props) => {
         focusHandler={history.goBack}
       />
       <div id="search-result-page">
-        <SubHeader title={subHeaderTitle} filter={<Filter setCondition={setFilterCondition} />} />
-        <ProductList productList={productList} column={2} />
-        <CartFloatButton />
+        {productList.length ? (
+          <>
+            <SubHeader
+              title={subHeaderTitle}
+              filter={<Filter setCondition={setFilterCondition} />}
+            />
+            <ProductList productList={productList} column={2} />
+            <CartFloatButton />
+          </>
+        ) : (
+          <div className="empty-cart">
+            <img className="empty-cart-img" src="/images/empty-cart.jpeg" />
+            <input
+              type="button"
+              className="main-link"
+              value="다시 검색하기"
+              onClick={deleteHandler}
+            />
+          </div>
+        )}
       </div>
     </>
   )

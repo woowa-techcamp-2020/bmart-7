@@ -120,7 +120,9 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
       <Divider />
       <ul className="result-list">
         {resultList.map((result, idx) => (
-          <li key={idx}>{result.title}</li>
+          <Link to={`/detail/${result.id}`}>
+            <li key={idx}>{result.title}</li>
+          </Link>
         ))}
       </ul>
       <h3>최근 검색어</h3>
