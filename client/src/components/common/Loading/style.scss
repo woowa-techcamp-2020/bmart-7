@@ -5,6 +5,9 @@
   align-items: center;
   height: 100vh;
 }
+.display-none {
+  display: none;
+}
 @keyframes run {
   0% {
     left: 50%;

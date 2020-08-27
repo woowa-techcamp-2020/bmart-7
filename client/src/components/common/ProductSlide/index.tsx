@@ -8,10 +8,11 @@ export type ProductSlideProps = {
   title: string
   moreLink?: string
   productList?: ProductType[]
+  eagerLoading?: boolean
 }
 
 export const ProductSlide: React.FC<ProductSlideProps> = (props) => {
-  const { title, moreLink, productList } = props
+  const { title, moreLink, productList, eagerLoading } = props
   const ref = useRef<HTMLDivElement>()
   return (
     <div className="product-slide" ref={ref}>
@@ -25,7 +26,7 @@ export const ProductSlide: React.FC<ProductSlideProps> = (props) => {
       </div>
       <div className="slider-wrapper">
         {productList.map((product) => (
-          <Product product={product} key={product.id} />
+          <Product eagerLoading={eagerLoading} product={product} key={product.id} />
         ))}
         <div className="buffer"></div>
       </div>
