@@ -1,0 +1,12 @@
+@import 'src/styles/package';
+
+#order-page {
+  .footer-buffer {
+    height: 150px;
+    Footer {
+      position: fixed;
+      bottom: 0;
+      max-width: 800px;
+    }
+  }
+}
