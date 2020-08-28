@@ -1,48 +1,60 @@
 import React from 'react'
 import './style.scss'
-import { Divider } from '@/components/common'
+import { Divider, EmptyPage } from '@/components/common'
+import { GET_USER_ORDERS } from './gql'
+import { useQuery } from 'react-apollo'
+import { formatPrice } from '@/utils'
 
 export const OrderRecordContainer: React.FC = () => {
   const date = new Date()
   const today = `${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`
 
+  const { loading, error, data } = useQuery(GET_USER_ORDERS, {
+    variables: {
+      id: +localStorage.getItem('userId'),
+    },
+    fetchPolicy: 'cache-and-network',
+  })
+
+  if (loading) return <></>
+  if (error) return <></>
+
+  const orders = data.getUserOrders
+
   return (
-    <>
-      <div className="order-record-container">
-        <div className="date-wrap">
-          <img src="./images/orderIcon.png" alt="order-icon" className="order-icon" />
-          <div className="today">{today}</div>
-        </div>
+    <div className="order-container">
+      {orders.length > 0 ? (
+        orders.map((order) => (
+          <React.Fragment key={order.id}>
+            <div className="order-record-container">
+              <div className="date-wrap">
+                <img src="./images/orderIcon.png" alt="order-icon" className="order-icon" />
+                <div className="price">
+                  {formatPrice(
+                    order.orderItems.reduce(
+                      (sum, item) => sum + item.product.salePrice * item.count,
+                      0
+                    )
+                  )}
+                  원
+                </div>
+              </div>
 
-        <div className="text-wrap">
-          <div className="price">36,500원</div>
-          <div className="sub-text">한우 A++ 척 아이롤 스테이크용 300g</div>
-        </div>
-
-        <div className="bottom-wrap">
-          <div className="content-btn-wrap">
-            <button className="content-btn">펼쳐보기</button>
-          </div>
-        </div>
-      </div>
-      <Divider />
-      <div className="order-record-container">
-        <div className="date-wrap">
-          <img src="./images/orderIcon.png" alt="order-icon" className="order-icon" />
-          <div className="today">{today}</div>
-        </div>
-
-        <div className="text-wrap">
-          <div className="price">25,000원</div>
-          <div className="sub-text">맞춤상회 소대창 구이 200g 외 2개</div>
-        </div>
-
-        <div className="bottom-wrap">
-          <div className="content-btn-wrap">
-            <button className="content-btn">펼쳐보기</button>
-          </div>
-        </div>
-      </div>
-    </>
+              {order.orderItems.map((item) => (
+                <div className="text-wrap" key={item.id}>
+                  <div className="sub-text">{item.product.title}</div>
+                  <div className="price-text">
+                    {formatPrice(item.product.salePrice)}원 | {item.count}개
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Divider />
+          </React.Fragment>
+        ))
+      ) : (
+        <EmptyPage title="주문내역이 없습니다." buttonText="주문하러 가기" />
+      )}
+    </div>
   )
 }

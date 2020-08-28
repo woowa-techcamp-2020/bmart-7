@@ -2,9 +2,10 @@
 
 #order-page {
   .footer-buffer {
-    height: 150px;
+    height: 120px;
+
     Footer {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       max-width: 800px;
     }
