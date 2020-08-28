@@ -25,8 +25,8 @@ const makeHeaderIntersectionObserver = (setCurrentCategoryId) => {
       })
     },
     {
-      threshold: 0.1,
-      rootMargin: '0.1px',
+      threshold: 0.37,
+      rootMargin: '0px',
     }
   )
 }
