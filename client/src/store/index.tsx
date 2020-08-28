@@ -38,6 +38,7 @@ export const InitStore: React.FC = () => {
           return
         }
         localStorage.setItem('userId', initAuthUser.id)
+        localStorage.setItem('username', initAuthUser.userId)
 
         const data = await fetchQuery({
           query: GET_INIT_DATA,

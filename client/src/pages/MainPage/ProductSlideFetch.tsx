@@ -22,5 +22,5 @@ export const ProductSlideFetch: React.FC<IProps> = ({ sortBy }) => {
   if (error) return <p>에러</p>
   const productList = data.getProducts
 
-  return <ProductSlide productList={productList} title="김영지님을 위해 준비한 상품" moreLink="" />
+  return <ProductSlide productList={productList} title="새로 나왔어요" moreLink="" />
 }

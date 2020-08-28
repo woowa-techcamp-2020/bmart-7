@@ -72,6 +72,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
     tempY = e.clientY
     tempX = e.clientX
   }
+  const username = localStorage.getItem('username')
   return (
     <>
       {/* <Loading class={loadingClass} /> */}
@@ -99,7 +100,7 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
           <ProductSlide
             eagerLoading={false}
             productList={hotProducList}
-            title="김영지님을 위해 준비한 상품"
+            title={`${username}님을 위해 준비한 상품`}
             moreLink=""
           />
         </div>

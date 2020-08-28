@@ -10,7 +10,6 @@ export const CategoryContainer: React.FC = () => {
   const [mainTitleId, setMainTitleId] = useState(0)
 
   const clickMainTitle = (mainId) => {
-    console.log(mainId)
     if (mainId === -1) {
       return
     }
