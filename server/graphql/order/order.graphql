@@ -1,0 +1,25 @@
+type Order {
+  id: Int!
+  user: User!
+  orderItems: [OrderItem!]!
+}
+
+type OrderItem {
+  id: Int!
+  count: Int!
+  product: Product!
+  order: Order!
+}
+
+type Query {
+  getUserOrders(id: Int!): [Order!]
+}
+
+input OrderInput {
+  userId: Int!
+  cartItemIds: [Int!]!
+}
+
+type Mutation {
+  insertOrder(input: OrderInput!): Order
+}
