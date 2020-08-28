@@ -14,6 +14,12 @@ export function createContext({ req }: { req: Request }): Context {
 }
 
 export async function checkAuth(userId: number, context: Context): Promise<boolean> {
+  const splitted = context.req.headers.authorization.split('-')
+
+  if (splitted[0] === 'guest') {
+    return true
+  }
+
   const userInfo = await decodeJwt(context.req.headers.authorization)
   if (userInfo.id !== userId) {
     throw new ApolloError('Authorization Error', 'AUTH')

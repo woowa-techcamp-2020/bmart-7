@@ -22,11 +22,19 @@ export const userResolver = {
 }
 
 async function initAuthUser(parent, args, context: Context) {
-  const userInfo = await decodeJwt(context.req.headers.authorization)
+  const splitted = context.req.headers.authorization.split('-')
+
+  let id
+  if (splitted[0] === 'guest') {
+    id = +splitted[1]
+  } else {
+    const userInfo = await decodeJwt(context.req.headers.authorization)
+    id = userInfo.id
+  }
 
   return await context.prisma.user.findOne({
     where: {
-      id: userInfo.id,
+      id,
     },
   })
 }
@@ -61,7 +69,14 @@ async function getUserFavorites(parent, args: UserWhereUniqueInput, context: Con
 }
 
 async function insertUser(parent, args: { input: UserCreateInput }, context: Context) {
-  const { id, userId, email, phone, address } = { ...args.input }
+  let { id, userId } = { ...args.input }
+  const { email, phone, address } = { ...args.input }
+
+  if (id === 0) {
+    id = await context.prisma.user.count()
+    id += 1
+    userId = `Guest-${id}`
+  }
 
   return await context.prisma.user.create({
     data: {
