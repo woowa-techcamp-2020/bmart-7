@@ -7,12 +7,12 @@ import { BsArrowCounterclockwise } from 'react-icons/bs'
 import { makeIntersectionObserver, fetchQuery } from '@/utils/index'
 interface IProps {
   title: string
-  categoryId: number
+  sectionId: number
   totalPageNum: number
 }
 
 export const RecommendedContainer: React.FC<IProps> = (props) => {
-  const { title, categoryId, totalPageNum } = props
+  const { title, sectionId, totalPageNum } = props
   const count = 6
   const limit = count * totalPageNum
   const [pageNum, setPageNum] = useState(1)
@@ -26,7 +26,7 @@ export const RecommendedContainer: React.FC<IProps> = (props) => {
     const { getRecommended } = await fetchQuery({
       query: GET_RECOMMENDED,
       variables: {
-        categoryId,
+        sectionId,
         offset,
         limit,
       },
