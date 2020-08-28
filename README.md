@@ -141,6 +141,11 @@ npm install
 - ![title](https://img.shields.io/badge/-Node.js-339933?&logo=Node.js&logoColor=white)
 - ![title](https://img.shields.io/badge/-Express-191919?&logo=Node.js&logoColor=white)
 - ![title](https://img.shields.io/badge/-GraphQL-311C87?&logo=graphql&logoColor=white)
+  - API를 위한 쿼리 언어
+  - 타입 기반 API 스키마 작성 가능
+  - overfetching 과 underfetching 를 해결
+  - 데이터 요청의 유연함 (필요한 데이터만 요청 가능)
+    클라이언트가 미리 선언한 구조대로 서버에 데이터를 요청하면, 서버는 요청받은 구조로 데이터를 반환하는 특징
 - ![title](https://img.shields.io/badge/-MySQL-4479A1?&logo=MySQL&logoColor=white)
 
 **ETC**
