@@ -132,14 +132,17 @@ async function getProducts(parent, args: { input: ProductFilterInput }, context:
 }
 
 async function getRecommended(parent, args, context: Context) {
-  const { categoryId, limit, offset } = args
+  const { sectionId, limit, offset } = args
+
   return await context.prisma.product.findMany({
-    skip: offset,
-    take: limit,
     where: {
-      categoryId,
-      isMain: 1,
+      category: {
+        mainCategory: {
+          sectionId,
+        },
+      },
     },
+    take: limit,
   })
 }
 

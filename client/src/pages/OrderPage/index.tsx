@@ -17,10 +17,6 @@ export const OrderPage: React.FC<RouteProps> = ({ history }) => {
       />
       <Divider />
       <OrderRecordContainer />
-
-      <div className="footer-buffer">
-        <Footer />
-      </div>
     </div>
   )
 }

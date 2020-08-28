@@ -107,11 +107,11 @@ export const MainPage: React.FC<RouteProps> = ({ history }) => {
         <Divider />
         <PreviewContainer />
         <Divider />
-        <RecommendedContainer title="지금 뭐 먹지?" categoryId={187} totalPageNum={3} />
+        <RecommendedContainer title="지금 뭐 먹지?" sectionId={1} totalPageNum={3} />
         <Divider />
         <ProductSlideFetch sortBy={sortByList.CREATED_AT} />
         <Divider />
-        <RecommendedContainer title="지금 필요한 생필품!" categoryId={187} totalPageNum={3} />
+        <RecommendedContainer title="지금 필요한 생필품!" sectionId={2} totalPageNum={3} />
         <Divider />
         <CategoryPreviewSection />
         <CartFloatButton isLoading={isLoading} />

@@ -12,22 +12,24 @@
     .order-icon {
       width: 4rem;
     }
-    .today {
+    .price {
       font-size: 1.5rem;
+      font-weight: 500;
     }
   }
 
   .text-wrap {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 2rem;
 
-    .price {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
     .sub-text {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .price-text {
       font-size: 1.3rem;
     }
   }

@@ -15,8 +15,6 @@ export const MyCarousel: React.FC = () => {
   const slides = imgArr.length + 1
   const imageBox = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(1)
-  console.log(currentSlide)
-  // const [goFirst, setgoFirst] = useState(true)
 
   const clickLRightBtn = () => {
     if (currentSlide < 5) {

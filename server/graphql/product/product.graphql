@@ -52,7 +52,7 @@ input ProductMultipleFilterInput {
 type Query {
   getProduct(id: Int!): Product
   getProducts(input: ProductFilterInput): [Product!]!
-  getRecommended(offset: Int!, limit: Int!, categoryId: Int!): [Product!]
+  getRecommended(offset: Int!, limit: Int!, sectionId: Int!): [Product!]
   getSearchProducts(searchInput: String!): [Product!]
   getMultipleProducts(input: ProductMultipleFilterInput): [Product]
 }

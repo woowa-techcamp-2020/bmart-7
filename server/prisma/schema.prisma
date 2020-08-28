@@ -16,6 +16,7 @@ model User {
   createdAt DateTime?  @default(now())
   cartItems CartItem[]
   favorites Favorite[]
+  orders    Order[]
 }
 
 model MainCategory {
@@ -31,22 +32,23 @@ model MainCategory {
 }
 
 model Product {
-  id          Int        @default(autoincrement()) @id
+  id          Int         @default(autoincrement()) @id
   title       String
   categoryId  Int?
   originPrice Int
   salePrice   Int
   salePercent Int?
-  isMain      Int        @default(0)
-  hit         Int        @default(0)
-  amount      Int        @default(0)
-  createdAt   DateTime   @default(now())
+  isMain      Int         @default(0)
+  hit         Int         @default(0)
+  amount      Int         @default(0)
+  createdAt   DateTime    @default(now())
   description String?
-  mainImage   String     @default("")
-  bannerImage String     @default("")
-  category    Category?  @relation(fields: [categoryId], references: [id])
+  mainImage   String      @default("")
+  bannerImage String      @default("")
+  category    Category?   @relation(fields: [categoryId], references: [id])
   cartItems   CartItem[]
   favorites   Favorite[]
+  orderItems  OrderItem[]
 
   @@index([categoryId], name: "categoryId_idx")
 }
@@ -88,4 +90,25 @@ model CartItem {
 
   @@index([productId], name: "productId_idx")
   @@index([userId], name: "user_idx")
+}
+
+model Order {
+  id         Int         @default(autoincrement()) @id
+  userId     Int
+  user       User        @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+
+  @@index([userId], name: "userId_idx")
+}
+
+model OrderItem {
+  id        Int     @default(autoincrement()) @id
+  count     Int     @default(1)
+  productId Int
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId], name: "oid_idx")
+  @@index([productId], name: "pid_idx")
 }

@@ -70,8 +70,6 @@ npm install
 
 ### MainPage
 
-![](https://github.com/Blair-0404/test/blob/master/src/main.gif)
-
 - 배너 / 카테고리 아이템
 - 유저를 위한 상품을 추천
 - 번쩍할인 리스트 : 할인율 높은 상품 추천
@@ -121,8 +119,6 @@ npm install
 ### 땡겨요
 
 - 메인화면에서 화면을 아래로 드래그 하듯 당기면 랜덤으로 메뉴를 추천해주는 떙겨요 구현
-
----
 
 ## 👨🏻‍💻 기술 스택
 

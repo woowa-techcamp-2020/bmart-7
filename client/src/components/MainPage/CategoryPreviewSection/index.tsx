@@ -61,7 +61,7 @@ export const CategoryPreviewSection: React.FC = () => {
       query: GET_MULTIPLE_PRODUCTS,
       variables: {
         input: {
-          limit: 100,
+          limit: 130,
         },
       },
     })
