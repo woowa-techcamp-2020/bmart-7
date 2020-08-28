@@ -25,9 +25,38 @@ git clone https://github.com/woowa-techcamp-2020/bmart-7.git
 cd client
 npm install
 
-cd server
+cd ../server
 npm install
 ```
+
+### 2. Setup Environment Variables
+
+- client
+  - 개발환경 : .env.development
+  - 배포환경 : .env.production
+  - example(공통)
+    - REACT_APP_GITHUB_CLIENT_ID=
+    - REACT_APP_BASE_URL=
+    - REACT_APP_S3_URL=
+    - REACT_APP_GRAPHQL_URL=
+- server
+
+  - 개발환경 : .env.dev
+  - 배포환경 : .env.prod
+  - example
+    - .env.dev
+      - GITHUB_CLIENT_ID=
+      - GITHUB_CLIENT_SECRET=
+      - PEM_PATH=
+      - SERVER_HOST=
+      - SERVER_USER=
+      - DB_PORT=
+      - JWT_SECRET=
+    - DB 연결을 위한 port forwarding을 위해 필요합니다.
+    - .env.prod
+      - GITHUB_CLIENT_ID=
+      - GITHUB_CLIENT_SECRET=
+      - JWT_SECRET=
 
 ---
 
