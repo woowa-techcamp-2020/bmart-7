@@ -58,9 +58,15 @@ npm install
       - GITHUB_CLIENT_SECRET=
       - JWT_SECRET=
 
+## Pages Introduction
+
+![](https://github.com/Blair-0404/test/blob/master/src/main1.gif)
+
 ---
 
-## Pages Introduction
+![](https://github.com/Blair-0404/test/blob/master/src/main2.gif)
+
+---
 
 ### MainPage
 
