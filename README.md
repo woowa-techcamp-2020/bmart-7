@@ -35,6 +35,8 @@ npm install
 
 ### MainPage
 
+![](https://github.com/Blair-0404/test/blob/master/src/main.gif)
+
 - 배너 / 카테고리 아이템
 - 유저를 위한 상품을 추천
 - 번쩍할인 리스트 : 할인율 높은 상품 추천
