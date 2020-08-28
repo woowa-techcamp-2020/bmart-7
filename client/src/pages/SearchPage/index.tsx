@@ -27,13 +27,11 @@ export const SearchPage: React.FC<RouteProps> = (props) => {
   const state = history.location.state
   const [keyword, setKeyword] = useState('')
   const [resultList, setResultList] = useState([])
-  // const [timeOut, setTimeOut] = useState(null)
 
   useEffect(() => {
     state ? setKeyword(state.query) : setKeyword('')
   }, [state])
 
-  // const [timeOut, setTimeOut] = useState(0)
   const item = getItem()
   const previousKeywords = item ? item : []
   const [keywordRecords, setKeywordRecords] = useState(previousKeywords)
