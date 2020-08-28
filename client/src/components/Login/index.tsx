@@ -4,8 +4,12 @@ import './style.scss'
 import axios from 'axios'
 import queryParser from 'query-parser-url'
 import { socialSites } from './config'
+import { useMutation } from 'react-apollo'
+import { INSERT_USER } from './gql'
 
 export const Login = () => {
+  const [createUser] = useMutation(INSERT_USER)
+
   useEffect(() => {
     const url = window.location.search.substring(1)
 
@@ -20,6 +24,21 @@ export const Login = () => {
     })
   }, [])
 
+  const freeLogin = async () => {
+    const {
+      data: { insertUser },
+    } = await createUser({
+      variables: {
+        input: {
+          id: 0,
+          userId: '',
+        },
+      },
+    })
+    localStorage.setItem('token', `guest-${insertUser.id}`)
+    window.location.href = '/'
+  }
+
   return (
     <div className="login-section">
       <div className="login-wrapper">
@@ -32,6 +51,9 @@ export const Login = () => {
           {socialSites.map((site, index) => {
             return <SocialLoginBtn {...site} key={index} />
           })}
+        </div>
+        <div className="free-login-button" onClick={() => freeLogin()}>
+          간편 로그인 For Demo
         </div>
       </div>
     </div>

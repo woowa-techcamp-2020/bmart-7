@@ -34,10 +34,8 @@ export const SubCategoryContainer: React.FC<IProps> = (props) => {
     <>
       {isShow
         ? newsubCategories.map((data, idx) => (
-            <Link to={`${path(data.id)}${data.id}`}>
-              <li key={idx} className="title sub-title">
-                {data.title}
-              </li>
+            <Link to={`${path(data.id)}${data.id}`} key={idx}>
+              <li className="title sub-title">{data.title}</li>
             </Link>
           ))
         : null}

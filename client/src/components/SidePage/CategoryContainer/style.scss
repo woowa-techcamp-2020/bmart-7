@@ -26,6 +26,8 @@
       border-top: $border;
 
       .title {
+        display: flex;
+        align-items: center;
         padding: 15px;
         font-size: 1.4rem;
         height: 50px;

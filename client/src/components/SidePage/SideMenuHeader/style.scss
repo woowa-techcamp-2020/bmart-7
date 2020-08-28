@@ -21,7 +21,7 @@
   .show-detail-wrap {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     border: 1px solid $color-gray-200;
     margin-bottom: 1rem;
     padding: 1rem;
